@@ -12,6 +12,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "react-media": "^1.9.2",
     "styled-jsx": "^3.2.1"
   },
   "devDependencies": {
@@ -22,7 +23,6 @@
     "babel-eslint": "^10.0.1",
     "babel-plugin-import": "^1.11.0",
     "eslint": "^5.15.3",
-    "eslint-config-promise": "^2.0.1",
     "eslint-config-promise-react": "^1.0.2",
     "imagemin-gifsicle": "^6.0.1",
     "imagemin-mozjpeg": "^8.0.0",

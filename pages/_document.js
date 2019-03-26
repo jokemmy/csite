@@ -1,8 +1,8 @@
 
-import PropTypes from 'prop-types';
-import { Fragment, Component } from 'react';
+// import PropTypes from 'prop-types';
+// import { Fragment, Component } from 'react';
 import Document, { Main, Head, NextScript } from 'next/document';
-import flush from 'styled-jsx/server';
+// import flush from 'styled-jsx/server';
 import moment from 'moment';
 
 // 设置中文

@@ -1,5 +1,5 @@
 
-import Layout from '../components/MyLayout';
+import Layout from '@layouts/Layout';
 
 const indexPageContent = <p>Hello Next.js</p>;
 

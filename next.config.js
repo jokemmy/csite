@@ -40,8 +40,11 @@ module.exports = compose([
   }],
 
   [ withCSS, {
+    cssModules: true,
     cssLoaderOptions: {
-      importLoaders: 1
+      camelCase: true,
+      importLoaders: 1,
+      localIdentName: "[local]___[hash:base64:5]"
     }
   }],
 
@@ -78,31 +81,25 @@ module.exports = compose([
 ], {
   webpack( config ) {
 
+    // 添加 node_modules 内外的 less css 支持
     const nodeModules = path.resolve( __dirname, './node_modules' );
     const cssLoader = config.module.rules.find(({ test }) => test.test( '.css' ));
     const lessLoader = config.module.rules.find(({ test }) => test.test( '.less' ));
+    const withoutModules = ( item ) => {
+      if ( /^css-loader/.test( item.loader )) {
+        return {
+          ...item,
+          options: Object.assign( omit( item.options, [ 'modules', 'camelCase', 'localIdentName' ]), {
+            modules: false
+          })
+        };
+      }
+      return item;
+    };
+    const cssLoaders = cssLoader.use.map( withoutModules );
+    const lessLoaders = lessLoader.use.map( withoutModules );
     cssLoader.exclude = nodeModules;
     lessLoader.exclude = nodeModules;
-    const withoutModules = ( loader ) => {
-      return {
-        ...loader,
-        options: Object.assign( omit( loader.options, [ 'modules', 'camelCase', 'localIdentName' ]), {
-          modules: false
-        })
-      };
-    };
-    const cssLoaders = cssLoader.use.map(( item ) => {
-      if ( /^css-loader/.test( item.loader )) {
-        return withoutModules( item );
-      }
-      return item;
-    });
-    const lessLoaders = lessLoader.use.map(( item ) => {
-      if ( /^css-loader/.test( item.loader )) {
-        return withoutModules( item );
-      }
-      return item;
-    });
     config.module.rules.push({
       test: /\.css$/,
       include: nodeModules,
@@ -118,6 +115,11 @@ module.exports = compose([
     config.plugins.push(
       new webpack.IgnorePlugin( /^\.\/locale$/, /moment$/ )
     );
+
+    // 添加特殊文件夹别名
+    [ 'components', 'layouts', 'pages', 'assets' ].forEach(( dirName ) => {
+      config.resolve.alias[`@${dirName}`] = path.resolve( __dirname, `./${dirName}` );
+    });
 
     return config;
   }
