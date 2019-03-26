@@ -1,5 +1,6 @@
 
-const webpack = require( 'webpack' ); // eslint-disable-line
+const omit = require( 'omit.js' );
+const webpack = require( 'webpack' );
 const withCSS = require( '@zeit/next-css' );
 const withLess = require( '@zeit/next-less' );
 const compose = require( 'next-compose-plugins' );
@@ -9,7 +10,7 @@ const path = require( 'path' );
 const fs = require( 'fs' );
 
 
-// Where your antd-custom.less file lives
+// Where your custom.less file lives
 const themeVariables = lessToJS(
   fs.readFileSync( path.resolve( __dirname, './assets/custom.less' ), 'utf8' )
 );
@@ -28,6 +29,7 @@ module.exports = compose([
   [ withLess, {
     cssModules: true,
     cssLoaderOptions: {
+      camelCase: true,
       importLoaders: 1,
       localIdentName: "[local]___[hash:base64:5]"
     },
@@ -37,25 +39,6 @@ module.exports = compose([
     }
   }],
 
-  [ withCSS, {
-    cssModules: true,
-    cssLoaderOptions: {
-      importLoaders: 1,
-      localIdentName: "[local]___[hash:base64:5]"
-    }
-  }],
-
-  [ withLess, {
-    cssLoaderOptions: {
-      importLoaders: 1
-    },
-    lessLoaderOptions: {
-      javascriptEnabled: true,
-      modifyVars: themeVariables
-    }
-  }],
-
-  // css支持
   [ withCSS, {
     cssLoaderOptions: {
       importLoaders: 1
@@ -95,31 +78,47 @@ module.exports = compose([
 ], {
   webpack( config ) {
 
-    const cssLoaders = config.module.rules.filter(({ test }) => test.test( '.css' ));
-    const lessLoaders = config.module.rules.filter(({ test }) => test.test( '.less' ));
-
-    // 修改路径
-    cssLoaders[0].include = [
-      path.resolve( __dirname, './components' ),
-      path.resolve( __dirname, './layouts' )
-    ];
-    lessLoaders[0].include = [
-      path.resolve( __dirname, './components' ),
-      path.resolve( __dirname, './layouts' )
-    ];
-    cssLoaders[1].include = [
-      path.resolve( __dirname, './node_modules' )
-    ];
-    lessLoaders[1].include = [
-      path.resolve( __dirname, './node_modules' )
-    ];
+    const nodeModules = path.resolve( __dirname, './node_modules' );
+    const cssLoader = config.module.rules.find(({ test }) => test.test( '.css' ));
+    const lessLoader = config.module.rules.find(({ test }) => test.test( '.less' ));
+    cssLoader.exclude = nodeModules;
+    lessLoader.exclude = nodeModules;
+    const withoutModules = ( loader ) => {
+      return {
+        ...loader,
+        options: Object.assign( omit( loader.options, [ 'modules', 'camelCase', 'localIdentName' ]), {
+          modules: false
+        })
+      };
+    };
+    const cssLoaders = cssLoader.use.map(( item ) => {
+      if ( /^css-loader/.test( item.loader )) {
+        return withoutModules( item );
+      }
+      return item;
+    });
+    const lessLoaders = lessLoader.use.map(( item ) => {
+      if ( /^css-loader/.test( item.loader )) {
+        return withoutModules( item );
+      }
+      return item;
+    });
+    config.module.rules.push({
+      test: /\.css$/,
+      include: nodeModules,
+      use: cssLoaders
+    });
+    config.module.rules.push({
+      test: /\.less$/,
+      include: nodeModules,
+      use: lessLoaders
+    });
 
     // momentjs 精简打包
     config.plugins.push(
       new webpack.IgnorePlugin( /^\.\/locale$/, /moment$/ )
     );
 
-    // console.log( "config.module.rules:", config.module.rules );
     return config;
   }
 });

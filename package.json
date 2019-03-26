@@ -1,12 +1,14 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "next --inspect",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "moment": "^2.24.0",
     "next": "^8.0.3",
+    "omit.js": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
