@@ -117,7 +117,7 @@ module.exports = compose([
     );
 
     // 添加特殊文件夹别名
-    [ 'components', 'layouts', 'pages', 'assets' ].forEach(( dirName ) => {
+    [ 'components', 'layouts', 'pages', 'assets', 'lib' ].forEach(( dirName ) => {
       config.resolve.alias[`@${dirName}`] = path.resolve( __dirname, `./${dirName}` );
     });
 

@@ -2,6 +2,7 @@
 import React from 'react';
 import Media from 'react-media';
 import { ThemeContext } from '@components/Themes';
+import './basic.less';
 
 
 class Base extends React.Component {
