@@ -18,21 +18,8 @@ class Base extends React.Component {
   //   };
   // }
 
-  state = {
-    isLoaded: false
-  };
-
-  componentDidMount() {
-    this.props.whileLoaded(() => {
-      this.setState({
-        isLoaded: true
-      });
-    });
-  }
-
   render() {
-    const { children, isMobile } = this.props;
-    const { isLoaded } = this.state;
+    const { children, isMobile, isLoaded } = this.props;
     return (
       <ThemeContext.Provider value={{ isMobile, isLoaded }}>
         {children}
