@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 // import TweenOne from 'rc-tween-one';
 import React, { Component } from 'react';
 import { isServer } from '@lib/utils';
+import { ThemeContext } from '@components/Themes';
 import menuData from './menu';
 // import headerLogo from '../../assets/logo-header.png';
 import styles from './header.less';
@@ -15,6 +16,8 @@ const Item = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
 class Header extends Component {
+
+  static contextType = ThemeContext;
 
   static defaultProps = {
     className: 'header'
@@ -64,39 +67,37 @@ class Header extends Component {
 
   render() {
 
+    const { isMobile } = this.context;
     const { phoneOpen } = this.state;
-    const { className } = this.props;
     const props = { ...this.props };
-    const isMobile = props.isMobile;
-    delete props.isMobile;
     const navChildren = this.getMenu( menuData );
-    const nav = !isServer() ? isMobile ? (
-      <div className={`${className}-phone-nav${phoneOpen ? ' open' : ''}`}>
+    const nav = isMobile ? (
+      <span className={styles.phoneMenu}>
         <div
           onClick={this.handlePhoneClick}
-          className={`${className}-phone-nav-bar`}>
+          className={`phone-nav-bar`}>
           <em />
           <em />
           <em />
         </div>
-        <div className={`${className}-phone-nav-text`}>
+        <div className={`phone-nav-text`}>
           <Menu selectedKeys={['']} mode="inline" theme="dark">
             {navChildren}
           </Menu>
         </div>
-      </div>
+      </span>
     ) : (
-      <span className={`${className}-nav`}>
-        <Menu mode="horizontal" selectedKeys={['']} theme="dark">
+      <span className={styles.menu}>
+        <Menu mode="horizontal" selectedKeys={['']} theme="dark" className={styles.headerBg}>
           {navChildren}
         </Menu>
       </span>
-    ) : null;
+    );
 
     return (
       <header {...props}>
-        <div className={`${className}-container`}>
-          <div className={`${className}-logo`}>
+        <div className={`container`}>
+          <div className={`logo`}>
             {/*<img alt="" src={headerLogo} />*/}
           </div>
           {nav}

@@ -5,6 +5,7 @@ const withCSS = require( '@zeit/next-css' );
 const withLess = require( '@zeit/next-less' );
 const compose = require( 'next-compose-plugins' );
 const optimizedImages = require( 'next-optimized-images' );
+const LessFunc = require( 'less-plugin-functions' );
 const lessToJS = require( 'less-vars-to-js' );
 const path = require( 'path' );
 const fs = require( 'fs' );
@@ -14,6 +15,11 @@ const fs = require( 'fs' );
 const themeVariables = lessToJS(
   fs.readFileSync( path.resolve( __dirname, './assets/custom.less' ), 'utf8' )
 );
+
+// const themeVariables = lessToJS(
+//   fs.readFileSync( path.resolve( __dirname, './node_modules/antd/lib/style/themes/default.less' ), 'utf8' ),
+//   { resolveVariables: true, dictionary: true }
+// );
 
 if ( typeof require !== 'undefined' ) {
   require.extensions['.css'] = file => {}; // eslint-disable-line
@@ -35,7 +41,8 @@ module.exports = compose([
     },
     lessLoaderOptions: {
       javascriptEnabled: true,
-      modifyVars: themeVariables
+      plugins: [new LessFunc()]
+      // modifyVars: themeVariables
     }
   }],
 
@@ -96,20 +103,36 @@ module.exports = compose([
       }
       return item;
     };
-    const cssLoaders = cssLoader.use.map( withoutModules );
-    const lessLoaders = lessLoader.use.map( withoutModules );
-    cssLoader.exclude = nodeModules;
-    lessLoader.exclude = nodeModules;
+    const withGlobalLess = ( patterns ) => ( loaders, item ) => {
+      loaders.push( item );
+      if ( /^less-loader/.test( item.loader )) {
+        loaders.push({
+          loader: 'style-resources-loader',
+          options: {
+            injector: 'prepend',
+            patterns
+          }
+        });
+      }
+      return loaders;
+    };
     config.module.rules.push({
       test: /\.css$/,
       include: nodeModules,
-      use: cssLoaders
+      use: cssLoader.use.map( withoutModules )
     });
     config.module.rules.push({
       test: /\.less$/,
       include: nodeModules,
-      use: lessLoaders
+      use: lessLoader.use.map( withoutModules )
     });
+    cssLoader.exclude = nodeModules;
+    lessLoader.exclude = nodeModules;
+
+    // 添加全局less
+    lessLoader.use = lessLoader.use.reduce( withGlobalLess([
+      path.resolve( __dirname, './assets/custom.less' )
+    ]), []);
 
     // momentjs 精简打包
     config.plugins.push(

@@ -15,5 +15,6 @@ export const themes = {
 
 export const ThemeContext = React.createContext({
   themes: themes.dark,
+  isLoaded: false,
   isMobile: false
 });

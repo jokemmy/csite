@@ -1,7 +1,6 @@
 
 import React from 'react';
 import Basic from '@layouts/Basic';
-import Header from '@components/Header';
 
 
 class Layout extends React.Component {
@@ -9,12 +8,10 @@ class Layout extends React.Component {
     const { children } = this.props;
     return (
       <Basic>
-        <Header />
         {children}
       </Basic>
     );
   }
 }
-
 
 export default Layout;

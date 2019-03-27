@@ -1,12 +1,15 @@
 
-import Layout from '@layouts/Layout';
+import Page from '@layouts/Page';
+import Banner from '@components/Banner';
+import Parallax from '@components/Parallax';
 
-const indexPageContent = <p>Hello Next.js</p>;
 
 export default function Index() {
   return (
-    <Layout>
-      {indexPageContent}
-    </Layout>
+    <Page>
+      <Banner>
+        <Parallax />
+      </Banner>
+    </Page>
   );
 }

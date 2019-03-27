@@ -1,5 +1,7 @@
 
-@import "~antd/lib/style/index.less";
+// 页面没有使用 antd 组件时可能会缺失基础样式所以这手动引入
+// 页面有 antd 组件时会自动引入 index.less 为了防止重复引入添加参数 reference
+@import (reference) "~antd/lib/style/index.less";
 
 body {
   overflow-x: hidden;
