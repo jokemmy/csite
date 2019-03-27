@@ -3,7 +3,7 @@ import React from 'react';
 import Parallax from 'parallax-js';
 
 
-class ParallaxElement extends React.Component {
+class Scene extends React.Component {
 
   constructor( props ) {
     super( props );
@@ -11,7 +11,8 @@ class ParallaxElement extends React.Component {
   }
 
   componentDidMount() {
-    this.parallaxInstance = new Parallax( this.sceneRef.current );
+    const { options } = this.props;
+    this.parallaxInstance = new Parallax( this.sceneRef.current, options );
   }
 
   componentWillUnmount() {
@@ -19,10 +20,13 @@ class ParallaxElement extends React.Component {
   }
 
   render() {
+    const { children, ...props } = this.props;
     return (
-      <div ref={this.sceneRef} />
+      <div {...props} ref={this.sceneRef}>
+        {children}
+      </div>
     );
   }
 }
 
-export default ParallaxElement;
+export default Scene;

@@ -10,8 +10,6 @@ import './basic.less';
 @withLoaded
 class Base extends React.Component {
 
-  static contextType = ThemeContext;
-
   // static getDerivedStateFromProps( props ) {
   //   return {
 
