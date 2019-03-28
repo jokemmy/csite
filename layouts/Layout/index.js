@@ -5,9 +5,9 @@ import Basic from '@layouts/Basic';
 
 class Layout extends React.Component {
   render() {
-    const { children } = this.props;
+    const { children, ...props } = this.props;
     return (
-      <Basic>
+      <Basic {...props}>
         {children}
       </Basic>
     );

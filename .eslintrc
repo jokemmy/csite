@@ -5,6 +5,8 @@
   ],
   "rules": {
     "no-console": [0],
-    "consistent-return": [0]
+    "consistent-return": [0],
+    "react/display-name": [0],
+    "prefer-arrow-callback": [0]
   }
 }

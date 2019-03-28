@@ -9,18 +9,16 @@ import './basic.less';
 
 @withLoaded
 class Base extends React.Component {
-
-  // static getDerivedStateFromProps( props ) {
-  //   return {
-
-  //   };
-  // }
-
+  componentWillUnmount() {
+  console.log("2:", 2)
+}
   render() {
-    const { children, isMobile, isLoaded } = this.props;
+    const { children, isMobile, isLoaded, className, ...props } = this.props;
     return (
       <ThemeContext.Provider value={{ isMobile, isLoaded }}>
-        {children}
+        <div {...props} className={`page-basic${className ? ` ${className}` : ''}`}>
+          {children}
+        </div>
         <Mask />
       </ThemeContext.Provider>
     );
@@ -33,7 +31,9 @@ class Wrapped extends React.Component {
     super( props );
     pushLoader( 'BasicMediaLoader' );
   }
-
+componentWillUnmount() {
+  console.log("1:", 1)
+}
   render() {
     return (
       <Media query="(max-width: 767px)" defaultMatches={false}>

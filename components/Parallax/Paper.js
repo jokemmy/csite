@@ -4,9 +4,9 @@ import React from 'react';
 
 class Paper extends React.Component {
   render() {
-    const { depth, children, ...props } = this.props;
+    const { depth, children, className, ...props } = this.props;
     return (
-      <div {...props} data-depth={depth}>
+      <div {...props} className={`${className ? `${className} ` : ''}paper`} data-depth={depth}>
         {children}
       </div>
     );

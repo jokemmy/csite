@@ -1,0 +1,26 @@
+
+.scene {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: @blue-6;
+  :global(.paper) {
+    // height: 0;
+    // height: 100%;
+    // position: absolute;
+    // left: 0;
+    // top: 0;
+  }
+}
+
+.content {
+  h1 {
+    top: 50%;
+    font-size: 50px;
+    position: absolute;
+    padding: 0 32px;
+    transform: translateY(-50%);
+    color: #fff;
+  }
+}

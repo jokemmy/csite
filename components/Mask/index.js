@@ -23,9 +23,9 @@ class Mask extends React.Component {
     return (
       <div
         onTransitionEnd={this.handleTransitionEnd}
-        className={classnames( styles.mask, {
+        className={classnames( 'page-mask', {
           [styles.hide]: fade,
-          [styles.fadeOut]: isLoaded
+          [styles.fadeOut]: !fade && isLoaded
         })}>
         <div className={styles.center}>
           ThingsPower

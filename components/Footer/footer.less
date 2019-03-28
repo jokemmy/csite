@@ -1,0 +1,56 @@
+
+:global {
+
+  .ft {
+    padding: 24px 0;
+    color: @footer-color;
+    background-color: @footer-background-color;
+  }
+
+  .ft a {
+    color: @footer-link-color;
+    &:hover {
+      color: @footer-link-hover-color;
+      text-decoration: underline;
+    }
+  }
+
+  .ft-share {
+    padding-bottom: 7px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #d6d6d6;
+  }
+
+  .ft-navigation {
+  }
+
+  .ft-legal {
+    font-size: 12px;
+  }
+
+  .ft-legal-copyright {
+    float: left;
+    margin-top: 5px;
+  }
+
+  .ft-legal-links {
+    float: right;
+    margin-top: 5px;
+  }
+
+  .ft-legal-links a {
+    margin-left: 16px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .ft-legal-links {
+      float: left;
+    }
+    .ft-legal-links a {
+      margin-left: 0;
+      margin-right: 8px;
+    }
+  }
+
+}
+

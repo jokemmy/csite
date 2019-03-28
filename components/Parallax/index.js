@@ -11,8 +11,14 @@ class Scene extends React.Component {
   }
 
   componentDidMount() {
+    const defaultOptions = {
+      selector: '.paper'
+    };
     const { options } = this.props;
-    this.parallaxInstance = new Parallax( this.sceneRef.current, options );
+    this.parallaxInstance = new Parallax(
+      this.sceneRef.current,
+      Object.assign( defaultOptions, options )
+    );
   }
 
   componentWillUnmount() {
@@ -20,9 +26,9 @@ class Scene extends React.Component {
   }
 
   render() {
-    const { children, ...props } = this.props;
+    const { children, className, ...props } = this.props;
     return (
-      <div {...props} ref={this.sceneRef}>
+      <div {...props} className={`${className ? `${className} ` : ''}scene`} ref={this.sceneRef}>
         {children}
       </div>
     );

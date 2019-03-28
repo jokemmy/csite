@@ -6,7 +6,7 @@ import ParallaxFirst from './ParallaxFirst';
 
 function App() {
   return (
-    <Page>
+    <Page tranparent footer={false}>
       <Banner>
         <ParallaxFirst />
       </Banner>

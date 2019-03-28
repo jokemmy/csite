@@ -6,71 +6,73 @@ export default {
   },
   menu2: {
     text: '关于我们',
-    menu: {
-      menu21: {
-        text: '公司简介'
-      },
-      menu22: {
-        text: '公司资质'
-      },
-      menu23: {
-        text: '设计团队'
-      }
-    }
+    url: '/store'
   },
   menu3: {
-    text: '营业方向',
+    text: '智能硬件',
     menu: {
       menu31: {
-        text: '合作客户'
+        text: '终端设备类'
       },
       menu32: {
-        text: '住宅公寓',
+        text: '接口转换类',
         url: '/projects?type=1'
       },
       menu33: {
-        text: '商业办公',
+        text: '智能网关类',
         url: '/projects?type=2'
       },
       menu34: {
-        text: '酒店度假',
+        text: '智能网由类',
         url: '/projects?type=3'
       },
       menu35: {
-        text: '文化医疗',
-        url: '/projects?type=4'
+        text: '前置服务类',
+        url: '/projects?type=3'
       },
       menu36: {
-        text: '艺术软装',
-        url: '/projects?type=5'
+        text: '集成机柜类',
+        url: '/projects?type=3'
       }
     }
   },
   menu4: {
-    text: '联系我们',
+    text: '解决方案',
     menu: {
-      menu21: {
-        text: '地址电话'
+      menu31: {
+        text: '智慧园区'
       },
-      menu22: {
-        text: '地图'
+      menu32: {
+        text: '智慧校园',
+        url: '/projects?type=1'
+      },
+      menu33: {
+        text: '智慧建筑',
+        url: '/projects?type=2'
+      },
+      menu34: {
+        text: '其他场景',
+        url: '/projects?type=3'
       }
     }
   },
   menu5: {
-    text: '招贤纳士',
+    text: '应用商店',
     menu: {
-      menu51: {
-        text: '企业文化'
+      menu21: {
+        text: '能源管理'
       },
-      menu52: {
-        text: '员工活动'
+      menu22: {
+        text: '能源回收'
       },
-      menu53: {
-        text: '校园招聘'
+      menu23: {
+        text: '节能控制'
       },
-      menu54: {
-        text: '社会招聘'
+      menu24: {
+        text: '安全保障'
+      },
+      menu25: {
+        text: '运行管理'
       }
     }
   }

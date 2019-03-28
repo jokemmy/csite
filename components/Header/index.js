@@ -1,14 +1,10 @@
 
-// import fs from 'flystore';
 import { Menu } from 'antd';
-import Link from 'next/link';
-import PropTypes from 'prop-types';
-// import TweenOne from 'rc-tween-one';
+import Link from 'next/link'
+import classnames from 'classnames';
 import React, { Component } from 'react';
-import { isServer } from '@lib/utils';
 import { ThemeContext } from '@components/Themes';
 import menuData from './menu';
-// import headerLogo from '../../assets/logo-header.png';
 import styles from './header.less';
 
 
@@ -19,36 +15,59 @@ class Header extends Component {
 
   static contextType = ThemeContext;
 
-  static defaultProps = {
-    className: 'header'
-  };
-
-  static propTypes = {
-    className: PropTypes.string
-  };
-
-  state = {
-    phoneOpen: false
-    // bgColor: ''
-  };
-
-  componentDidMount() {
-    // setTimeout(() => {
-    //   if (( document.scrollingElement || document.body ).scrollTop > 345 ) {
-    //     this.setState({ bgColor: 'rgba(0,0,0,0.8)' });
-    //   } else {
-    //     this.setState({ bgColor: '' });
-    //   }
-    // }, 300 );
-    // fs( 'header' ).watch( 'bgcolor', ( bgColor ) => {
-    //   this.setState({ bgColor });
-    // });
+  constructor( props ) {
+    super( props );
+    this.state = {
+      phoneOpen: false,
+      menuHeight: 0,
+      animEnd: true
+    };
+    this.menu = React.createRef();
   }
 
   handlePhoneClick = () => {
+    const phoneOpen = !this.state.phoneOpen;
+    if ( phoneOpen ) {
+      this.setState(() => ({
+        phoneOpen,
+        animEnd: true,
+        menuHeight: this.menu.current.scrollHeight
+      }));
+    } else {
+      this.setState(() => ({
+        animEnd: true,
+        menuHeight: this.menu.current.scrollHeight
+      }), () => {
+        setTimeout(() => {
+          this.setState(() => ({
+            phoneOpen,
+            animEnd: true,
+            menuHeight: 0
+          }));
+        });
+      });
+    }
+  };
+
+  handlePhoneMenuTransitionEnd = () => {
     this.setState(( state ) => ({
-      phoneOpen: !state.phoneOpen
+      animEnd: state.menuHeight === 0 || false
     }));
+  };
+
+  handlePhoneMenuSelect = () => {
+    this.setState(() => ({
+      animEnd: true,
+      menuHeight: this.menu.current.scrollHeight
+    }), () => {
+      setTimeout(() => {
+        this.setState(() => ({
+          phoneOpen: false,
+          animEnd: true,
+          menuHeight: 0
+        }));
+      });
+    });
   };
 
   getMenu = ( data ) => Object.entries( data ).map(([ key, { text, menu, url }]) => {
@@ -68,39 +87,42 @@ class Header extends Component {
   render() {
 
     const { isMobile } = this.context;
-    const { phoneOpen } = this.state;
-    const props = { ...this.props };
-    const navChildren = this.getMenu( menuData );
-    const nav = isMobile ? (
-      <span className={styles.phoneMenu}>
-        <div
-          onClick={this.handlePhoneClick}
-          className={`phone-nav-bar`}>
-          <em />
-          <em />
-          <em />
-        </div>
-        <div className={`phone-nav-text`}>
-          <Menu selectedKeys={['']} mode="inline" theme="dark">
-            {navChildren}
-          </Menu>
-        </div>
-      </span>
-    ) : (
-      <span className={styles.menu}>
-        <Menu mode="horizontal" selectedKeys={['']} theme="dark" className={styles.headerBg}>
-          {navChildren}
-        </Menu>
-      </span>
-    );
+    const { phoneOpen, menuHeight, animEnd } = this.state;
+    const { className, ...props } = this.props;
+    this.navChildren = this.navChildren || this.getMenu( menuData );
 
     return (
-      <header {...props}>
-        <div className={`container`}>
-          <div className={`logo`}>
+      <header {...props} className={classnames( className, 'header' )}>
+        <div className={'header-container'}>
+          <div className={'header-logo'}>
             {/*<img alt="" src={headerLogo} />*/}
           </div>
-          {nav}
+          {isMobile ? (
+            <span className={classnames( styles.phoneMenu, { [styles.open]: phoneOpen })}>
+              <div
+                onClick={this.handlePhoneClick}
+                className={styles.mobileMenu}>
+                <em />
+                <em />
+                <em />
+              </div>
+              <div
+                ref={this.menu}
+                className={styles.phoneMenuContainer}
+                onTransitionEnd={this.handlePhoneMenuTransitionEnd}
+                style={isMobile && animEnd ? { height: menuHeight } : null}>
+                <Menu selectedKeys={['']} mode="inline" theme="dark" onSelect={this.handlePhoneMenuSelect}>
+                  {this.navChildren}
+                </Menu>
+              </div>
+            </span>
+          ) : (
+            <div className={styles.menu}>
+              <Menu mode="horizontal" selectedKeys={['']} theme="dark">
+                {this.navChildren}
+              </Menu>
+            </div>
+          )}
         </div>
       </header>
     );
