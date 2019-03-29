@@ -5,6 +5,7 @@ import { pushLoader, popLoader, withLoaded } from '@lib/loaded';
 import Mask from '@components/Mask';
 import { ThemeContext } from '@components/Themes';
 import './basic.less';
+import './fonts.less';
 
 
 @withLoaded

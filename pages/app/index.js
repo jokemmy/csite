@@ -2,6 +2,7 @@
 import { Fragment } from 'react';
 import Banner from '@components/Banner';
 import ParallaxFirst from './ParallaxFirst';
+import ParallaxSecond from './ParallaxSecond';
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <Fragment>
       <Banner>
         <ParallaxFirst />
+        <ParallaxSecond />
       </Banner>
     </Fragment>
   );
@@ -18,7 +20,8 @@ function App() {
 App.getInitialProps = async function( ctx ) {
   const layoutProps = {
     tranparent: true,
-    footer: false
+    footer: false,
+    title: '江苏欣动信息科技'
   };
   return { layoutProps };
 };

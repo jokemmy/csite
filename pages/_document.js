@@ -21,7 +21,6 @@ class CustomDocument extends Document {
     return (
       <html lang="zh-cn">
         <Head>
-          <meta charSet="utf-8" />
           <meta name="renderer" content="webkit" />
           <meta name="force-rendering" content="webkit" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />

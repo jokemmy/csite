@@ -1,5 +1,5 @@
 
-import styles from './body.less';
+import './body.less';
 
 
 function Body({ children }) {

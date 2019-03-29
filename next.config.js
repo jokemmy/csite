@@ -1,6 +1,7 @@
 
 const omit = require( 'omit.js' );
 const webpack = require( 'webpack' );
+const withFonts = require( 'next-fonts' );
 const withCSS = require( '@zeit/next-css' );
 const withLess = require( '@zeit/next-less' );
 const compose = require( 'next-compose-plugins' );
@@ -53,6 +54,10 @@ module.exports = compose([
       importLoaders: 1,
       localIdentName: "[local]___[hash:base64:5]"
     }
+  }],
+
+  [ withFonts, {
+    enableSvg: true
   }],
 
   // 图片支持

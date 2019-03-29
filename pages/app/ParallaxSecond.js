@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import Parallax from '@components/Parallax';
 import Paper from '@components/Parallax/Paper';
 import imagePcb from '@assets/images/pcb.jpg';
-import imageTunnel from '@assets/images/tunnel.png';
 import styles from './parallax.less';
 
 
@@ -25,21 +24,15 @@ class WallPaper extends React.Component {
     return (
       <Parallax className={styles.scene} options={options}>
         <Paper depth={0.05}>
-          <div className={styles.paperBackground} style={{ backgroundImage: `url(${imageTunnel})` }} />
-        </Paper>
-        <Paper depth={0.4}>
-        22222
-        </Paper>
-        <Paper depth={0.6}>
-        33333
+          <div className={styles.paperBackground} style={{ backgroundImage: `url(${imagePcb})` }} />
         </Paper>
         <div className={styles.content}>
           <div className={styles.toptic}>
             <h1 className={classnames( styles.topticTitle, 'AppSiYuanExtraLight' )}>
-              智慧服务 · 智慧管理 · 智慧运行
+              综合能源服务一体化解决方案
             </h1>
             <p className={classnames( styles.topticDesc, 'AppSiYuan' )}>
-              依托物联网技术和信息化手段，高度契合能源管理业务需求，打造全新的智慧能源运管体系，为客户提供全方位、一体化的整合式服务。
+              综合能源服务管理平台&智慧能源规划咨询服务。
             </p>
           </div>
         </div>

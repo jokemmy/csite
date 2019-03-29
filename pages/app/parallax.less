@@ -4,9 +4,9 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
-  background-color: @blue-6;
+  // background-color: @blue-6;
   :global(.paper) {
-    // height: 0;
+    height: 0;
     // height: 100%;
     // position: absolute;
     // left: 0;
@@ -14,13 +14,50 @@
   }
 }
 
-.content {
-  h1 {
-    top: 50%;
-    font-size: 50px;
+.paper-background {
+  margin-top: -30px;
+  margin-left: -30px;
+  height: calc(100vh + 60px);
+  width: calc(100vw + 60px);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  &::before {
+    content: '';
     position: absolute;
-    padding: 0 32px;
-    transform: translateY(-50%);
-    color: #fff;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
   }
+}
+
+.content {
+  width: 60%;
+  height: 100%;
+  position: relative;
+}
+
+.toptic {
+  top: 50%;
+  left: 50%;
+  max-width: calc(100% - 60px);
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.toptic-title {
+  white-space: nowrap;
+  color: @gray-1;
+  font-size: 44px;
+}
+
+.toptic-desc {
+  font-size: 16px;
+  color: @gray-5;
+  line-height: 1.8;
+}
+
+.toptic-action {
+  
 }

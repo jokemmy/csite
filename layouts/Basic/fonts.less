@@ -1,0 +1,39 @@
+
+// app lunbo
+@font-face {
+  font-family: 'App SiYuan';
+  src: url('../../assets/fonts/app/SiYuan/webfont.eot'); /* IE9 */
+  src: url('../../assets/fonts/app/SiYuan/webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../../assets/fonts/app/SiYuan/webfont.woff') format('woff'), /* chrome、firefox */
+  url('../../assets/fonts/app/SiYuan/webfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../../assets/fonts/app/SiYuan/webfont.svg#webfont') format('svg'); /* iOS 4.1- */
+}
+
+@font-face {
+  font-family: 'App SiYuan Extra Light';
+  src: url('../../assets/fonts/app/SiYuanExtraLight/webfont.eot'); /* IE9 */
+  src: url('../../assets/fonts/app/SiYuanExtraLight/webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../../assets/fonts/app/SiYuanExtraLight/webfont.woff') format('woff'), /* chrome、firefox */
+  url('../../assets/fonts/app/SiYuanExtraLight/webfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../../assets/fonts/app/SiYuanExtraLight/webfont.svg#webfont') format('svg'); /* iOS 4.1- */
+}
+
+.font {
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:global {
+
+  .AppSiYuan {
+    font-family: "App SiYuan" !important;
+    .font();
+  }
+
+  .AppSiYuanExtraLight {
+    font-family: "App SiYuan Extra Light" !important;
+    .font();
+  }
+}

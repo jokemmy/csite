@@ -1,5 +1,6 @@
 
 import React from 'react';
+import omit from 'omit.js';
 import Parallax from 'parallax-js';
 
 
@@ -26,7 +27,7 @@ class Scene extends React.Component {
   }
 
   render() {
-    const { children, className, ...props } = this.props;
+    const { children, className, ...props } = omit( this.props, ['options']);
     return (
       <div {...props} className={`${className ? `${className} ` : ''}scene`} ref={this.sceneRef}>
         {children}

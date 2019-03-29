@@ -19,7 +19,7 @@ class Mask extends React.Component {
 
   render() {
     const { fade } = this.state;
-    const { isLoaded } = this.context;console.log("fade:", fade)
+    const { isLoaded } = this.context;
     return (
       <div
         onTransitionEnd={this.handleTransitionEnd}
