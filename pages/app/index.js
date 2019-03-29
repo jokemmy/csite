@@ -1,17 +1,26 @@
 
-import Page from '@layouts/Page';
+import { Fragment } from 'react';
 import Banner from '@components/Banner';
 import ParallaxFirst from './ParallaxFirst';
 
 
 function App() {
   return (
-    <Page tranparent footer={false}>
+    <Fragment>
       <Banner>
         <ParallaxFirst />
       </Banner>
-    </Page>
+    </Fragment>
   );
 }
+
+
+App.getInitialProps = async function( ctx ) {
+  const layoutProps = {
+    tranparent: true,
+    footer: false
+  };
+  return { layoutProps };
+};
 
 export default App;

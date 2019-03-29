@@ -1,13 +1,13 @@
 
 :global {
 
-  .ft {
+  .footer {
     padding: 24px 0;
     color: @footer-color;
     background-color: @footer-background-color;
   }
 
-  .ft a {
+  .footer a {
     color: @footer-link-color;
     &:hover {
       color: @footer-link-hover-color;
@@ -15,38 +15,40 @@
     }
   }
 
-  .ft-share {
+  .footer-share {
     padding-bottom: 7px;
     margin-bottom: 8px;
     border-bottom: 1px solid #d6d6d6;
   }
 
-  .ft-navigation {
+  .footer-navigation {
   }
 
-  .ft-legal {
+  .footer-legal {
     font-size: 12px;
   }
 
-  .ft-legal-copyright {
+  .footer-legal-copyright {
     float: left;
     margin-top: 5px;
+    white-space: nowrap;
+    width: 300px;
   }
 
-  .ft-legal-links {
+  .footer-legal-links {
     float: right;
     margin-top: 5px;
   }
 
-  .ft-legal-links a {
+  .footer-legal-links a {
     margin-left: 16px;
   }
 
   @media only screen and (max-width: 767px) {
-    .ft-legal-links {
-      float: left;
+    .footer-legal-copyright, .footer-legal-links {
+      float: none;
     }
-    .ft-legal-links a {
+    .footer-legal-links a {
       margin-left: 0;
       margin-right: 8px;
     }

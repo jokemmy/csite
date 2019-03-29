@@ -1,6 +1,6 @@
 
 import { Menu } from 'antd';
-import Link from 'next/link'
+import Link from 'next/link';
 import classnames from 'classnames';
 import React, { Component } from 'react';
 import { ThemeContext } from '@components/Themes';
@@ -88,11 +88,11 @@ class Header extends Component {
 
     const { isMobile } = this.context;
     const { phoneOpen, menuHeight, animEnd } = this.state;
-    const { className, ...props } = this.props;
+    const { className, tranparent, ...props } = this.props;
     this.navChildren = this.navChildren || this.getMenu( menuData );
 
     return (
-      <header {...props} className={classnames( className, 'header' )}>
+      <header {...props} className={classnames( 'header', className )}>
         <div className={'header-container'}>
           <div className={'header-logo'}>
             {/*<img alt="" src={headerLogo} />*/}
@@ -110,14 +110,14 @@ class Header extends Component {
                 ref={this.menu}
                 className={styles.phoneMenuContainer}
                 onTransitionEnd={this.handlePhoneMenuTransitionEnd}
-                style={isMobile && animEnd ? { height: menuHeight } : null}>
+                style={isMobile && animEnd ? { height: tranparent ? menuHeight : Math.max( 48, menuHeight ) } : null}>
                 <Menu selectedKeys={['']} mode="inline" theme="dark" onSelect={this.handlePhoneMenuSelect}>
                   {this.navChildren}
                 </Menu>
               </div>
             </span>
           ) : (
-            <div className={styles.menu}>
+            <div className={styles.menu} style={tranparent ? { height: 0 } : null}>
               <Menu mode="horizontal" selectedKeys={['']} theme="dark">
                 {this.navChildren}
               </Menu>

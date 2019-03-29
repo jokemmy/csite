@@ -9,9 +9,6 @@ import './basic.less';
 
 @withLoaded
 class Base extends React.Component {
-  componentWillUnmount() {
-  console.log("2:", 2)
-}
   render() {
     const { children, isMobile, isLoaded, className, ...props } = this.props;
     return (
@@ -31,9 +28,7 @@ class Wrapped extends React.Component {
     super( props );
     pushLoader( 'BasicMediaLoader' );
   }
-componentWillUnmount() {
-  console.log("1:", 1)
-}
+
   render() {
     return (
       <Media query="(max-width: 767px)" defaultMatches={false}>

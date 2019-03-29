@@ -1,24 +1,18 @@
 
-import React from 'react';
-import Page from '@layouts/Page';
+import React, { Fragment } from 'react';
 
 
-class Store extends React.Component {
-  componentWillUnmount() {
-    console.log("4:", 4)
-  }
-  render() {
-    return (
-      <Page>
-      </Page>
-    );
-  }
+function Store() {
+  return (
+    <Fragment>
+      <div />
+    </Fragment>
+  );
 }
-// function Store() {
-//   return (
-//     <Page>
-//     </Page>
-//   );
-// }
+
+Store.getInitialProps = async function( ctx ) {
+  const layoutProps = {};
+  return { layoutProps };
+};
 
 export default Store;

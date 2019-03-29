@@ -1,20 +1,20 @@
 
-import styles from './footer.less';
+import './footer.less';
 
 
 function Footer() {
   return (
-    <div className="ft">
-      <div className="ft-content page-content">
-        <section className="ft-navigation">
+    <div className="footer">
+      <div className="footer-content page-content">
+        <section className="footer-navigation">
         </section>
-        <section className="ft-share">
+        <section className="footer-share">
         </section>
-        <section className="ft-legal">
-          <div className="ft-legal-copyright">
+        <section className="footer-legal">
+          <div className="footer-legal-copyright">
             Copyright © 2019 江苏欣动信息科技有限公司 | 苏ICP备sssssssss号-1
           </div>
-          <div className="ft-legal-links">
+          <div className="footer-legal-links">
             <a href="#">招贤纳士</a>
             <a href="#">隐私政策</a>
             <a href="#">COOKIE政策</a>
