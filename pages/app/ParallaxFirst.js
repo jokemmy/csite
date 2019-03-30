@@ -22,16 +22,11 @@ const options = {
 
 class WallPaper extends React.Component {
   render() {
+    const { className, ...props } = this.props;
     return (
-      <Parallax className={styles.scene} options={options}>
-        <Paper depth={0.05}>
+      <Parallax {...props} className={classnames( styles.scene, className )} options={options}>
+        <Paper depth={0.2}>
           <div className={styles.paperBackground} style={{ backgroundImage: `url(${imageTunnel})` }} />
-        </Paper>
-        <Paper depth={0.4}>
-        22222
-        </Paper>
-        <Paper depth={0.6}>
-        33333
         </Paper>
         <div className={styles.content}>
           <div className={styles.toptic}>

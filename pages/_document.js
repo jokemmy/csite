@@ -24,8 +24,9 @@ class CustomDocument extends Document {
           <meta name="renderer" content="webkit" />
           <meta name="force-rendering" content="webkit" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+          <script src="/static/whatenvis.min.js"></script>
           {/* Use minimum-scale=1 to enable GPU rasterization */}
-          {/*<meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />*/}
+          <meta name="viewport" content="user-scalable=no, width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
           {/* PWA primary color */}
           {/*<meta name="theme-color" content={pageContext.theme.palette.primary.main} />*/}
           {/*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />

@@ -1,0 +1,66 @@
+
+:global {
+  .c-slide-down-enter {
+    animation-duration: @anim-speed-2;
+    animation-fill-mode: both;
+    animation-timing-function: @ease-out;
+    animation-play-state: paused;
+  }
+
+  .c-slide-down-appear {
+    animation-duration: @anim-speed-2;
+    animation-fill-mode: both;
+    animation-timing-function: @ease-out;
+    animation-play-state: paused;
+  }
+
+  .c-slide-down-leave {
+    animation-duration: @anim-speed-2;
+    animation-fill-mode: both;
+    animation-timing-function: @ease-in;
+    animation-play-state: paused;
+  }
+
+  .c-slide-down-enter.c-slide-down-enter-active {
+    z-index: 1;
+    :local {
+      animation-name: cslideDownIn;
+    }
+    animation-play-state: running;
+  }
+
+  .c-slide-down-appear.c-slide-down-appear-active {
+    z-index: 1;
+    :local {
+      animation-name: cslideDownIn;
+    }
+    animation-play-state: running;
+  }
+
+  .c-slide-down-leave.c-slide-down-leave-active {
+    :local {
+      animation-name: cslideDownOut;
+    }
+    animation-play-state: running;
+  }
+
+
+}
+
+@keyframes cslideDownIn {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes cslideDownOut {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(20%);
+  }
+}

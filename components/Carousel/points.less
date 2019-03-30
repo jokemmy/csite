@@ -1,0 +1,28 @@
+
+.track {
+  z-index: 1;
+  width: 6px;
+  position: fixed;
+  background-color: @light-3;
+  border-radius: 3px;
+  z-index: 2;
+  top: 50%;
+  right: 32px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.block {
+  width: 100%;
+}
+
+.thumb {
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  transition: top @anim-speed-2 @ease-in-out;
+  background-color: @light-6;
+  border-radius: 3px;
+  z-index: -1;
+}

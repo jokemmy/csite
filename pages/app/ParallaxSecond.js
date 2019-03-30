@@ -23,7 +23,7 @@ class WallPaper extends React.Component {
   render() {
     return (
       <Parallax className={styles.scene} options={options}>
-        <Paper depth={0.05}>
+        <Paper depth={0.2}>
           <div className={styles.paperBackground} style={{ backgroundImage: `url(${imagePcb})` }} />
         </Paper>
         <div className={styles.content}>

@@ -1,0 +1,66 @@
+
+:global {
+  .c-slide-up-enter {
+    animation-duration: @anim-speed-2;
+    animation-fill-mode: both;
+    animation-timing-function: @ease-out;
+    animation-play-state: paused;
+  }
+
+  .c-slide-up-appear {
+    animation-duration: @anim-speed-2;
+    animation-fill-mode: both;
+    animation-timing-function: @ease-out;
+    animation-play-state: paused;
+  }
+
+  .c-slide-up-leave {
+    animation-duration: @anim-speed-2;
+    animation-fill-mode: both;
+    animation-timing-function: @ease-in;
+    animation-play-state: paused;
+  }
+
+  .c-slide-up-enter.c-slide-up-enter-active {
+    z-index: 1;
+    :local {
+      animation-name: cslideUpIn;
+    }
+    animation-play-state: running;
+  }
+
+  .c-slide-up-appear.c-slide-up-appear-active {
+    z-index: 1;
+    :local {
+      animation-name: cslideUpIn;
+    }
+    animation-play-state: running;
+  }
+
+  .c-slide-up-leave.c-slide-up-leave-active {
+    :local {
+      animation-name: cslideUpOut;
+    }
+    animation-play-state: running;
+  }
+
+
+}
+
+@keyframes cslideUpIn {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes cslideUpOut {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20%);
+  }
+}

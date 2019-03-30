@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Carousel from '@components/Carousel';
 import styles from './banner.less';
 
 
@@ -7,9 +8,9 @@ class Banner extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <div className={styles.banner}>
+      <Carousel className={styles.banner}>
         {children}
-      </div>
+      </Carousel>
     );
   }
 }

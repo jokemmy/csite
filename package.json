@@ -14,11 +14,16 @@
     "omit.js": "^1.0.0",
     "parallax-js": "^3.1.0",
     "prop-types": "^15.7.2",
+    "rc-animate": "^2.6.0",
+    "rc-queue-anim": "^1.6.12",
     "rc-tween-one": "^2.3.4",
+    "rc-util": "^4.6.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "react-hammerjs": "^1.0.1",
     "react-media": "^1.9.2",
-    "styled-jsx": "^3.2.1"
+    "styled-jsx": "^3.2.1",
+    "whatenvis": "^1.1.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",
