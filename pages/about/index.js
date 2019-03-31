@@ -11,11 +11,13 @@ function About() {
     <Fragment>
       <PageImage
         image={image}
-        text="智慧能源的践行者"
+        text=""
         className={styles.aboutPageImage} />
       <div className="page-content">
         <section className="page-section">
-          <h2>我们是做什么的<a href="#我们是做什么的" className="anchor">#</a></h2>
+          <h2 className="page-title">
+            我们是做什么的<a href="#我们是做什么的" className="anchor">#</a>
+          </h2>
           <p>
             江苏欣动信息科技有限公司是国内专注物联网技术和智慧解决方案开发、实施及运营的高新科技企业。欣动科技坚信利用物联网技术改变物业管理等传统行业，致力于为客户提供智慧能源解决方案。
           </p><p>
@@ -23,8 +25,10 @@ function About() {
           </p>
         </section>
         <section className="page-section">
-          <h2>我们有什么成就<a href="#我们有什么成就" className="anchor">#</a></h2>
-          <h3 >应用支撑平台、数据中心平台、物联感知平台</h3>
+          <h2 className="page-title">
+            我们有什么成就<a href="#我们有什么成就" className="anchor">#</a>
+          </h2>
+          <h3>应用支撑平台、数据中心平台、物联感知平台</h3>
           <p>
             以欣动科技自主研发的DD-IoT平台为核心，采用应用支撑平台、数据中心平台、物联感知平台构建起三级平台，利用人工智能+物联网+大数据+云计算技术，采用前端硬件设备+后端大数据平台模式，将人与基础设施、服务管理建立紧密联系，打通各级、各行业智慧应用平台，形成系统化的解决方案。
           </p>

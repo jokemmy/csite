@@ -5,23 +5,38 @@
   top: @header-height;
   z-index: @anchor-zIndex;
   background-color: @anchor-background-color;
+  box-shadow: @shadow-down;
   height: @anchor-height;
+  line-height: @anchor-height;
+  text-align: right;
   width: 100vw;
 }
 
-.anchor {
-  :global {
-    .ant-anchor {
-      height: 100%;
-      line-height: @anchor-height;
-      text-align: right;
-    }
-    .ant-anchor-link {
-      display: inline-block;
-      padding: 0 24px 0 0;
-      &:last-child {
-        padding-right: 64px;
-      }
-    }
+.link {
+  color: @dark-5;
+  display: inline-block;
+  padding: 0 16px;
+  font-size: 12px;
+  &::before {
+    opacity: 0;
+    content: "#";
+    position: relative;
+    margin-right: 4px;
+    color: @anchor-color;
+    font-weight: bold;
+    transform: scale(1);
+    transition: opacity @anim-speed-4;
+  }
+  &:last-child {
+    margin-right: 48px;
+  }
+  &:hover {
+    color: @dark-9;
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+  &:focus {
+    text-decoration: none;
   }
 }

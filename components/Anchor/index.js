@@ -1,16 +1,18 @@
 
-import { Anchor } from 'antd';
 import styles from './anchor.less';
-const { Link } = Anchor;
 
 
 function AnchorComp({ anchors }) {
   return (
-    <Anchor affix={false} className={styles.anchor}>
+    <div className={styles.anchor}>
       {anchors.map(( text ) => {
-        return <Link key={text} href={`#${text}`} title={text} />;
+        return (
+          <a key={text} href={`#${text}`} title={text} className={styles.link}>
+            {text}
+          </a>
+        );
       })}
-    </Anchor>
+    </div>
   );
 }
 
