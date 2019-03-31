@@ -6,6 +6,12 @@
 
 :global {
 
+  html {
+    text-size-adjust: 100%;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
   body {
     overflow-x: hidden;
   }
@@ -18,6 +24,45 @@
     max-width: 980px;
     padding: 0 24px;
     margin: 0 auto;
+  }
+
+  .page-section {
+    margin: 48px 0;
+    font-size: 16px;
+    h2 {
+      color: @dark-10;
+      font-size: 2.5em;
+      text-align: center;
+    }
+    strong {
+      color: @dark-9;
+    }
+    P {
+      color: @dark-8;
+      font-weight: 400;
+      min-height: 1.8em;
+      line-height: 1.8em;
+      white-space: normal;
+      letter-spacing: .05em;
+      text-indent: 2em;
+    }
+    .anchor {
+      opacity: 0;
+      margin-left: 8px;
+      transition: opacity @anim-speed-2 @ease-in-out;
+      color: @anchor-color;
+      text-decoration: none;
+      background-color: transparent;
+      outline: none;
+      cursor: pointer;
+      transition: color @anim-speed-2;
+      -webkit-text-decoration-skip: objects;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      &:hover .anchor {
+        opacity: 1;
+      }
+    }
   }
 
 }

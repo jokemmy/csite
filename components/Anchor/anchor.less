@@ -1,0 +1,27 @@
+
+.anchor {
+  left: 0;
+  position: fixed;
+  top: @header-height;
+  z-index: @anchor-zIndex;
+  background-color: @anchor-background-color;
+  height: @anchor-height;
+  width: 100vw;
+}
+
+.anchor {
+  :global {
+    .ant-anchor {
+      height: 100%;
+      line-height: @anchor-height;
+      text-align: right;
+    }
+    .ant-anchor-link {
+      display: inline-block;
+      padding: 0 24px 0 0;
+      &:last-child {
+        padding-right: 64px;
+      }
+    }
+  }
+}

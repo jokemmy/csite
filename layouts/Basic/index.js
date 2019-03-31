@@ -4,8 +4,10 @@ import Media from 'react-media';
 import { pushLoader, popLoader, withLoaded } from '@lib/loaded';
 import Mask from '@components/Mask';
 import { ThemeContext } from '@components/Themes';
+// import '@assets/typo.css';
 import './basic.less';
 import './fonts.less';
+
 
 
 @withLoaded
