@@ -89,7 +89,7 @@ class Header extends Component {
         content={content}
         arrowPointAtCenter
         mouseEnterDelay={0.5}
-        placement={align || 'bottoms'}
+        placement={align || 'bottom'}
         overlayClassName={classnames( styles.subMenu, { [styles[`subMenuCol${col}`]]: !!col })}
         getPopupContainer={getContainer}>
         <a className={styles.link}>{text}</a>

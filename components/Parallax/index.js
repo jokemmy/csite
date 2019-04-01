@@ -2,7 +2,7 @@
 import React from 'react';
 import omit from 'omit.js';
 import Parallax from 'parallax-js';
-
+//https://ken.artbees.net/wide-parallax-startup/
 
 class Scene extends React.Component {
 
