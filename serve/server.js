@@ -11,8 +11,8 @@ const port = parseInt( process.env.PORT, 10 ) || 3000;
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
 const app = next({ dir: '.', dev });
-
 const handle = app.getRequestHandler();
+
 
 app.prepare().then(() => {
 
@@ -50,7 +50,6 @@ app.prepare().then(() => {
 
   server.use( router.routes());
   server.use( router.allowedMethods());
-
   server.use(( ctx, next ) => {
     ctx.res.statusCode = 200;
     return next();
@@ -62,6 +61,7 @@ app.prepare().then(() => {
     }
     console.log( `> Ready on port ${port} [${env}]` );
   });
+
 }).catch( err => {
   console.log( 'An error occurred, unable to start the server' );
   console.log( err );

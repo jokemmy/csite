@@ -12,10 +12,10 @@
   width: 100vw;
 }
 
-.link {
+.trigger {
   color: @dark-5;
   display: inline-block;
-  padding: 0 16px;
+  padding: 0 8px;
   font-size: 12px;
   &::before {
     opacity: 0;
@@ -28,7 +28,7 @@
     transition: opacity @anim-speed-4;
   }
   &:last-child {
-    margin-right: 48px;
+    margin-right: 56px;
   }
   &:hover {
     color: @dark-9;
@@ -38,5 +38,21 @@
   }
   &:focus {
     text-decoration: none;
+  }
+}
+
+.link {
+  opacity: 0;
+  margin-left: 8px;
+  transition: opacity @anim-speed-2 @ease-in-out;
+  color: @anchor-color;
+  user-select: none;
+  &:focus {
+    text-decoration: none;
+  }
+}
+h1, h2, h3, h4, h5, h6 {
+  &:hover .link {
+    opacity: 1;
   }
 }

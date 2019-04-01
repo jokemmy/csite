@@ -1,10 +1,9 @@
 
 import React from 'react';
 import Media from 'react-media';
-import { pushLoader, popLoader, withLoaded } from '@lib/loaded';
 import Mask from '@components/Mask';
-import { ThemeContext } from '@components/Themes';
-// import '@assets/typo.css';
+import { ThemeContext, themeVariables } from '@components/Themes';
+import { pushLoader, popLoader, withLoaded } from '@lib/loaded';
 import './basic.less';
 import './fonts.less';
 
@@ -15,7 +14,7 @@ class Base extends React.Component {
   render() {
     const { children, isMobile, isLoaded, className, ...props } = this.props;
     return (
-      <ThemeContext.Provider value={{ isMobile, isLoaded }}>
+      <ThemeContext.Provider value={{ themeVariables, isMobile, isLoaded }}>
         <div {...props} className={`page-basic${className ? ` ${className}` : ''}`}>
           {children}
         </div>

@@ -1,6 +1,13 @@
 
 import React from 'react';
+import lessToJS from 'less-vars-to-js';
+import rawLessVariables from '!!raw-loader!@assets/custom.less';
 
+
+export const themeVariables = lessToJS(
+  rawLessVariables,
+  { resolveVariables: true, dictionary: true/*, stripPrefix: true*/ }
+);
 
 export const themes = {
   light: {
@@ -14,7 +21,8 @@ export const themes = {
 };
 
 export const ThemeContext = React.createContext({
-  themes: themes.dark,
+  themes,
+  themeVariables,
   isLoaded: false,
   isMobile: false
 });
