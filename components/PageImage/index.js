@@ -7,7 +7,9 @@ import styles from './pageImage.less';
 
 function PageImage({ image, children, className }) {
   return (
-    <div className={classnames( styles.pageImage, className )} style={{ backgroundImage: `url(${image})` }}>
+    <div
+      style={{ backgroundImage: `url(${image})` }}
+      className={classnames( styles.pageImage, className )} >
       {children}
     </div>
   );
