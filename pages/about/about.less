@@ -2,10 +2,77 @@
 .about-page-image {
   background-position: top;
   margin-top: @header-height;
+  padding-top: @anchor-height + 32;
+  margin-bottom: 64px;
+  height: auto;
+}
+
+.section-title {
+  margin-bottom: 1.8em;
+}
+
+.section-banner {
+  margin-bottom: 32px;
+  pointer-events: none;
 }
 
 @media only screen and (max-width: 767px) {
   .about-page-image {
     margin-top: @header-phone-height;
+  }
+}
+
+// 动画元素
+.text {
+  position: relative;
+}
+
+.block {
+  height: 50px;
+  width: 30px;
+  display: inline-block;
+  opacity: 0.5;
+  position: relative;
+  left: 100px;
+  background-color: @blue-3;
+  transform: rotate(-10deg);
+  z-index: -1;
+  pointer-events: none;
+}
+.before {
+  height: 30px;
+  width: 30px;
+  opacity: 0.7;
+  position: absolute;
+  transform: rotate(-50deg);
+  border: 2px solid @volcano-5;
+  border-radius: 6px;
+  left: 50px;
+  top: -30px;
+}
+.after {
+  height: 40px;
+  width: 10px;
+  opacity: 0.6;
+  position: absolute;
+  background-color: @yellow-5;
+  transform: rotate(20deg);
+  left: -30px;
+  top: 40px;
+}
+
+.after-text {
+  position: relative;
+  .block {
+    transform: rotate(-20deg);
+    left: -200px;
+  }
+  .after {
+    left: -80px;
+    top: -60px;
+  }
+  .before {
+    left: 100px;
+    top: -50px;
   }
 }

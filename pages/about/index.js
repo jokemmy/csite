@@ -1,22 +1,34 @@
 
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
+import { Parallax } from 'rc-scroll-anim';
 import { Link } from '@components/Anchor';
 import PageImage from '@components/PageImage';
 import image from '@assets/images/about-image.jpg';
+import icons from '@assets/images/about-icons.svg';
 import styles from './about.less';
 
 
 function About() {
   return (
     <Fragment>
-      <PageImage
-        image={image}
-        className={styles.aboutPageImage} />
+      <PageImage image={image} className={styles.aboutPageImage}>
+        <div className="page-content">
+          <img alt="icons" src={icons} className={styles.sectionBanner} />
+        </div>
+      </PageImage>
       <div className="page-content">
         <section className="page-section">
-          <h2 className="page-title">
-            我们是做什么的<Link href="#我们是做什么的">#</Link>
+          <h2 className={styles.sectionTitle} style={{ textAlign: 'left' }}>
+            <Link href="#我们做的是什么">我们做的是什么</Link>
+            <i className={styles.text}>
+              <Parallax
+                animation={{ y: 20, rotate: 180 }}
+                className={styles.after} />
+              <Parallax
+                animation={{ y: 10, rotate: 360 }}
+                className={styles.before} />
+            </i>
           </h2>
           <p>
             江苏欣动信息科技有限公司是国内专注物联网技术和智慧解决方案开发、实施及运营的高新科技企业。欣动科技坚信利用物联网技术改变物业管理等传统行业，致力于为客户提供智慧能源解决方案。
@@ -26,8 +38,19 @@ function About() {
           </p>
         </section>
         <section className="page-section">
-          <h2 className="page-title">
-            我们有什么成就<Link href="#我们有什么成就">#</Link>
+          <h2 className={styles.sectionTitle} style={{ textAlign: 'right' }}>
+            <i className={styles.afterText}>
+              <Parallax
+                animation={{ y: 30, rotate: 270 }}
+                className={styles.block} />
+              <Parallax
+                animation={{ y: 20, rotate: 180 }}
+                className={styles.after} />
+              <Parallax
+                animation={{ y: 10, rotate: 360 }}
+                className={styles.before} />
+            </i>
+            <Link href="#我们有什么成就">我们有什么成就</Link>
           </h2>
           <h3>应用支撑平台、数据中心平台、物联感知平台</h3>
           <p>
@@ -50,7 +73,7 @@ function About() {
 About.getInitialProps = async function( ctx ) {
   const layoutProps = {
     title: '欣动价值',
-    anchors: [ '我们是做什么的', '我们有什么成就' ]
+    anchors: [ '我们做的是什么', '我们有什么成就' ]
   };
   return { layoutProps };
 };

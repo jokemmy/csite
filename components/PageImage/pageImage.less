@@ -1,11 +1,22 @@
 
 .pageImage {
-  height: 350px;
+  z-index: 1;
+  min-height: 350px;
+  position: relative;
+  overflow: hidden;
   background-repeat: no-repeat;
   background-position: center;
-  // background-size: cover;
 }
 
-.title {
-  color: @light-8;
+.mirror {
+  width: 100%;
+  height: calc(100% + 100px);
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 100%;
+  transform: translateY(-100px);
 }

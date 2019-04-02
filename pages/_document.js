@@ -1,6 +1,7 @@
 
 import moment from 'moment';
 import Document, { Main, Head, NextScript } from 'next/document';
+import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
 
 // 设置中文
@@ -11,28 +12,8 @@ class CustomDocument extends Document {
 
   static getInitialProps( ctx ) {
     const initialProps = Document.getInitialProps( ctx );
-
-    //     const themeVariables = lessToJS(
-    //       lessVariablesString,
-    //       { resolveVariables: true, dictionary: true }
-    //     );
-    //     console.log("themeVariables:", themeVariables)
-    // console.log("themeVariables:", themeVariables)
-    //   const page = ctx.renderPage( Component => {
-    //   const WrappedComponent = props => {
-    //     pageContext = props.pageContext;
-    //     return <Component {...props} />;
-    //   };
-
-    //   WrappedComponent.propTypes = {
-    //     pageContext: PropTypes.object.isRequired,
-    //   };
-
-    //   return WrappedComponent;
-    // });
-
-
-    return { ...initialProps, head: []};
+    const spriteContent = sprite.stringify();
+    return { ...initialProps, spriteContent, head: []};
   }
 
   render() {
@@ -52,6 +33,7 @@ class CustomDocument extends Document {
           <link rel="stylesheet" href="/static/editor.css" />*/}
         </Head>
         <body>
+          <div dangerouslySetInnerHTML={{ __html: this.props.spriteContent }} />
           <Main />
           <NextScript />
         </body>

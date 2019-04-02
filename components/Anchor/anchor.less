@@ -42,17 +42,25 @@
 }
 
 .link {
-  opacity: 0;
-  margin-left: 8px;
-  transition: opacity @anim-speed-2 @ease-in-out;
-  color: @anchor-color;
-  user-select: none;
+  color: inherit;
+  &:hover {
+    color: inherit;
+  }
   &:focus {
     text-decoration: none;
   }
+  &::after {
+    opacity: 0;
+    content: '#';
+    display: inline-block;
+    color: @anchor-color;
+    user-select: none;
+    margin-left: 8px;
+    transition: opacity @anim-speed-2 @ease-in-out;
+  }
 }
 h1, h2, h3, h4, h5, h6 {
-  &:hover .link {
+  &:hover .link::after {
     opacity: 1;
   }
 }

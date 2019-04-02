@@ -4,8 +4,9 @@ import Animate from 'rc-animate';
 import classnames from 'classnames';
 import Hammer from 'react-hammerjs';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
-import '@assets/motions/slideUp.less';
-import '@assets/motions/slideDown.less';
+import '@assets/motions/cScale.less';
+import '@assets/motions/cSlideUp.less';
+import '@assets/motions/cSlideDown.less';
 import Points from './points';
 import styles from './carousel.less';
 
@@ -72,15 +73,13 @@ class Carousel extends React.Component {
     const { children } = this.props;
     const count = React.Children.count( children );
     const { /*pointerType,*/ offsetDirection } = event;
-    // if ( process.env.NODE_ENV === 'development' || pointerType !== 'mouse' ) {
-      event.preventDefault();
-      if ( offsetDirection === 8 && index < count - 1 ) { // 上
-        this.handleChange( index + 1 );
-      }
-      if ( offsetDirection === 16 && index > 0 ) { // 下
-        this.handleChange( index - 1 );
-      }
-    // }
+    event.preventDefault();
+    if ( offsetDirection === 8 && index < count - 1 ) { // 上
+      this.handleChange( index + 1 );
+    }
+    if ( offsetDirection === 16 && index > 0 ) { // 下
+      this.handleChange( index - 1 );
+    }
   };
 
   render() {
@@ -93,11 +92,13 @@ class Carousel extends React.Component {
         <div {...props} className={classnames( className, styles.carousel )}>
           <Animate
             component="div"
-            transitionName={direction ? 'c-slide-up' : 'c-slide-down'}
             transitionAppear={false}
-            onEnd={this.handleScrollEnd}>
+            onEnd={this.handleScrollEnd}
+            transitionName={direction ? 'c-slide-up' : 'c-slide-down'}>
             <div key={`${index}`} className={styles.paper}>
-              {child}
+              <div className="c-scale">
+                {child}
+              </div>
             </div>
           </Animate>
           <Points

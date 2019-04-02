@@ -1,23 +1,23 @@
 
 :global {
   .c-slide-down-enter {
-    animation-duration: @anim-speed-2;
+    animation-duration: @anim-speed-4;
     animation-fill-mode: both;
-    animation-timing-function: @ease-out;
+    animation-timing-function: @easeOutCubic;
     animation-play-state: paused;
   }
 
   .c-slide-down-appear {
-    animation-duration: @anim-speed-2;
+    animation-duration: @anim-speed-4;
     animation-fill-mode: both;
-    animation-timing-function: @ease-out;
+    animation-timing-function: @easeOutCubic;
     animation-play-state: paused;
   }
 
   .c-slide-down-leave {
-    animation-duration: @anim-speed-2;
+    animation-duration: @anim-speed-4;
     animation-fill-mode: both;
-    animation-timing-function: @ease-in;
+    animation-timing-function: @easeOutQuad;
     animation-play-state: paused;
   }
 
@@ -49,18 +49,18 @@
 
 @keyframes cslideDownIn {
   0% {
-    transform: translateY(-100%);
+    transform: translate3d(0, -100%, 0);
   }
   100% {
-    transform: translateY(0%);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes cslideDownOut {
   0% {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateY(20%);
+    transform: translate3d(0, 30%, 0);
   }
 }

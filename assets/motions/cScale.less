@@ -1,0 +1,45 @@
+
+:global {
+
+  .c-slide-up-enter, .c-slide-down-enter {
+    .c-scale {
+      :local {
+        animation-name: cScaleIn;
+      }
+      animation-duration: @anim-speed-4;
+      animation-fill-mode: both;
+      animation-timing-function: @easeInQuad;
+      animation-play-state: running;
+    }
+  }
+
+  .c-slide-up-leave, .c-slide-down-leave {
+    .c-scale {
+      :local {
+        animation-name: cScaleOut;
+      }
+      animation-duration: @anim-speed-4;
+      animation-fill-mode: both;
+      animation-timing-function: @easeOutQuad;
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes cScaleIn {
+  0% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes cScaleOut {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  100% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
