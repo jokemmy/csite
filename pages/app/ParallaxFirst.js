@@ -3,8 +3,8 @@ import React from 'react';
 import classnames from 'classnames';
 import Parallax from '@components/Parallax';
 import Paper from '@components/Parallax/Paper';
-import imagePcb from '@assets/images/pcb.jpg';
-import imageTunnel from '@assets/images/tunnel.png';
+// import imagePcb from '@assets/images/pcb.jpg?webp';
+import imageTunnel from '@assets/images/tunnel.png?webp';
 import styles from './parallax.less';
 
 

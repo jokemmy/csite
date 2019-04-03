@@ -39,19 +39,21 @@ function AnchorComp({ anchors }) {
   };
 
   return (
-    <div className={styles.anchor}>
-      {anchors.map(( text ) => {
-        return (
-          <a tabIndex="-1"
-            key={text}
-            title={text}
-            href={`#${text}`}
-            className={styles.trigger}
-            onClick={handleClick( text )}>
-            {text}
-          </a>
-        );
-      })}
+    <div className="page-anchor">
+      <div className={styles.anchor}>
+        {anchors.map(( text ) => {
+          return (
+            <a tabIndex="-1"
+              key={text}
+              title={text}
+              href={`#${text}`}
+              className={styles.trigger}
+              onClick={handleClick( text )}>
+              {text}
+            </a>
+          );
+        })}
+      </div>
     </div>
   );
 }

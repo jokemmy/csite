@@ -1,11 +1,15 @@
 
+import classnames from 'classnames';
 import React, { Fragment } from 'react';
+import styles from './hardware.less';
 
 
 function Hardware() {
   return (
     <Fragment>
-      <div />
+      <section className="page-banner page-section">
+
+      </section>
     </Fragment>
   );
 }

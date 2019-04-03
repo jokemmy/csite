@@ -4,6 +4,7 @@ import Animate from 'rc-animate';
 import classnames from 'classnames';
 import Hammer from 'react-hammerjs';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
+import { requestAnimationFrame, cancelAnimationFrame } from '@lib/requestAnimationFrame';
 import '@assets/motions/cScale.less';
 import '@assets/motions/cSlideUp.less';
 import '@assets/motions/cSlideDown.less';
@@ -11,11 +12,16 @@ import Points from './points';
 import styles from './carousel.less';
 
 
+export const CarouselContext = React.createContext({
+  isEnable: false
+});
+
 class Carousel extends React.Component {
 
   state = {
     index: 0,
-    scrolling: false
+    scrolling: false,
+    isEnable: false
   };
 
   componentDidMount() {
@@ -28,6 +34,10 @@ class Carousel extends React.Component {
       this.wheelListener.remove();
       this.wheelListener = null;
     }
+    if ( this.rafHandle ) {
+      cancelAnimationFrame( this.rafHandle );
+      this.rafHandle = null;
+    }
   }
 
   handleWheel = ( e ) => {
@@ -38,23 +48,20 @@ class Carousel extends React.Component {
     const count = React.Children.count( children ) - 1;
     if ( scrolling === false ) {
       if ( delta > 0 && index > 0 ) {
-        this.state.scrolling = true; // eslint-disable-line
-        this.setState({
-          index: index - 1,
-          direction: 0 // 向上
-        });
+        this.handleChange( index - 1 );
       } else if ( delta < 0 && index < count ) {
-        this.state.scrolling = true; // eslint-disable-line
-        this.setState({
-          index: index + 1,
-          direction: 1 // 向下
-        });
+        this.handleChange( index + 1 );
       }
     }
   };
 
-  handleScrollEnd = () => {
-    this.state.scrolling = false; // eslint-disable-line
+  handleScrollEnd = ( _, exists ) => {
+    if ( exists ) {
+      this.state.scrolling = false; // eslint-disable-line
+      this.setState({
+        isEnable: true
+      });
+    }
   };
 
   handleChange = ( targetIndex ) => {
@@ -62,8 +69,15 @@ class Carousel extends React.Component {
     if ( scrolling === false ) {
       this.state.scrolling = true; // eslint-disable-line
       this.setState({
-        index: targetIndex,
-        direction: targetIndex > index ? 1 : 0
+        isEnable: false
+      }, () => {
+        this.rafHandle = requestAnimationFrame(() => {
+          this.rafHandle = null;
+          this.setState({
+            index: targetIndex,
+            direction: targetIndex > index ? 1 : 0
+          });
+        });
       });
     }
   };
@@ -83,31 +97,33 @@ class Carousel extends React.Component {
   };
 
   render() {
-    const { index, direction } = this.state;
+    const { index, direction, isEnable } = this.state;
     const { children, className, ...props } = this.props;
     const count = React.Children.count( children );
     const child = React.Children.toArray( children ).find(( _, i ) => i === index );
     return (
-      <Hammer onSwipe={this.handleSwipe} direction="DIRECTION_VERTICAL">
-        <div {...props} className={classnames( className, styles.carousel )}>
-          <Animate
-            component="div"
-            transitionAppear={false}
-            onEnd={this.handleScrollEnd}
-            transitionName={direction ? 'c-slide-up' : 'c-slide-down'}>
-            <div key={`${index}`} className={styles.paper}>
-              <div className="c-scale">
-                {child}
+      <CarouselContext.Provider value={{ isEnable }}>
+        <Hammer onSwipe={this.handleSwipe} direction="DIRECTION_VERTICAL">
+          <div {...props} className={classnames( className, styles.carousel )}>
+            <Animate
+              component="div"
+              transitionAppear={false}
+              onEnd={this.handleScrollEnd}
+              transitionName={direction ? 'c-slide-up' : 'c-slide-down'}>
+              <div key={`${index}`} className={styles.paper}>
+                <div className="c-scale">
+                  {child}
+                </div>
               </div>
-            </div>
-          </Animate>
-          <Points
-            size={30}
-            index={index}
-            onChange={this.handleChange}
-            points={Array( count ).fill( 1 )} />
-        </div>
-      </Hammer>
+            </Animate>
+            <Points
+              size={30}
+              index={index}
+              onChange={this.handleChange}
+              points={Array( count ).fill( 1 )} />
+          </div>
+        </Hammer>
+      </CarouselContext.Provider>
     );
   }
 }

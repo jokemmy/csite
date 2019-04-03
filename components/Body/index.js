@@ -4,7 +4,7 @@ import './body.less';
 
 function Body({ children }) {
   return (
-    <div className="body">
+    <div className="page-body">
       {children}
     </div>
   );

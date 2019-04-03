@@ -20,21 +20,31 @@
     height: 100%;
   }
 
+  .page-anchor {
+    left: 0;
+    position: fixed;
+    top: @header-height;
+    z-index: @anchor-zIndex;
+    background-color: @anchor-background-color;
+    // box-shadow: @shadow-down;
+    width: 100vw;
+  }
+
   .page-content {
-    max-width: 980px;
+    max-width: @page-width;
     padding: 0 24px;
     margin: 0 auto;
+  }
+
+  .page-banner {
+    padding-top: @header-height + @anchor-height;
+    min-height: 80px;
   }
 
   .page-section {
     position: relative;
     margin-bottom: 64px;
     font-size: 16px;
-    h2 {
-      color: @dark-10;
-      font-size: 2.5em;
-      text-align: center;
-    }
     strong {
       color: @dark-9;
     }
@@ -45,7 +55,6 @@
       line-height: 1.8em;
       white-space: normal;
       letter-spacing: .05em;
-      text-indent: 2em;
     }
   }
 

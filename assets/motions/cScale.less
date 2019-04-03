@@ -1,7 +1,8 @@
 
 :global {
 
-  .c-slide-up-enter, .c-slide-down-enter {
+  .c-slide-up-enter.c-slide-up-enter-active,
+  .c-slide-down-enter.c-slide-down-enter-active {
     .c-scale {
       :local {
         animation-name: cScaleIn;
@@ -13,11 +14,13 @@
     }
   }
 
-  .c-slide-up-leave, .c-slide-down-leave {
+  .c-slide-up-leave.c-slide-up-leave-active,
+  .c-slide-down-leave.c-slide-down-leave-active {
     .c-scale {
       :local {
         animation-name: cScaleOut;
       }
+      will-change: transform;
       animation-duration: @anim-speed-4;
       animation-fill-mode: both;
       animation-timing-function: @easeOutQuad;

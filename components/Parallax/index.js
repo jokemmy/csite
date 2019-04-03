@@ -2,16 +2,32 @@
 import React from 'react';
 import omit from 'omit.js';
 import Parallax from 'parallax-js';
+import { CarouselContext } from '@components/Carousel';
 //https://ken.artbees.net/wide-parallax-startup/
 
 class Scene extends React.Component {
+
+  static contextType = CarouselContext;
 
   constructor( props ) {
     super( props );
     this.sceneRef = React.createRef();
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
+    const { isEnable } = this.context;
+    if ( isEnable ) {
+      this.createParallax();
+    } else {
+      this.destroyParallax();
+    }
+  }
+
+  componentWillUnmount() {
+    this.destroyParallax();
+  }
+
+  createParallax() {
     const defaultOptions = {
       selector: '.paper'
     };
@@ -22,14 +38,19 @@ class Scene extends React.Component {
     );
   }
 
-  componentWillUnmount() {
-    this.parallaxInstance.destroy();
+  destroyParallax() {
+    if ( this.parallaxInstance ) {
+      this.parallaxInstance.destroy();
+      this.parallaxInstance = null;
+    }
   }
 
   render() {
     const { children, className, ...props } = omit( this.props, ['options']);
     return (
-      <div {...props} className={`${className ? `${className} ` : ''}scene`} ref={this.sceneRef}>
+      <div {...props}
+        ref={this.sceneRef}
+        className={`${className ? `${className} ` : ''}scene`} >
         {children}
       </div>
     );
