@@ -13,7 +13,7 @@ import styles from './carousel.less';
 
 
 export const CarouselContext = React.createContext({
-  isEnable: false
+  isEnable: true
 });
 
 class Carousel extends React.Component {
@@ -21,7 +21,7 @@ class Carousel extends React.Component {
   state = {
     index: 0,
     scrolling: false,
-    isEnable: false
+    isEnable: true
   };
 
   componentDidMount() {

@@ -23,6 +23,13 @@ class Scene extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { isEnable } = this.context;
+    if ( isEnable ) {
+      this.createParallax();
+    }
+  }
+
   componentWillUnmount() {
     this.destroyParallax();
   }

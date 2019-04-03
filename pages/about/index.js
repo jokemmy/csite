@@ -1,14 +1,13 @@
 
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
-// import { Parallax } from 'rc-scroll-anim';
 import { Link } from '@components/Anchor';
 import banner1 from '@assets/images/about-banner-1.jpg?webp';
 import banner2 from '@assets/images/about-banner-2.png?webp';
-// import icons from '@assets/images/about-icons.svg';
+import Advantage from './advantage';
 import styles from './about.less';
 
-// instances = new simpleParallax(images);
+
 class About extends React.Component {
 
   static getInitialProps = async function( ctx ) {
@@ -43,75 +42,35 @@ class About extends React.Component {
             </div>
           </div>
         </section>
-        <section className="page-section" style={{ height: 500 }}>
-        </section>
-        <section className="page-section">
-          <div className={classnames( styles.aboutBlock,  styles.aboutBlockImage )} style={{   backgroundImage: `url(${banner2})` }}>
-            <div className="page-content">
-              <h2 className={styles.aboutBlockTitle} style={{ textAlign: 'right', color: '#fff' }}>
-                <Link href="#核心能力与优势">核心能力与优势</Link>
-              </h2>
-              <div className={styles.aboutBlockContent}>
-                <h3>应用支撑平台、数据中心平台、物联感知平台</h3>
-                <p>
-                  以欣动科技自主研发的DD-IoT平台为核心，采用应用支撑平台、数据中心平台、物联感知平台构建起三级平台，利用人工智能+物联网+大数据+云计算技术，采用前端硬件设备+后端大数据平台模式，将人与基础设施、服务管理建立紧密联系，打通各级、各行业智慧应用平台，形成系统化的解决方案。
-                </p>
-                <h3>核心能力与优势</h3>
-                <ul>
-                  <li>更安全：确保能源使用安全</li>
-                  <li>更可靠：提供高稳定性的产品和解决方案</li>
-                  <li>更高效：提供简洁方便的解决方案，帮助客户实现最佳的能效管理和过程效率</li>
-                  <li>更互联互通：融合信息技术和运营技术，帮助客户实现更好的的商业结果</li>
-                  <li>更可持续：以能源为切入，实现资源的可持续。</li>
-                </ul>
-              </div>
+        <section className="page-section" style={{ minHeight: 300 }}>
+          <div className="page-content">
+            <h2 className={styles.aboutBlockTitle} style={{ textAlign: 'right' }}>
+              <Link href="#核心能力与优势">核心能力与优势</Link>
+            </h2>
+            <div className={styles.aboutBlockContent}>
+              <h3>应用支撑平台、数据中心平台、物联感知平台</h3>
+              <p>
+                以欣动科技自主研发的DD-IoT平台为核心，采用应用支撑平台、数据中心平台、物联感知平台构建起三级平台，利用人工智能+物联网+大数据+云计算技术，采用前端硬件设备+后端大数据平台模式，将人与基础设施、服务管理建立紧密联系，打通各级、各行业智慧应用平台，形成系统化的解决方案。
+              </p>
+{/*              <h3>核心能力与优势</h3>*/}
+{/*              <ul>
+                <li>更安全：确保能源使用安全</li>
+                <li>更可靠：提供高稳定性的产品和解决方案</li>
+                <li>更高效：提供简洁方便的解决方案，帮助客户实现最佳的能效管理和过程效率</li>
+                <li>更互联互通：融合信息技术和运营技术，帮助客户实现更好的的商业结果</li>
+                <li>更可持续：以能源为切入，实现资源的可持续。</li>
+              </ul>*/}
             </div>
           </div>
         </section>
         <section className="page-section">
-          <div className="page-content">
-{/*            <i className={styles.text}>
-                <Parallax
-                  animation={{ y: 20, rotate: 180 }}
-                  className={styles.after} />
-                <Parallax
-                  animation={{ y: 10, rotate: 360 }}
-                  className={styles.before} />
-              </i>*/}
-            
-            
+          <div className={classnames( styles.aboutBlock,  styles.aboutBlockImage, styles.dark )} style={{ padding: 0, backgroundImage: `url(${banner2})` }}>
+            <div className="page-content"><Advantage /></div>
           </div>
         </section>
-{/*        <section className="page-section">
-          <div className="page-content">
-            <h2 className={styles.sectionTitle} style={{ textAlign: 'right' }}>
-              <i className={styles.afterText}>
-                <Parallax
-                  animation={{ y: 30, rotate: 270 }}
-                  className={styles.block} />
-                <Parallax
-                  animation={{ y: 20, rotate: 180 }}
-                  className={styles.after} />
-                <Parallax
-                  animation={{ y: 10, rotate: 360 }}
-                  className={styles.before} />
-              </i>
-              <Link href="#我们有什么成就">我们有什么成就</Link>
-            </h2>
-            <h3>应用支撑平台、数据中心平台、物联感知平台</h3>
-            <p>
-              以欣动科技自主研发的DD-IoT平台为核心，采用应用支撑平台、数据中心平台、物联感知平台构建起三级平台，利用人工智能+物联网+大数据+云计算技术，采用前端硬件设备+后端大数据平台模式，将人与基础设施、服务管理建立紧密联系，打通各级、各行业智慧应用平台，形成系统化的解决方案。
-            </p>
-            <h3>核心能力与优势</h3>
-            <ul>
-              <li>更安全：确保能源使用安全</li>
-              <li>更可靠：提供高稳定性的产品和解决方案</li>
-              <li>更高效：提供简洁方便的解决方案，帮助客户实现最佳的能效管理和过程效率</li>
-              <li>更互联互通：融合信息技术和运营技术，帮助客户实现更好的的商业结果</li>
-              <li>更可持续：以能源为切入，实现资源的可持续。</li>
-            </ul>
-          </div>
-        </section>*/}
+        <section className="page-section">
+          
+        </section>
       </Fragment>
     );
   }
