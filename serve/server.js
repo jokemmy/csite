@@ -10,7 +10,7 @@ const compress = require( 'koa-compress' );
 const port = parseInt( process.env.PORT, 10 ) || 3000;
 const env = process.env.NODE_ENV;
 const dev = env !== 'production';
-const app = next({ dir: '.', dev });
+const app = next({ dev });
 const handle = app.getRequestHandler();
 
 
@@ -37,10 +37,10 @@ app.prepare().then(() => {
   //   ctx.respond = false;
   // });
 
-  // router.get( '/store', async ctx => {
-  //   await app.render( ctx.req, ctx.res, '/store', ctx.query );
-  //   ctx.respond = false;
-  // });
+  router.get( '/store/:type', async ctx => {
+    await app.render( ctx.req, ctx.res, '/store', ctx.query );
+    ctx.respond = false;
+  });
 
   // Default catch-all handler to allow Next.js to handle all other routes
   router.get( '*', async ctx => {
@@ -48,12 +48,13 @@ app.prepare().then(() => {
     ctx.respond = false;
   });
 
+  server.use( async ( ctx, next ) => {
+    ctx.res.statusCode = 200;
+    await next();
+  });
+
   server.use( router.routes());
   server.use( router.allowedMethods());
-  server.use(( ctx, next ) => {
-    ctx.res.statusCode = 200;
-    return next();
-  });
 
   server.listen( port, err => {
     if ( err ) {
