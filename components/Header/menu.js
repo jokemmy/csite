@@ -10,67 +10,11 @@ export default {
   },
   menu3: {
     text: '智能硬件',
-    col: 3,
-    align: 'bottom',
-    menu: {
-      menu31: {
-        text: '终端设备类',
-        as: '/hardware/1',
-        url: '/hardware?type=1'
-      },
-      menu32: {
-        text: '接口转换类',
-        as: '/hardware/2',
-        url: '/hardware?type=12'
-      },
-      menu33: {
-        text: '智能网关类',
-        as: '/hardware/3',
-        url: '/hardware?type=3'
-      },
-      menu34: {
-        text: '智能网由类',
-        as: '/hardware/4',
-        url: '/hardware?type=4'
-      },
-      menu35: {
-        text: '前置服务类',
-        as: '/hardware/5',
-        url: '/hardware?type=5'
-      },
-      menu36: {
-        text: '集成机柜类',
-        as: '/hardware/6',
-        url: '/hardware?type=6'
-      }
-    }
+    url: '/hardware'
   },
   menu4: {
     text: '解决方案',
-    col: 2,
-    align: 'bottom',
-    menu: {
-      menu31: {
-        text: '智慧园区',
-        as: '/scene/1',
-        url: '/scene?type=1'
-      },
-      menu32: {
-        text: '智慧校园',
-        as: '/scene/2',
-        url: '/scene?type=2'
-      },
-      menu33: {
-        text: '智慧建筑',
-        as: '/scene/3',
-        url: '/scene?type=3'
-      },
-      menu34: {
-        text: '其他场景',
-        as: '/scene/4',
-        url: '/scene?type=4'
-      }
-    }
+    url: '/scene'
   },
   menu5: {
     text: '应用商店',

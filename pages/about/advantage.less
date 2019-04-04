@@ -14,12 +14,49 @@
   z-index: 1;
 }
 
+.icon {
+  color: #fff;
+  z-index: 1;
+  position: absolute;
+  font-size: 48px;
+  .svgIcon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
+}
+
 .label {
-  padding: 8px 12px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 6px 0 2px;
   position: absolute;
   background-color: @light-7;
-  border-radius: 3px;
+  border-radius: 0 3px 3px 0;
+  transform: translate(37px, -8px);
+  white-space: nowrap;
   z-index: 1;
+  .arrow {
+    top: 0;
+    left: -30px;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    &::before {
+      content: '';
+      top: 50.2%;
+      right: calc(61% - 100%);
+      width: 81%;
+      height: 81%;
+      position: absolute;
+      border-radius: 5px;
+      transform: translateY(-50%) rotate(45deg);
+      background-color: @light-7;
+    }
+  }
 }
 
 .point-scale {

@@ -8,7 +8,7 @@
 }
 
 .trigger {
-  color: @dark-5;
+  color: @light-8;
   display: inline-block;
   padding: 0 8px;
   font-size: 12px;
@@ -33,6 +33,12 @@
   }
   &:focus {
     text-decoration: none;
+  }
+}
+
+:global(.page-scrolled) {
+  .trigger {
+    color: @dark-5;
   }
 }
 

@@ -26,21 +26,21 @@ app.prepare().then(() => {
   server.use( koabody());
   server.use( compress());
 
-  // 添加服务端简洁链接支持
-  router.get( '/hardware/:type', async ctx => {
-    await app.render( ctx.req, ctx.res, '/hardware', ctx.query );
-    ctx.respond = false;
-  });
+  // // 添加服务端简洁链接支持
+  // router.get( '/hardware', async ctx => {
+  //   await app.render( ctx.req, ctx.res, '/hardware', ctx.query );
+  //   ctx.respond = false;
+  // });
 
-  router.get( '/scene/:type', async ctx => {
-    await app.render( ctx.req, ctx.res, '/scene', ctx.query );
-    ctx.respond = false;
-  });
+  // router.get( '/scene', async ctx => {
+  //   await app.render( ctx.req, ctx.res, '/scene', ctx.query );
+  //   ctx.respond = false;
+  // });
 
-  router.get( '/store/:type', async ctx => {
-    await app.render( ctx.req, ctx.res, '/store', ctx.query );
-    ctx.respond = false;
-  });
+  // router.get( '/store', async ctx => {
+  //   await app.render( ctx.req, ctx.res, '/store', ctx.query );
+  //   ctx.respond = false;
+  // });
 
   // Default catch-all handler to allow Next.js to handle all other routes
   router.get( '*', async ctx => {
