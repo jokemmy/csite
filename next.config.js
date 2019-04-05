@@ -47,6 +47,8 @@ module.exports = compose([
     },
     [PHASE_PRODUCTION_BUILD + PHASE_EXPORT]: {
       cssLoaderOptions: {
+        camelCase: true,
+        importLoaders: 1,
         localIdentName: '[hash:base64:8]'
       }
     }
@@ -61,6 +63,8 @@ module.exports = compose([
     },
     [PHASE_PRODUCTION_BUILD + PHASE_EXPORT]: {
       cssLoaderOptions: {
+        camelCase: true,
+        importLoaders: 1,
         localIdentName: '[hash:base64:8]'
       }
     }
