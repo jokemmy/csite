@@ -32,13 +32,9 @@ app.prepare().then(() => {
   //   ctx.respond = false;
   // });
 
-  // router.get( '/scene', async ctx => {
-  //   await app.render( ctx.req, ctx.res, '/scene', ctx.query );
-  //   ctx.respond = false;
-  // });
-
   router.get( '/store/:type', async ctx => {
-    await app.render( ctx.req, ctx.res, '/store', ctx.query );
+    const params = { type: ctx.params.type };
+    await app.render( ctx.req, ctx.res, '/store', params );
     ctx.respond = false;
   });
 

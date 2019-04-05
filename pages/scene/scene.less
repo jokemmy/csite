@@ -89,13 +89,17 @@
   overflow: auto;
   background-position: top center;
   background-size: cover;
+  background-repeat: no-repeat;
   background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
 }
 
 .block-content {
+  flex: 1 1 auto;
   background-color: @light-9;
   :global(.page-content) {
-    padding-left: 100px;
+    position: relative;
   }
 }
 
@@ -136,10 +140,10 @@
 }
 
 .icon-back {
-  margin-top: 8px;
-  margin-left: -90px;
+  top: 16px;
+  right: 16px;
   position: absolute;
-  font-size: 24px;
+  font-size: 18px;
   display: inline-block;
   margin-right: 16px;
   color: @dark-6;

@@ -18,8 +18,8 @@ import styles from './scene.less';
 
 class Scene extends React.Component {
 
-  static getInitialProps = async () => {
-      const layoutProps = {
+  static getInitialProps = async ( ctx ) => {
+    const layoutProps = {
       footer: false,
       transparent: true,
       title: '解决方案'
@@ -35,7 +35,7 @@ class Scene extends React.Component {
     this.setState({ index });
   };
 
-  handleback = () => {
+  handleBack = () => {
     this.setState({ index: 0 });
   };
 
@@ -44,7 +44,7 @@ class Scene extends React.Component {
     const { index } = this.state;
 
     return (
-      <Banner disbaled index={index ? 1 : 0} className={styles.view}>
+      <Banner disabled index={index ? 1 : 0} className={styles.view}>
         <section className="page-view" style={{ backgroundImage: `url(${banner})` }}>
           <div className={styles.solutions}>
             <h1>解决方案<span>Best Solutions</span></h1>
@@ -81,7 +81,7 @@ class Scene extends React.Component {
             <div className={styles.blockContent}>
               <div className="page-content">
                 <div className={styles.sceneTitle}>
-                  <div className={styles.iconBack}  onClick={this.handleback}>
+                  <div className={styles.iconBack}  onClick={this.handleBack}>
                     <SvgIcon icon={back} />返回
                   </div>
                   <h2>智慧园区</h2>
@@ -134,7 +134,7 @@ class Scene extends React.Component {
             <div className={styles.blockContent}>
               <div className="page-content">
                 <div className={styles.sceneTitle}>
-                  <div className={styles.iconBack}  onClick={this.handleback}>
+                  <div className={styles.iconBack}  onClick={this.handleBack}>
                     <SvgIcon icon={back} />返回
                   </div>
                   <h2>智慧校园</h2>
@@ -188,7 +188,7 @@ class Scene extends React.Component {
             <div className={styles.blockContent}>
               <div className="page-content">
                 <div className={styles.sceneTitle}>
-                  <div className={styles.iconBack}  onClick={this.handleback}>
+                  <div className={styles.iconBack}  onClick={this.handleBack}>
                     <SvgIcon icon={back} />返回
                   </div>
                   <h2>智慧建筑</h2>
@@ -238,7 +238,7 @@ class Scene extends React.Component {
             <div className={styles.blockContent}>
               <div className="page-content">
                 <div className={styles.sceneTitle}>
-                  <div className={styles.iconBack}  onClick={this.handleback}>
+                  <div className={styles.iconBack}  onClick={this.handleBack}>
                     <SvgIcon icon={back} />返回
                   </div>
                   <h2>其他方案</h2>

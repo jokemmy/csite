@@ -3,7 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import Parallax from '@components/Parallax';
 import Paper from '@components/Parallax/Paper';
-import imagePcb from '@assets/images/pcb.jpg';
+import banner from '@assets/images/banner/banner-4.jpg';
 import styles from './parallax.less';
 
 
@@ -21,18 +21,19 @@ const options = {
 
 class WallPaper extends React.Component {
   render() {
+    const { className, ...props } = this.props;
     return (
-      <Parallax className={styles.scene} options={options}>
+      <Parallax {...props} className={classnames( styles.scene, className )} options={options}>
         <Paper depth={0.2}>
-          <div className={styles.paperBackground} style={{ backgroundImage: `url(${imagePcb})` }} />
+          <div className={styles.paperBackground} style={{ backgroundImage: `url(${banner})` }} />
         </Paper>
         <div className={styles.content}>
           <div className={styles.toptic}>
             <h1 className={classnames( styles.topticTitle, 'AppSiYuanExtraLight' )}>
-              综合能源服务一体化解决方案
+              智能硬件
             </h1>
             <p className={classnames( styles.topticDesc, 'AppSiYuan' )}>
-              综合能源服务管理平台&智慧能源规划咨询服务。
+              欣动智能硬件TG121
             </p>
           </div>
         </div>

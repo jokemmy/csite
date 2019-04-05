@@ -3,8 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import Parallax from '@components/Parallax';
 import Paper from '@components/Parallax/Paper';
-// import imagePcb from '@assets/images/pcb.jpg?webp';
-import imageTunnel from '@assets/images/tunnel.png';
+import banner from '@assets/images/banner/banner-1.jpg';
 import styles from './parallax.less';
 
 
@@ -26,7 +25,7 @@ class WallPaper extends React.Component {
     return (
       <Parallax {...props} className={classnames( styles.scene, className )} options={options}>
         <Paper depth={0.2}>
-          <div className={styles.paperBackground} style={{ backgroundImage: `url(${imageTunnel})` }} />
+          <div className={styles.paperBackground} style={{ backgroundImage: `url(${banner})` }} />
         </Paper>
         <div className={styles.content}>
           <div className={styles.toptic}>
