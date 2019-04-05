@@ -41,7 +41,7 @@ class Base extends React.Component {
   };
 
   render() {
-    const { scrolled } = this.state;console.log("scrolled:", scrolled)
+    const { scrolled } = this.state;
     const { children, isMobile, isLoaded, className, ...props } = this.props;
     return (
       <ThemeContext.Provider value={{ themeVariables, isMobile, isLoaded }}>

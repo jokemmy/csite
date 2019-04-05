@@ -5,17 +5,18 @@ const withFonts = require( 'next-fonts' );
 const withCSS = require( '@zeit/next-css' );
 const withLess = require( '@zeit/next-less' );
 const compose = require( 'next-compose-plugins' );
+const { PHASE_PRODUCTION_BUILD, PHASE_EXPORT } = require( 'next/constants' );
 const optimizedImages = require( 'next-optimized-images' );
 const LessFunc = require( 'less-plugin-functions' );
-const lessToJS = require( 'less-vars-to-js' );
+// const lessToJS = require( 'less-vars-to-js' );
 const path = require( 'path' );
-const fs = require( 'fs' );
+// const fs = require( 'fs' );
 
 
 // Where your custom.less file lives
-const themeVariables = lessToJS(
-  fs.readFileSync( path.resolve( __dirname, './assets/custom.less' ), 'utf8' )
-);
+// const themeVariables = lessToJS(
+//   fs.readFileSync( path.resolve( __dirname, './assets/custom.less' ), 'utf8' )
+// );
 
 // const themeVariables = lessToJS(
 //   fs.readFileSync( path.resolve( __dirname, './node_modules/antd/lib/style/themes/default.less' ), 'utf8' ),
@@ -43,7 +44,11 @@ module.exports = compose([
     lessLoaderOptions: {
       javascriptEnabled: true,
       plugins: [new LessFunc()]
-      // modifyVars: themeVariables
+    },
+    [PHASE_PRODUCTION_BUILD + PHASE_EXPORT]: {
+      cssLoaderOptions: {
+        localIdentName: '[hash:base64:8]'
+      }
     }
   }],
 
@@ -53,6 +58,11 @@ module.exports = compose([
       camelCase: true,
       importLoaders: 1,
       localIdentName: "[local]___[hash:base64:5]"
+    },
+    [PHASE_PRODUCTION_BUILD + PHASE_EXPORT]: {
+      cssLoaderOptions: {
+        localIdentName: '[hash:base64:8]'
+      }
     }
   }],
 
@@ -137,7 +147,7 @@ module.exports = compose([
     cssLoader.exclude = nodeModules;
     lessLoader.exclude = nodeModules;
 
-    // 添加全局less
+    // 添加全局less, 每个less开头都会引入这个文件
     lessLoader.use = lessLoader.use.reduce( withGlobalLess([
       path.resolve( __dirname, './assets/custom.less' )
     ]), []);
@@ -147,6 +157,7 @@ module.exports = compose([
       new webpack.IgnorePlugin( /^\.\/locale$/, /moment$/ )
     );
 
+    // 添加字体目录避免与精灵冲突
     const fontLoader = config.module.rules.find(({ test }) => test.test( '.svg' ) && test.test( '.ttf' ));
     fontLoader.include = path.resolve( __dirname, './assets/fonts' );
 

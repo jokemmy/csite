@@ -6,7 +6,7 @@ import ParallaxSecond from './ParallaxSecond';
 
 function App() {
   return (
-    <Banner>
+    <Banner showPoints>
       <ParallaxFirst />
       <ParallaxSecond />
     </Banner>

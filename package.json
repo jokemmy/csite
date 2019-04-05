@@ -1,9 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "server": "cross-env NODE_ENV=development PORT=3000 node --inspect serve/server.js",
-    "dev": "next dev",
-    "start": "next start",
+    "dev": "cross-env NODE_ENV=development PORT=3000 node --inspect serve/server.js",
+    "start": "cross-env NODE_ENV=production PORT=3000 node serve/server.js",
     "build": "next build"
   },
   "dependencies": {

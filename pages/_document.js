@@ -1,5 +1,6 @@
 
 import moment from 'moment';
+import { Fragment } from 'react';
 import Document, { Main, Head, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 
@@ -20,6 +21,7 @@ class CustomDocument extends Document {
     return (
       <html lang="zh-cn">
         <Head>
+          <meta charset="utf-8" />
           <meta name="renderer" content="webkit" />
           <meta name="force-rendering" content="webkit" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -33,7 +35,7 @@ class CustomDocument extends Document {
           <link rel="stylesheet" href="/static/editor.css" />*/}
         </Head>
         <body>
-          <div dangerouslySetInnerHTML={{ __html: this.props.spriteContent }} />
+          <div style={{ display: 'none' }} dangerouslySetInnerHTML={{ __html: this.props.spriteContent }} />
           <Main />
           <NextScript />
         </body>

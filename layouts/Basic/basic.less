@@ -20,12 +20,32 @@
     height: 100%;
   }
 
+  .page-view {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .page-view-bg {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: absolute;
+    background-position: top center;
+    background-size: cover;
+  }
+
   .page-anchor {
     left: 0;
     position: fixed;
     top: @header-height;
     z-index: @anchor-zIndex;
-    transition: color @anim-speed-3, background-color @anim-speed-3;
+    transition:
+      color @anim-speed-3,
+      background-color @anim-speed-3;
     width: 100vw;
   }
 
@@ -67,6 +87,19 @@
   .page-top-banner {
     min-height: 80px;
     margin-bottom: 0;
+  }
+
+  .page-banner-title {
+    display: inline-block;
+    color: @light-10;
+    font-size: 48px;
+    margin-bottom: 0;
+    position: relative;
+    top: 150px;
+    left: 33%;
+    * {
+      color: inherit;
+    }
   }
 
   .page-banner-images {

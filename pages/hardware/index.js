@@ -8,8 +8,18 @@ import styles from './hardware.less';
 function Hardware() {
   return (
     <Fragment>
+      <section className="page-view">
+        <div className="page-view-bg" style={{ backgroundImage: `url(${banner})` }} />
+        <div className={styles.listContent}>
+          <h1>智能硬件<span>Smart Hardware</span></h1>
+        </div>
+      </section>
       <section className="page-top-banner">
-        <div className="page-banner-images" style={{ backgroundImage: `url(${banner})` }} />
+        <div className="page-banner-images" style={{ backgroundImage: `url(${banner})` }}>
+          <div className="page-banner-title">
+            <h1>智能硬件</h1>
+          </div>
+        </div>
       </section>
       <div className={styles.prods}>
         {productions.map(( production, index ) => {

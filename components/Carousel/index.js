@@ -1,5 +1,6 @@
 
 import React from 'react';
+import is from 'whatitis';
 import Animate from 'rc-animate';
 import classnames from 'classnames';
 import Hammer from 'react-hammerjs';
@@ -16,7 +17,22 @@ export const CarouselContext = React.createContext({
   isEnable: true
 });
 
+function HammerHoc({ disabled, children, ...props }) {
+  return !disabled ? children : (
+    <Hammer {...props} direction="DIRECTION_VERTICAL">
+      {children}
+    </Hammer>
+  );
+}
+
 class Carousel extends React.Component {
+
+  static getDerivedStateFromProps = ( props, state ) => {
+    if ( is.Number( props.index ) && props.index >= 0 && state.index !== props.index ) {
+      return { index: props.index, direction: props.index > state.index ? 1 : 0 };
+    }
+    return null;
+  }
 
   state = {
     index: 0,
@@ -43,10 +59,10 @@ class Carousel extends React.Component {
   handleWheel = ( e ) => {
     // 正数页面向上,负数页面向下
     const delta = ( whatenvis.firefox ? 3 : 1 ) * e.delta;
-    const { children } = this.props;
+    const { children, disabled } = this.props;
     const { index, scrolling } = this.state;
-    const count = React.Children.count( children ) - 1;
-    if ( scrolling === false ) {
+    const count = React.Children.toArray( children ).length - 1;
+    if ( !disabled && scrolling === false ) {
       if ( delta > 0 && index > 0 ) {
         this.handleChange( index - 1 );
       } else if ( delta < 0 && index < count ) {
@@ -85,8 +101,8 @@ class Carousel extends React.Component {
   handleSwipe = ( event ) => {
     const { index } = this.state;
     const { children } = this.props;
-    const count = React.Children.count( children );
-    const { /*pointerType,*/ offsetDirection } = event;
+    const count = React.Children.toArray( children ).length;
+    const { offsetDirection } = event;
     event.preventDefault();
     if ( offsetDirection === 8 && index < count - 1 ) { // 上
       this.handleChange( index + 1 );
@@ -98,12 +114,13 @@ class Carousel extends React.Component {
 
   render() {
     const { index, direction, isEnable } = this.state;
-    const { children, className, ...props } = this.props;
-    const count = React.Children.count( children );
-    const child = React.Children.toArray( children ).find(( _, i ) => i === index );
+    const { children, className, disabled, showPoints, ...props } = this.props;
+    const childArray = React.Children.toArray( children );
+    const count = childArray.length;
+    const child = childArray.find(( _, i ) => i === index );
     return (
       <CarouselContext.Provider value={{ isEnable }}>
-        <Hammer onSwipe={this.handleSwipe} direction="DIRECTION_VERTICAL">
+        <HammerHoc onSwipe={this.handleSwipe} disabled={disabled}>
           <div {...props} className={classnames( className, styles.carousel )}>
             <Animate
               component="div"
@@ -116,13 +133,15 @@ class Carousel extends React.Component {
                 </div>
               </div>
             </Animate>
-            <Points
-              size={30}
-              index={index}
-              onChange={this.handleChange}
-              points={Array( count ).fill( 1 )} />
+            {showPoints ? (
+              <Points
+                size={30}
+                index={index}
+                onChange={this.handleChange}
+                points={Array( count ).fill( 1 )} />
+            ) : null}
           </div>
-        </Hammer>
+        </HammerHoc>
       </CarouselContext.Provider>
     );
   }

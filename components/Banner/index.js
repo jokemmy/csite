@@ -1,14 +1,15 @@
 
 import React from 'react';
+import classnames from 'classnames';
 import Carousel from '@components/Carousel';
 import styles from './banner.less';
 
 
 class Banner extends React.Component {
   render() {
-    const { children } = this.props;
+    const { children, className, ...props } = this.props;
     return (
-      <Carousel className={styles.banner}>
+      <Carousel {...props} className={classnames( styles.banner, className )}>
         {children}
       </Carousel>
     );
