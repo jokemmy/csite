@@ -1,7 +1,7 @@
 
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
-import banner from '@assets/images/hardware-banner.jpg';
+import banner from '@assets/images/hardware/banner.jpg';
 import productions from './productions';
 import styles from './hardware.less';
 

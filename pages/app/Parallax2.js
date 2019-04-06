@@ -3,7 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import Parallax from '@components/Parallax';
 import Paper from '@components/Parallax/Paper';
-import banner from '@assets/images/banner/banner-2.jpg';
+import banner from '@assets/images/app/banner-2.jpg';
 import styles from './parallax.less';
 
 

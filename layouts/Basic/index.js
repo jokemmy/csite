@@ -1,5 +1,6 @@
 
 import React from 'react';
+import omit from 'omit.js';
 import Media from 'react-media';
 import classnames from 'classnames';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
@@ -15,7 +16,8 @@ import './fonts.less';
 class Base extends React.Component {
 
   state = {
-    scrolled: false
+    scrollClasses: [],
+    scrollCache: []
   };
 
   componentDidMount() {
@@ -31,23 +33,29 @@ class Base extends React.Component {
   }
 
   handleScroll = () => {
-    const { scrolled } = this.state;
+    const { scrollCache, scrollClasses } = this.state;
+    const { scrollClass } = this.props;
     const doc = document.body.scrollTop ? document.body : document.documentElement;
-    if ( doc.scrollTop >= 300 && !scrolled ) {
-      this.setState({ scrolled: true });
-    } else if ( doc.scrollTop < 300 ) {
-      this.setState({ scrolled: false });
-    }
+    Object.keys( scrollClass ).forEach(( key ) => {
+      const func = new Function( `return ${doc.scrollTop + key}` );
+      if ( func() && !scrollCache.includes( key )) {
+        scrollCache.push( key );
+        this.setState({ scrollClasses: [ ...scrollClasses, scrollClass[key] ]});
+      } else if ( !func() && scrollCache.includes( key )) {
+        this.setState({
+          scrollCache: scrollCache.filter(( k ) => k !== key ),
+          scrollClasses: scrollClasses.filter(( c ) => c !== scrollClass[key])
+        });
+      }
+    });
   };
 
   render() {
-    const { scrolled } = this.state;
-    const { children, isMobile, isLoaded, className, ...props } = this.props;
+    const { scrollClasses } = this.state;
+    const { children, isMobile, isLoaded, className, ...props } = omit( this.props, ['scrollClass']);
     return (
       <ThemeContext.Provider value={{ themeVariables, isMobile, isLoaded }}>
-        <div {...props} className={classnames( 'page-basic', className, {
-          'page-scrolled': scrolled
-        })}>
+        <div {...props} className={classnames( 'page-basic', className, scrollClasses.join( ' ' ))}>
           {children}
         </div>
         <Mask />

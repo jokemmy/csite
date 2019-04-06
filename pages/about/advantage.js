@@ -1,19 +1,19 @@
 
-import fentikongtiao from '@assets/images/svg/fentikongtiao.svg?sprite';
-import gongnuan from '@assets/images/svg/gongnuan.svg?sprite';
-import jiaoshizhaoming from '@assets/images/svg/jiaoshizhaoming.svg?sprite';
-import jinggai from '@assets/images/svg/jinggai.svg?sprite';
-import ludengguanli from '@assets/images/svg/ludengguanli.svg?sprite';
-import reshuiyunyingshoufei from '@assets/images/svg/reshuiyunyingshoufei.svg?sprite';
-import susheshoufei from '@assets/images/svg/susheshoufei.svg?sprite';
-import VRVkongtiao from '@assets/images/svg/VRVkongtiao.svg?sprite';
-import yongnengpingheng from '@assets/images/svg/yongnengpingheng.svg?sprite';
-import yunhangtiaodu from '@assets/images/svg/yunhangtiaodu.svg?sprite';
-import yushuihuishou from '@assets/images/svg/yushuihuishou.svg?sprite';
-import zhihuiwulianzuwang from '@assets/images/svg/zhihuiwulianzuwang.svg?sprite';
-import zhinengguanjia from '@assets/images/svg/zhinengguanjia.svg?sprite';
-import zhongyangkongtiao from '@assets/images/svg/zhongyangkongtiao.svg?sprite';
-import zizhuqushuishoufei from '@assets/images/svg/zizhuqushuishoufei.svg?sprite';
+import fentikongtiao from '@assets/images/about/fentikongtiao.svg?sprite';
+import gongnuan from '@assets/images/about/gongnuan.svg?sprite';
+import jiaoshizhaoming from '@assets/images/about/jiaoshizhaoming.svg?sprite';
+import jinggai from '@assets/images/about/jinggai.svg?sprite';
+import ludengguanli from '@assets/images/about/ludengguanli.svg?sprite';
+import reshuiyunyingshoufei from '@assets/images/about/reshuiyunyingshoufei.svg?sprite';
+import susheshoufei from '@assets/images/about/susheshoufei.svg?sprite';
+import VRVkongtiao from '@assets/images/about/VRVkongtiao.svg?sprite';
+import yongnengpingheng from '@assets/images/about/yongnengpingheng.svg?sprite';
+import yunhangtiaodu from '@assets/images/about/yunhangtiaodu.svg?sprite';
+import yushuihuishou from '@assets/images/about/yushuihuishou.svg?sprite';
+import zhihuiwulianzuwang from '@assets/images/about/zhihuiwulianzuwang.svg?sprite';
+import zhinengguanjia from '@assets/images/about/zhinengguanjia.svg?sprite';
+import zhongyangkongtiao from '@assets/images/about/zhongyangkongtiao.svg?sprite';
+import zizhuqushuishoufei from '@assets/images/about/zizhuqushuishoufei.svg?sprite';
 import styles from './advantage.less';
 
 

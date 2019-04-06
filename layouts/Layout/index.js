@@ -11,13 +11,13 @@ import bodyStyles from '@components/Body/body.less';
 
 class Layout extends React.Component {
   render() {
-    const { children, transparent, title, header, footer, anchors } = this.props;
+    const { children, transparent, title, header, footer, anchors, scrollClass, headerMode } = this.props;console.log("scrollClass:", this.props)
     return (
-      <Page className={bodyStyles.container}>
+      <Page scrollClass={scrollClass} className={bodyStyles.container}>
         <Head>
           <title>{title}</title>
         </Head>
-        {header !== false ? <Header transparent={transparent} /> : null}
+        {header !== false ? <Header mode={headerMode} transparent={transparent} /> : null}
         {Array.isArray( anchors ) ? <Anchor anchors={anchors} /> : null}
         <Body>{children}</Body>
         {footer !== false ? <Footer /> : null}

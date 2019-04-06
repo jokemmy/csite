@@ -4,6 +4,8 @@ import Link from 'next/link';
 import classnames from 'classnames';
 import React, { Component } from 'react';
 import { ThemeContext } from '@components/Themes';
+import logo from '@assets/images/logo.png';
+import logoColor from '@assets/images/logo-color.png';
 import menuData from './menu';
 import styles from './header.less';
 
@@ -71,7 +73,7 @@ class Header extends Component {
     });
   };
 
-  getPCMenu = ( data ) => Object.entries( data ).map(([ key, { align, text, menu, url, as, col }]) => {
+  getPCMenu = ( data ) => Object.entries( data ).map(([ key, { align, text, menu, url, className, as, col }]) => {
     const getContainer = () => { return this.headerRef.current; };
     const content = menu ? Object.entries( menu ).map(([ key, { text, url, as }]) => {
       return (
@@ -92,16 +94,16 @@ class Header extends Component {
         placement={align || 'bottom'}
         overlayClassName={classnames( styles.subMenu, { [styles[`subMenuCol${col}`]]: !!col })}
         getPopupContainer={getContainer}>
-        <a className={styles.link}>{text}</a>
+        <a className={classnames( styles.link, className )}>{text}</a>
       </Popover>
     ): (
       <Link key={key} as={as} href={url || '/'}>
-        <a className={styles.link}>{text}</a>
+        <a className={classnames( styles.link, className )}>{text}</a>
       </Link>
     );
   });
 
-  getMobileMenu = ( data ) => Object.entries( data ).map(([ key, { text, menu, url, as }]) => {
+  getMobileMenu = ( data ) => Object.entries( data ).map(([ key, { text, menu, url, as, className }]) => {
     return menu ? (
       <SubMenu key={`${key}_sub`} title={text}>
         {this.getMobileMenu( menu )}
@@ -109,7 +111,7 @@ class Header extends Component {
     ) : (
       <Item key={key}>
         <Link as={as} href={url || '/'}>
-          <a>{text}</a>
+          <a className={className}>{text}</a>
         </Link>
       </Item>
     );
@@ -119,15 +121,18 @@ class Header extends Component {
 
     const { isMobile } = this.context;
     const { phoneOpen, menuHeight, animEnd } = this.state;
-    const { className, transparent, ...props } = this.props;
+    const { className, transparent, mode, ...props } = this.props;
     this.PCMenu = this.PCMenu || this.getPCMenu( menuData );
     this.mobileMenu = this.mobileMenu || this.getMobileMenu( menuData );
 
     return (
-      <header {...props} ref={this.headerRef} className={classnames( 'header', className )}>
-        <div className={'header-container'}>
-          <div className={'header-logo'}>
-            {/*<img alt="" src={headerLogo} />*/}
+      <header {...props} ref={this.headerRef} className={classnames( 'header', className, {
+        [styles.dark]: mode === 'dark',
+        [styles.light]: mode === 'light'
+      })}>
+        <div className="header-container">
+          <div className="header-logo">
+            <img alt="logo" src={logo} />
           </div>
           {isMobile ? (
             <span className={classnames( styles.phoneMenu, { [styles.open]: phoneOpen })}>

@@ -2,8 +2,8 @@
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
 import { Link } from '@components/Anchor';
-import banner1 from '@assets/images/about-banner-1.jpg';
-import banner2 from '@assets/images/about-banner-2.png';
+import banner1 from '@assets/images/about/banner-1.jpg';
+import banner2 from '@assets/images/about/banner-2.jpg';
 import Advantage from './advantage';
 import styles from './about.less';
 
@@ -12,6 +12,10 @@ class About extends React.Component {
 
   static getInitialProps = async function( ctx ) {
     const layoutProps = {
+      scrollClass: {
+        '>=300': 'page-scrolled'
+      },
+      headerMode: 'dark',
       title: '欣动价值',
       anchors: [ '我们做的是什么', '核心能力与优势' ]
     };

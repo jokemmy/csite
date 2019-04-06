@@ -18,6 +18,30 @@
     margin: 0 auto;
   }
 
+  .header-logo {
+    float: left;
+    height: 0;
+    line-height: @header-height;
+    img {
+      height: @header-height - 16px;
+    }
+  }
+
+  .experience {
+    background: linear-gradient(#42a1ec, #0070c9);
+    border-color: #07c;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 16px;
+    color: @light-9;
+    cursor: pointer;
+    display: inline;
+    line-height: 32px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: @shadow-down-dark;
+  }
+
 
   @media only screen and (max-width: 767px) {
     .header {

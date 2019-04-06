@@ -3,16 +3,16 @@ import React from 'react';
 import classnames from 'classnames';
 import Banner from '@components/Banner';
 import SvgIcon from '@components/SvgIcon';
-import banner from '@assets/images/scene-banner.jpg';
-import banner1 from '@assets/images/scene-banner-1.jpg';
-import banner2 from '@assets/images/scene-banner-2.jpg';
-import banner3 from '@assets/images/scene-banner-3.jpg';
-import banner4 from '@assets/images/scene-banner-4.jpg';
-import back from '@assets/images/svg/back.svg?sprite';
-import zhinengfenxi from '@assets/images/solutions/zhinengfenxi.svg?sprite';
-import wuliankeji from '@assets/images/solutions/wuliankeji.svg?sprite';
-import xitongronghe from '@assets/images/solutions/xitongronghe.svg?sprite';
-import lianwangzhihui from '@assets/images/solutions/lianwangzhihui.svg?sprite';
+import banner from '@assets/images/scene/banner.jpg';
+import banner1 from '@assets/images/scene/banner-1.jpg';
+import banner2 from '@assets/images/scene/banner-2.jpg';
+import banner3 from '@assets/images/scene/banner-3.jpg';
+import banner4 from '@assets/images/scene/banner-4.jpg';
+import back from '@assets/images/scene/back.svg?sprite';
+import zhinengfenxi from '@assets/images/scene/zhinengfenxi.svg?sprite';
+import wuliankeji from '@assets/images/scene/wuliankeji.svg?sprite';
+import xitongronghe from '@assets/images/scene/xitongronghe.svg?sprite';
+import lianwangzhihui from '@assets/images/scene/lianwangzhihui.svg?sprite';
 import styles from './scene.less';
 
 
@@ -28,15 +28,30 @@ class Scene extends React.Component {
   };
 
   state = {
-    index: 0
+    index: 0,
+    animating: false
   };
 
+  componentDidUpdate( _, prevState ) {
+    if ( prevState.index !== this.state.index ) {
+      this.state.animating = true; // eslint-disable-line
+    }
+  }
+
   handleClick = ( index ) => () => {
-    this.setState({ index });
+    if ( !this.state.animating ) {
+      this.setState({ index });
+    }
   };
 
   handleBack = () => {
-    this.setState({ index: 0 });
+    if ( !this.state.animating ) {
+      this.setState({ index: 0 });
+    }
+  };
+
+  handleEnd = () => {
+    this.state.animating = false; // eslint-disable-line
   };
 
   render() {
@@ -44,7 +59,7 @@ class Scene extends React.Component {
     const { index } = this.state;
 
     return (
-      <Banner disabled index={index ? 1 : 0} className={styles.view}>
+      <Banner disabled showPoints={false} index={index ? 1 : 0} className={styles.view} onEnd={this.handleEnd}>
         <section className="page-view" style={{ backgroundImage: `url(${banner})` }}>
           <div className={styles.solutions}>
             <h1>解决方案<span>Best Solutions</span></h1>
