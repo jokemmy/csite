@@ -1,6 +1,8 @@
 
 import React from 'react';
 import classnames from 'classnames';
+import { getClientSize, set, get } from 'rc-util/lib/Dom/css';
+import { requestAnimationFrame } from '@lib/requestAnimationFrame';
 import Banner from '@components/Banner';
 import SvgIcon from '@components/SvgIcon';
 import banner from '@assets/images/scene/banner.jpg';
@@ -29,10 +31,19 @@ class Scene extends React.Component {
     return { layoutProps };
   };
 
-  state = {
-    index: 0,
-    animating: false
-  };
+  constructor( props ) {
+    super( props );
+    this.state = {
+      index: 0,
+      animating: false,
+      position: null
+    };
+    this.pageRef = React.createRef();
+  }
+
+  componentDidMount() {
+
+  }
 
   componentDidUpdate( _, prevState ) {
     if ( prevState.index !== this.state.index ) {
@@ -40,10 +51,39 @@ class Scene extends React.Component {
     }
   }
 
-  handleClick = ( index ) => () => {
-    if ( !this.state.animating ) {
-      this.setState({ index });
-    }
+  handleEnter = ({ target }) => {
+    const position = target.getBoundingClientRect();
+    this.state.position = position;
+  };
+
+  handleClick = ( index ) => ({ currentTarget }) => {
+    const { position } = this.state;
+    const clientSize = getClientSize();
+    const target = currentTarget.children[0];
+    const newPosition = currentTarget.getBoundingClientRect();
+    const translateY = 0;
+    const fixedStyle = {
+      zIndex: 2,
+      height: `${newPosition.height}px`,
+      width: `${newPosition.width}px`,
+      position: 'absolute',
+      transform: `translateX(${newPosition.left}px) translateY(${newPosition.top}px)`
+    };
+    const fixedLastStyle = {
+      transition: 'width 500ms, height 500ms, transform 500ms',
+      transform: `translateX(0px) translateY(0px)`,
+      height: '100vh',
+      width: '100vw'
+    };
+    console.log("fixedStyle:", fixedStyle)
+    console.log("fixedLastStyle:", fixedLastStyle)
+    set( this.pageRef.current, fixedStyle );
+    requestAnimationFrame(() => {
+      set( this.pageRef.current, fixedLastStyle );
+    });
+    // if ( !this.state.animating ) {
+    //   this.setState({ index });
+    // }
   };
 
   handleBack = () => {
@@ -68,25 +108,32 @@ class Scene extends React.Component {
             <div className={styles.solutionsContent}>
               <div
                 className={classnames( styles.solutionBlock, styles.sceneBanner1 )}
-                onClick={this.handleClick( 1 )}>
+                onClick={this.handleClick( 1 )}
+                onMouseEnter={this.handleEnter}>
                 <h2>智<br />慧<br />园<br />区</h2>
               </div>
               <div
                 className={classnames( styles.solutionBlock, styles.sceneBanner2 )}
-                onClick={this.handleClick( 2 )}>
+                onClick={this.handleClick( 2 )}
+                onMouseEnter={this.handleEnter}>
                 <h2>智<br />慧<br />校<br />园</h2>
               </div>
               <div
                 className={classnames( styles.solutionBlock, styles.sceneBanner3 )}
-                onClick={this.handleClick( 3 )}>
+                onClick={this.handleClick( 3 )}
+                onMouseEnter={this.handleEnter}>
                 <h2>智<br />慧<br />建<br />筑</h2>
               </div>
               <div
                 className={classnames( styles.solutionBlock, styles.sceneBanner4 )}
-                onClick={this.handleClick( 4 )}>
+                onClick={this.handleClick( 4 )}
+                onMouseEnter={this.handleEnter}>
                 <h2>其<br />他<br />场<br />景</h2>
               </div>
             </div>
+          </div>
+          <div ref={this.pageRef} className={classnames( styles.solutionBlockContent, styles.blockBanner1 )}>
+            <h2>智<br />慧<br />园<br />区</h2>
           </div>
         </section>
         {index === 1 ? (
