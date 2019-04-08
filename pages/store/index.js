@@ -10,7 +10,7 @@ function Store() {
   );
 }
 
-Store.getInitialProps = async function( ctx ) {
+Store.getInitialProps = async function( ctx_ ) {
   const layoutProps = {
     title: '应用商店'
   };

@@ -33,9 +33,11 @@ function Hardware() {
   );
 }
 
-Hardware.getInitialProps = async function( ctx ) {
+Hardware.getInitialProps = async function( ctx_ ) {
   const layoutProps = {
-    transparent: true,
+    header: {
+      transparent: true
+    },
     title: '智能硬件'
   };
   return { layoutProps };

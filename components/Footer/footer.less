@@ -52,6 +52,28 @@
       margin-right: 8px;
     }
   }
-
 }
 
+.overlay {
+  z-index: 1;
+  position: relative;
+  transform: translateY(-100%);
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.light.transparent {
+  color: @light-10;
+  background: linear-gradient(rgba(0 ,0, 0, 0) 20%, rgba(0 ,0, 0, 0.6));
+  :global(.footer-share) {
+    border-color: transparent;
+  }
+  a {
+    color: @light-9;
+    &:hover {
+      color: @light-10;
+    }
+  }
+}

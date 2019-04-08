@@ -1,10 +1,16 @@
 
-import './footer.less';
+import classnames from 'classnames';
+import styles from './footer.less';
 
 
-function Footer() {
+function Footer({ transparent, overlay, mode }) {
   return (
-    <div className="page-footer">
+    <footer className={classnames( 'page-footer', {
+      [styles.transparent]: transparent,
+      [styles.overlay]: overlay,
+      [styles.light]: mode === 'light',
+      [styles.dark]: mode === 'dark'
+    })}>
       <div className="footer-content page-content">
         <section className="footer-navigation">
         </section>
@@ -21,7 +27,7 @@ function Footer() {
           </div>
         </section>
       </div>
-    </div>
+    </footer>
   );
 }
 

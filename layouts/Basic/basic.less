@@ -57,14 +57,6 @@
     background-color: @anchor-background-color;
   }
 
-  .page-content {
-    max-width: @page-width;
-    padding: 0 24px;
-    margin: 0 auto;
-  }
-
-  .page-block,
-  .page-block-image,
   .page-section {
     position: relative;
     margin-bottom: 64px;
@@ -82,67 +74,24 @@
     }
   }
 
+  .page-content {
+    max-width: @page-width;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+
   .page-banner {
     padding-top: @header-height;
     min-height: 80px;
     margin-bottom: 0;
   }
 
-  .page-top-banner {
-    min-height: 80px;
-    margin-bottom: 0;
-  }
-
-  .page-banner-title {
-    display: inline-block;
-    color: @light-10;
-    font-size: 48px;
-    margin-bottom: 0;
-    position: relative;
-    top: 150px;
-    left: 33%;
-    * {
-      color: inherit;
+  @media only screen and (max-width: 767px) {
+    .page-banner {
+      padding-top: @header-height - 16px;
+      min-height: 80px;
+      margin-bottom: 0;
     }
   }
-
-  .page-banner-images {
-    min-height: 400px;
-    background-position: top center;
-    background-size: cover;
-    &.dark {
-      z-index: 1;
-      position: relative;
-      &::before {
-        top: 0;
-        left: 0;
-        content: '';
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background-color: @dark-6;
-        z-index: -1;
-      }
-    }
-  }
-
-  .page-block {
-    margin-bottom: 0;
-    &.even {
-      background-color: @dark-1;
-    }
-    &.odd {
-      background-color: @light-10;
-    }
-  }
-
-  .page-block-plain {
-    padding: 0;
-  }
-
-  .page-block-image {
-    margin-bottom: 0;
-  }
-
 }
 

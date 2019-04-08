@@ -1,5 +1,5 @@
 
-import { Menu, Popover } from 'antd';
+import { Menu } from 'antd';
 import Link from 'next/link';
 import classnames from 'classnames';
 import React, { Component } from 'react';
@@ -11,7 +11,6 @@ import styles from './header.less';
 
 
 const Item = Menu.Item;
-const SubMenu = Menu.SubMenu;
 
 class Header extends Component {
 
@@ -73,42 +72,16 @@ class Header extends Component {
     });
   };
 
-  getPCMenu = ( data ) => Object.entries( data ).map(([ key, { align, text, menu, url, className, as, col }]) => {
-    const getContainer = () => { return this.headerRef.current; };
-    const content = menu ? Object.entries( menu ).map(([ key, { text, url, as }]) => {
-      return (
-        <Link key={key} as={as} href={url || '/'}>
-          <a className={styles.linkItem}>
-            <div>{text}</div>
-          </a>
-        </Link>
-      );
-    }) : null;
-
-    return menu ? (
-      <Popover
-        key={key}
-        content={content}
-        arrowPointAtCenter
-        mouseEnterDelay={0.5}
-        placement={align || 'bottom'}
-        overlayClassName={classnames( styles.subMenu, { [styles[`subMenuCol${col}`]]: !!col })}
-        getPopupContainer={getContainer}>
-        <a className={classnames( styles.link, className )}>{text}</a>
-      </Popover>
-    ): (
+  getPCMenu = ( data ) => Object.entries( data ).map(([ key, { text, url, className, as }]) => {
+    return (
       <Link key={key} as={as} href={url || '/'}>
         <a className={classnames( styles.link, className )}>{text}</a>
       </Link>
     );
   });
 
-  getMobileMenu = ( data ) => Object.entries( data ).map(([ key, { text, menu, url, as, className }]) => {
-    return menu ? (
-      <SubMenu key={`${key}_sub`} title={text}>
-        {this.getMobileMenu( menu )}
-      </SubMenu>
-    ) : (
+  getMobileMenu = ( data ) => Object.entries( data ).map(([ key, { text, url, as, className }]) => {
+    return (
       <Item key={key}>
         <Link as={as} href={url || '/'}>
           <a className={className}>{text}</a>
@@ -126,14 +99,15 @@ class Header extends Component {
     this.mobileMenu = this.mobileMenu || this.getMobileMenu( menuData );
 
     return (
-      <header {...props} ref={this.headerRef} className={classnames( 'header', className, {
+      <header {...props} ref={this.headerRef} className={classnames( 'page-header', className, {
+        [styles.transparent]: transparent,
         [styles.dark]: mode === 'dark',
         [styles.light]: mode === 'light'
       })}>
         <div className="header-container">
-          <div className="header-logo">
-            <img alt="logo" src={logo} />
-          </div>
+          <figure className="header-logo">
+            <img alt="logo" src={mode === 'light' ? logoColor : logo} />
+          </figure>
           {isMobile ? (
             <span className={classnames( styles.phoneMenu, { [styles.open]: phoneOpen })}>
               <div
@@ -154,7 +128,7 @@ class Header extends Component {
               </div>
             </span>
           ) : (
-            <div className={styles.menu} style={transparent ? { height: 0 } : null}>
+            <div className={styles.menu}>
               {this.PCMenu}
             </div>
           )}

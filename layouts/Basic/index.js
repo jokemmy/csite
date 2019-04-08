@@ -15,6 +15,10 @@ import './fonts.less';
 @withLoaded
 class Base extends React.Component {
 
+  static defaultProps = {
+    scrollClass: {}
+  };
+
   state = {
     scrollClasses: [],
     scrollCache: []

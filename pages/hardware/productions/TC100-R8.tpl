@@ -1,5 +1,5 @@
 <div class="span12">
-  <div class="page-header">
+  <div class="prod-title">
     <h1 class="c1">
       TC100-R8
     </h1>

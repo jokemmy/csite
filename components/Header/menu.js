@@ -4,10 +4,6 @@ export default {
     text: '首页',
     url: '/'
   },
-  menu2: {
-    text: '关于我们',
-    url: '/about'
-  },
   menu3: {
     text: '智能硬件',
     url: '/hardware'
@@ -48,6 +44,10 @@ export default {
     //     url: '/store?type=5'
     //   }
     // }
+  },
+  menu2: {
+    text: '欣动价值',
+    url: '/about'
   },
   menu6: {
     text: '立即体验',

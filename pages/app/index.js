@@ -24,9 +24,11 @@ function App() {
 }
 
 
-App.getInitialProps = async function( ctx ) {
+App.getInitialProps = async function( ctx_ ) {
   const layoutProps = {
-    transparent: true,
+    header: {
+      transparent: true
+    },
     footer: false,
     title: '江苏欣动信息科技'
   };

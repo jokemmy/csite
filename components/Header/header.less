@@ -1,16 +1,14 @@
 
 :global {
 
-  .header {
+  .page-header {
     width: 100vw;
     z-index: @header-zIndex;
     position: fixed;
     padding: 0 48px;
     text-align: right;
     background-color: @header-background-color;
-    &.tranparent {
-      background-color: transparent;
-    }
+    transition: background-color @anim-speed-4 @easeOutQuart;
   }
 
   .header-container {
@@ -19,8 +17,9 @@
   }
 
   .header-logo {
-    float: left;
     height: 0;
+    margin: 0;
+    float: left;
     line-height: @header-height;
     img {
       height: @header-height - 16px;
@@ -28,32 +27,39 @@
   }
 
   .experience {
+    background-color: #0070c9;
     background: linear-gradient(#42a1ec, #0070c9);
     border-color: #07c;
     border-width: 1px;
     border-style: solid;
     border-radius: 16px;
-    color: @light-9;
+    color: @light-9 !important;
     cursor: pointer;
     display: inline;
     line-height: 32px;
     font-weight: bold;
     text-align: center;
-    box-shadow: @shadow-down-dark;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+    &:active {
+      background-color: #0067b9;
+      background: linear-gradient(#3d94d9, #0067b9);
+      border-color: #006dbc;
+    }
   }
 
-
   @media only screen and (max-width: 767px) {
-    .header {
+    .page-header {
       padding: 0;
       text-align: left;
     }
     .header-logo {
+      height: 0;
+      left: 16px;
       position: absolute;
-      left: 24px;
-      top: 8px;
-      height: 48px;
-      min-width: 48px;
+      line-height: @header-height - 16px;
+      img {
+        height: @header-height - 24px;
+      }
     }
   }
 }
@@ -61,7 +67,7 @@
 // 大屏菜单
 .link {
   color: @light-7;
-  transition: color @anim-speed-3;
+  transition: color @anim-speed-4 @easeOutQuart;
   display: inline-block;
   user-select: none;
   &:hover {
@@ -79,66 +85,22 @@
   }
 }
 
-.sub-menu {
-  z-index: @header-zIndex;
-  :global {
-    .ant-popover-inner {
-      overflow: hidden;
-      background-color: @dark-menu-background-color;
-    }
-    .ant-popover-arrow {
-      border-color: @dark-menu-background-color !important;
-    }
-    .ant-popover-inner-content {
-      color: @dark-menu-color;
-      padding: 8px;
+.light {
+  background-color: @light-10;
+  .link {
+    color: @dark-7;
+    &:hover {
+      color: @dark-10;
     }
   }
 }
 
-.link-item {
-  color: @light-7;
-  user-select: none;
-  border-radius: 3px;
-  padding: 8px;
-  transition:
-    background-color @anim-speed-4,
-    color @anim-speed-4;
-  &:hover {
-    background-color: @light-2;
-    color: @light-10;
-  }
-  &:focus {
-    text-decoration: none;
-  }
+.transparent {
+  background-color: transparent;
+  // .menu, :global(.header-logo) {
+  //   height: 0;
+  // }
 }
-
-.sub-menu-col-2 {
-  :global {
-    .ant-popover-inner-content {
-      width: 316px;
-    }
-  }
-  .link-item {
-    display: inline-block;
-    width: 150px;
-    height: 64px;
-  }
-}
-
-.sub-menu-col-3 {
-  :global {
-    .ant-popover-inner-content {
-      width: 466px;
-    }
-  }
-  .link-item {
-    display: inline-block;
-    width: 150px;
-    height: 64px;
-  }
-}
-
 
 // 小屏菜单
 .phone-menu {

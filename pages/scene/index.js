@@ -18,10 +18,12 @@ import styles from './scene.less';
 
 class Scene extends React.Component {
 
-  static getInitialProps = async ( ctx ) => {
+  static getInitialProps = async ( ctx_ ) => {
     const layoutProps = {
+      header: {
+        transparent: true
+      },
       footer: false,
-      transparent: true,
       title: '解决方案'
     };
     return { layoutProps };
@@ -60,39 +62,35 @@ class Scene extends React.Component {
 
     return (
       <Banner disabled showPoints={false} index={index ? 1 : 0} className={styles.view} onEnd={this.handleEnd}>
-        <section className="page-view" style={{ backgroundImage: `url(${banner})` }}>
+        <section className={classnames( 'page-view', styles.sceneBanner )}>
           <div className={styles.solutions}>
             <h1>解决方案<span>Best Solutions</span></h1>
             <div className={styles.solutionsContent}>
               <div
-                className={styles.solutionBlock}
-                onClick={this.handleClick( 1 )}
-                style={{ backgroundImage: `url(${banner1})` }}>
+                className={classnames( styles.solutionBlock, styles.sceneBanner1 )}
+                onClick={this.handleClick( 1 )}>
                 <h2>智<br />慧<br />园<br />区</h2>
               </div>
               <div
-                className={styles.solutionBlock}
-                onClick={this.handleClick( 2 )}
-                style={{ backgroundImage: `url(${banner2})` }}>
+                className={classnames( styles.solutionBlock, styles.sceneBanner2 )}
+                onClick={this.handleClick( 2 )}>
                 <h2>智<br />慧<br />校<br />园</h2>
               </div>
               <div
-                className={styles.solutionBlock}
-                onClick={this.handleClick( 3 )}
-                style={{ backgroundImage: `url(${banner3})` }}>
+                className={classnames( styles.solutionBlock, styles.sceneBanner3 )}
+                onClick={this.handleClick( 3 )}>
                 <h2>智<br />慧<br />建<br />筑</h2>
               </div>
               <div
-                className={styles.solutionBlock}
-                onClick={this.handleClick( 4 )}
-                style={{ backgroundImage: `url(${banner4})` }}>
+                className={classnames( styles.solutionBlock, styles.sceneBanner4 )}
+                onClick={this.handleClick( 4 )}>
                 <h2>其<br />他<br />场<br />景</h2>
               </div>
             </div>
           </div>
         </section>
         {index === 1 ? (
-          <section className={classnames( 'page-view', styles.block )} style={{ backgroundImage: `url(${banner1})` }}>
+          <section className={classnames( 'page-view', styles.block, styles.blockBanner1 )}>
             <div className={styles.blockContent}>
               <div className="page-content">
                 <div className={styles.sceneTitle}>
@@ -145,7 +143,7 @@ class Scene extends React.Component {
             </div>
           </section>
         ) : index === 2 ? (
-          <section className={classnames( 'page-view', styles.block )} style={{ backgroundImage: `url(${banner2})` }}>
+          <section className={classnames( 'page-view', styles.block, styles.blockBanner2 )}>
             <div className={styles.blockContent}>
               <div className="page-content">
                 <div className={styles.sceneTitle}>
@@ -199,7 +197,7 @@ class Scene extends React.Component {
             </div>
           </section>
         ) : index === 3 ? (
-          <section className={classnames( 'page-view', styles.block )} style={{ backgroundImage: `url(${banner3})` }}>
+          <section className={classnames( 'page-view', styles.block, styles.blockBanner3 )}>
             <div className={styles.blockContent}>
               <div className="page-content">
                 <div className={styles.sceneTitle}>
@@ -249,7 +247,7 @@ class Scene extends React.Component {
             </div>
           </section>
         ) : index === 4 ? (
-          <section className={classnames( 'page-view', styles.block )} style={{ backgroundImage: `url(${banner4})` }}>
+          <section className={classnames( 'page-view', styles.block, styles.blockBanner4 )}>
             <div className={styles.blockContent}>
               <div className="page-content">
                 <div className={styles.sceneTitle}>

@@ -1,12 +1,13 @@
 
 .track {
-  width: 6px;
+  width: 2px;
   position: fixed;
   background-color: @light-3;
-  border-radius: 3px;
+  // border-radius: 2px;
   z-index: 11;
   top: 50%;
-  right: 32px;
+  transform: translateY(-50%);
+  right: 16px;
   overflow: hidden;
   cursor: pointer;
 }
@@ -20,7 +21,7 @@
   left: 0;
   width: 100%;
   position: absolute;
-  transition: top @anim-speed-2 @ease-in-out;
+  transition: top @anim-speed-3 @ease-in-out;
   background-color: @light-6;
   border-radius: 3px;
   z-index: -1;

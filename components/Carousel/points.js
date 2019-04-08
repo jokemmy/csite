@@ -14,14 +14,14 @@ class Points extends React.Component {
 
   render() {
     const { points, index, size } = this.props;
-    const sizeStyle = { height: size };
+    const sizeStyle = { height: `${100 / points.length}%` };
     const blockProps = ( i ) => ({
       className: styles.block,
       onClick: this.handleClick( i ),
       style: sizeStyle
     });
     return (
-      <div className={styles.track} style={{ height: points.length * size }}>
+      <div className={styles.track} style={{ height: size }}>
         {points.map(( point, i ) => {
           return i === index ? (
             <div key={`point-${i}`} {...blockProps( i )}></div>
@@ -29,7 +29,7 @@ class Points extends React.Component {
             <div key={`active-point-${i}`} {...blockProps( i )}></div>
           );
         })}
-        <div className={styles.thumb} style={{ top: index * size, ...sizeStyle }} />
+        <div className={styles.thumb} style={{ top: `${index * 100 / points.length}%`, ...sizeStyle }} />
       </div>
     );
   }
