@@ -118,15 +118,15 @@ class Scene extends React.Component {
       e.preventDefault();
       e.stopPropagation();
     }
-    if ( !selected.animating && isOpacity && e.target === e.currentTarget ) {
+    if ( isOpacity && e.target === e.currentTarget ) {
       this.state.selected = {}; // eslint-disable-line
       requestAnimationFrame(() => {
         this.pageRef.current.removeAttribute( 'style' );
       });
     } else if ( selected.animating && e.target === e.currentTarget ) {
       if ( isTransform ) {
-        this.state.selected = { ...selected, animating: false }; // eslint-disable-line
         if ( animIn ) {
+          this.state.selected = { ...selected, animating: false }; // eslint-disable-line
           this.setState({
             index: selected.index
           }, () => {
@@ -153,7 +153,7 @@ class Scene extends React.Component {
     return Object.entries({
       width: { ease: 'ease', duration: animSpeed },
       height: { ease: 'ease', duration: animSpeed },
-      opacity: { ease: 'ease', duration: animSpeed / 2 },
+      opacity: { ease: 'ease', duration: animSpeed / 4 },
       transform: { ease: 'ease', duration: animSpeed },
       'background-position': { ease: 'ease', duration: animSpeed }
     }).map(([ property, { ease, duration }]) => {
@@ -194,7 +194,7 @@ class Scene extends React.Component {
           <TweenOneGroup
             component=""
             appear={false}
-            enter={{ opacity: 0, type: 'from', duration: 300, ease: 'easeOutQuart' }}
+            enter={{ opacity: 0, type: 'from', duration: 400, ease: 'easeInCubic' }}
             leave={{ opacity: 0, duration: 300, ease: 'easeOutQuint' }}>
             {!selected.animating && selected.animIn ? index === 1 ? (
               <Scene1 key="1" onBack={this.handleBack} />
