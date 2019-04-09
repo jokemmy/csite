@@ -1,9 +1,15 @@
 
 import React from 'react';
 import classnames from 'classnames';
-import { getClientSize, set, get } from 'rc-util/lib/Dom/css';
+import TweenOne from 'rc-tween-one';
+import { set } from 'rc-util/lib/Dom/css';
+import { ThemeContext } from '@components/Themes';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
-import Banner from '@components/Banner';
+// import banner1 from '@assets/images/scene/banner-1.jpg';
+// import banner2 from '@assets/images/scene/banner-2.jpg';
+// import banner3 from '@assets/images/scene/banner-3.jpg';
+// import banner4 from '@assets/images/scene/banner-4.jpg';
+/*import Banner from '@components/Banner';
 import SvgIcon from '@components/SvgIcon';
 import banner from '@assets/images/scene/banner.jpg';
 import banner1 from '@assets/images/scene/banner-1.jpg';
@@ -14,11 +20,19 @@ import back from '@assets/images/scene/back.svg?sprite';
 import zhinengfenxi from '@assets/images/scene/zhinengfenxi.svg?sprite';
 import wuliankeji from '@assets/images/scene/wuliankeji.svg?sprite';
 import xitongronghe from '@assets/images/scene/xitongronghe.svg?sprite';
-import lianwangzhihui from '@assets/images/scene/lianwangzhihui.svg?sprite';
+import lianwangzhihui from '@assets/images/scene/lianwangzhihui.svg?sprite';*/
+import Scene1 from './scene1';
+import Scene2 from './scene2';
+import Scene3 from './scene3';
+import Scene4 from './scene4';
 import styles from './scene.less';
 
 
+const TweenOneGroup = TweenOne.TweenOneGroup;
+
 class Scene extends React.Component {
+
+  static contextType = ThemeContext;
 
   static getInitialProps = async ( ctx_ ) => {
     const layoutProps = {
@@ -36,315 +50,164 @@ class Scene extends React.Component {
     this.state = {
       index: 0,
       animating: false,
-      position: null
+      mouseHovered: {},
+      selected: {}
     };
     this.pageRef = React.createRef();
   }
 
-  componentDidMount() {
-
-  }
-
-  componentDidUpdate( _, prevState ) {
-    if ( prevState.index !== this.state.index ) {
-      this.state.animating = true; // eslint-disable-line
-    }
-  }
-
-  handleEnter = ({ target }) => {
-    const position = target.getBoundingClientRect();
-    this.state.position = position;
+  handleEnter = ({ index, title, className }) => ({ currentTarget }) => {
+    this.state.mouseHovered = { index, title, className, dom: currentTarget }; // eslint-disable-line
   };
 
-  handleClick = ( index ) => ({ currentTarget }) => {
-    const { position } = this.state;
-    const clientSize = getClientSize();
-    const target = currentTarget.children[0];
-    const newPosition = currentTarget.getBoundingClientRect();
-    const translateY = 0;
-    const fixedStyle = {
-      zIndex: 2,
-      height: `${newPosition.height}px`,
-      width: `${newPosition.width}px`,
-      position: 'absolute',
-      transform: `translateX(${newPosition.left}px) translateY(${newPosition.top}px)`
-    };
-    const fixedLastStyle = {
-      transition: 'width 500ms, height 500ms, transform 500ms',
-      transform: `translateX(0px) translateY(0px)`,
-      height: '100vh',
-      width: '100vw'
-    };
-    console.log("fixedStyle:", fixedStyle)
-    console.log("fixedLastStyle:", fixedLastStyle)
-    set( this.pageRef.current, fixedStyle );
-    requestAnimationFrame(() => {
-      set( this.pageRef.current, fixedLastStyle );
-    });
-    // if ( !this.state.animating ) {
-    //   this.setState({ index });
-    // }
+  handleClick = ({ currentTarget }) => {
+    const { selected } = this.state;
+    if ( !selected.animIn && !selected.animating ) {
+      const { mouseHovered } = this.state;
+      const newPosition = currentTarget.getBoundingClientRect();
+      const fixedStyle = {
+        width: `${newPosition.width}px`,
+        height: `${newPosition.height}px`,
+        transform: `translateX(${newPosition.left}px) translateY(${newPosition.top}px)`
+      };
+      const fixedLastStyle = {
+        transition: this.getTransition(),
+        transform: 'translateX(0) translateY(0)',
+        height: '100vh',
+        width: '100vw'
+      };
+      this.state.selected = { ...mouseHovered, animating: true, animIn: true }; // eslint-disable-line
+      this.forceUpdate(() => {
+        set( this.pageRef.current, fixedStyle );
+        requestAnimationFrame(() => {
+          set( this.pageRef.current, fixedLastStyle );
+        });
+      });
+    }
   };
 
   handleBack = () => {
-    if ( !this.state.animating ) {
-      this.setState({ index: 0 });
+    const { selected } = this.state;
+    if ( selected.animIn && !selected.animating ) {
+      const { dom } = selected;
+      const position = dom.getBoundingClientRect();
+      const fixedStyle = {
+        transition: this.getTransition()
+      };
+      const fixedLastStyle = {
+        width: `${position.width}px`,
+        height: `${position.height}px`,
+        transform: `translateX(${position.left}px) translateY(${position.top}px)`
+      };
+      this.state.selected = { ...selected, animating: true, animIn: false }; // eslint-disable-line
+      this.forceUpdate(() => {
+        set( this.pageRef.current, fixedStyle );
+        requestAnimationFrame(() => {
+          set( this.pageRef.current, fixedLastStyle );
+        });
+      });
     }
   };
 
-  handleEnd = () => {
-    this.state.animating = false; // eslint-disable-line
+  // 有这个函数会有多次触发,即每个属性触发一次,每个子元素也会触发
+  handleTransitionEnd = ( animIn ) => ( e ) => {
+    const { selected } = this.state;
+    const isTransform = e.nativeEvent.propertyName === 'transform';
+    const isOpacity = e.nativeEvent.propertyName === 'opacity';
+    if ( e.target === e.currentTarget ) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if ( !selected.animating && isOpacity && e.target === e.currentTarget ) {
+      this.state.selected = {}; // eslint-disable-line
+      requestAnimationFrame(() => {
+        this.pageRef.current.removeAttribute( 'style' );
+      });
+    } else if ( selected.animating && e.target === e.currentTarget ) {
+      if ( isTransform ) {
+        this.state.selected = { ...selected, animating: false }; // eslint-disable-line
+        if ( animIn ) {
+          this.setState({
+            index: selected.index
+          }, () => {
+            requestAnimationFrame(() => {
+              this.pageRef.current.setAttribute( 'style', 'height:100vh;width:100vw;' );
+            });
+          });
+        } else {
+          this.setState({
+            index: 0
+          }, () => {
+            requestAnimationFrame(() => {
+              set( this.pageRef.current, { opacity: 0.001 });
+            });
+          });
+        }
+      }
+    }
+  };
+
+  getTransition = () => {
+    const { themeVariables } = this.context;
+    const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
+    return Object.entries({
+      width: { ease: 'ease', duration: animSpeed },
+      height: { ease: 'ease', duration: animSpeed },
+      opacity: { ease: 'ease', duration: animSpeed / 2 },
+      transform: { ease: 'ease', duration: animSpeed },
+      'background-position': { ease: 'ease', duration: animSpeed }
+    }).map(([ property, { ease, duration }]) => {
+      return `${property} ${duration}ms ${ease}`;
+    }).join( ',' );
   };
 
   render() {
 
-    const { index } = this.state;
+    const { index, selected } = this.state;
 
     return (
-      <Banner disabled showPoints={false} index={index ? 1 : 0} className={styles.view} onEnd={this.handleEnd}>
-        <section className={classnames( 'page-view', styles.sceneBanner )}>
-          <div className={styles.solutions}>
-            <h1>解决方案<span>Best Solutions</span></h1>
-            <div className={styles.solutionsContent}>
-              <div
-                className={classnames( styles.solutionBlock, styles.sceneBanner1 )}
-                onClick={this.handleClick( 1 )}
-                onMouseEnter={this.handleEnter}>
-                <h2>智<br />慧<br />园<br />区</h2>
-              </div>
-              <div
-                className={classnames( styles.solutionBlock, styles.sceneBanner2 )}
-                onClick={this.handleClick( 2 )}
-                onMouseEnter={this.handleEnter}>
-                <h2>智<br />慧<br />校<br />园</h2>
-              </div>
-              <div
-                className={classnames( styles.solutionBlock, styles.sceneBanner3 )}
-                onClick={this.handleClick( 3 )}
-                onMouseEnter={this.handleEnter}>
-                <h2>智<br />慧<br />建<br />筑</h2>
-              </div>
-              <div
-                className={classnames( styles.solutionBlock, styles.sceneBanner4 )}
-                onClick={this.handleClick( 4 )}
-                onMouseEnter={this.handleEnter}>
-                <h2>其<br />他<br />场<br />景</h2>
-              </div>
-            </div>
+      <section className={classnames( 'page-view', styles.view, styles.sceneBanner )}>
+        <div className={styles.solutions}>
+          <h1>解决方案<span>Best Solutions</span></h1>
+          <div className={styles.solutionsContent}>
+            {[ '智慧全区', '智慧校园', '智慧建筑', '其他场景' ].map(( title, index ) => {
+              return (
+                <div
+                  key={title}
+                  onMouseEnter={this.handleEnter({ index: index + 1, title, className: styles[`sceneBanner${index + 1}`] })}
+                  className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`])}
+                  onClick={this.handleClick}>
+                  <h2 className={styles.solutionBlockTitle}>{title}</h2>
+                </div>
+              );
+            })}
           </div>
-          <div ref={this.pageRef} className={classnames( styles.solutionBlockContent, styles.blockBanner1 )}>
-            <h2>智<br />慧<br />园<br />区</h2>
-          </div>
-        </section>
-        {index === 1 ? (
-          <section className={classnames( 'page-view', styles.block, styles.blockBanner1 )}>
-            <div className={styles.blockContent}>
-              <div className="page-content">
-                <div className={styles.sceneTitle}>
-                  <div className={styles.iconBack}  onClick={this.handleBack}>
-                    <SvgIcon icon={back} />返回
-                  </div>
-                  <h2>智慧园区</h2>
-                </div>
-                <div className={styles.sceneContent}>
-                  <h3>奥义</h3>
-                  <p>
-                    构建智慧园区管理新体系，形成智慧园区服务新生态。只有打破各个独立的信息孤岛，
-                    建设统一的园区管理平台，实现设备、人员、数据的协调管理，才能提供满足客户需求的智慧园区解决方案。
-                  </p>
-                  <h3>解决方案</h3>
-                  <p>
-                    基于能源管理，以技术创新为驱动，致力于成为智慧园区管理的基础平台和决策中心。
-                    通过将设备、数据、应用和人员连接起来，结合海量数据分析智能决策和自动响应，
-                    携手生态合作伙伴，推动智慧园区建设进程。
-                  </p>
-                  <h3>
-                    功效
-                  </h3>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={xitongronghe} />
-                    <div className={styles.sceneName}>
-                      系统融合，实现统一调度
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={wuliankeji} />
-                    <div className={styles.sceneName}>
-                      物联科技，提升园区安全
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={lianwangzhihui} />
-                    <div className={styles.sceneName}>
-                      联网指挥，快速协作响应
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      智能分析，整体节能增效
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        ) : index === 2 ? (
-          <section className={classnames( 'page-view', styles.block, styles.blockBanner2 )}>
-            <div className={styles.blockContent}>
-              <div className="page-content">
-                <div className={styles.sceneTitle}>
-                  <div className={styles.iconBack}  onClick={this.handleBack}>
-                    <SvgIcon icon={back} />返回
-                  </div>
-                  <h2>智慧校园</h2>
-                </div>
-                <div className={styles.sceneContent}>
-                  <h3>奥义</h3>
-                  <p>
-                    智慧校园，绿色发展。
-                  </p>
-                  <h3>解决方案</h3>
-                  <p>
-                    将校园的通行、监控、电梯、能源等设备数据打通，通过DD-IoT物联感知平台自动化调度协作，保障校园安全、提升教学资源利用率、高校管理校园资产。
-                  </p>
-                  <h3>功效</h3>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      契合国家节约型校园验收标准
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      提升物业信息自动化管理水平
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      契合国家节约型校园验收标准
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      涵盖接地气的系统节能改造方案
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      让节能互动深入教学，成为习惯
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        ) : index === 3 ? (
-          <section className={classnames( 'page-view', styles.block, styles.blockBanner3 )}>
-            <div className={styles.blockContent}>
-              <div className="page-content">
-                <div className={styles.sceneTitle}>
-                  <div className={styles.iconBack}  onClick={this.handleBack}>
-                    <SvgIcon icon={back} />返回
-                  </div>
-                  <h2>智慧建筑</h2>
-                </div>
-                <div className={styles.sceneContent}>
-                  <h3>奥义</h3>
-                  <p>
-                    打造充分利用物联网释放价值的智能楼宇。
-                  </p>
-                  <h3>解决方案</h3>
-                  <p>
-                    利用物联网技术在建筑终端加装智能硬件，并联各个子系统，实时采集把控建筑信息，提升楼宇自动化水平，节约人力与能源，实现建筑智慧运营。为建筑全生命周期、全方位的信息和大数据汇总、展示、分析和应用提供平台。
-                  </p>
-                  <h3>
-                    功效
-                  </h3>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      一站式数据集成
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      分布式云端架构
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      实时监控与反向控制
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      专业建筑大数据分析
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        ) : index === 4 ? (
-          <section className={classnames( 'page-view', styles.block, styles.blockBanner4 )}>
-            <div className={styles.blockContent}>
-              <div className="page-content">
-                <div className={styles.sceneTitle}>
-                  <div className={styles.iconBack}  onClick={this.handleBack}>
-                    <SvgIcon icon={back} />返回
-                  </div>
-                  <h2>其他方案</h2>
-                </div>
-                <div className={styles.sceneContent}>
-                  <h3>奥义</h3>
-                  <p>
-                    打造充分利用物联网释放价值的智能楼宇。
-                  </p>
-                  <h3>解决方案</h3>
-                  <p>
-                    利用物联网技术在建筑终端加装智能硬件，并联各个子系统，实时采集把控建筑信息，提升楼宇自动化水平，节约人力与能源，实现建筑智慧运营。为建筑全生命周期、全方位的信息和大数据汇总、展示、分析和应用提供平台。
-                  </p>
-                  <h3>
-                    功效
-                  </h3>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      一站式数据集成
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      分布式云端架构
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      实时监控与反向控制
-                    </div>
-                  </div>
-                  <div className={styles.sceneIcon}>
-                    <SvgIcon className={styles.sceneSvg} icon={zhinengfenxi} />
-                    <div className={styles.sceneName}>
-                      专业建筑大数据分析
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        ) : null}
-      </Banner>
+        </div>
+        <div
+          ref={this.pageRef}
+          onTransitionEnd={this.handleTransitionEnd( selected.animIn )}
+          className={classnames( styles.solutionBlockContainer, selected.className )}>
+          <h2 className={classnames( styles.solutionBlockTitle, {
+            [styles.hidden]: selected.animIn && !selected.animating,
+            [styles.transparent]: selected.animIn && selected.animating
+          })}>{selected.title}</h2>
+          <TweenOneGroup
+            component=""
+            appear={false}
+            enter={{ opacity: 0, type: 'from', duration: 300, ease: 'easeOutQuart' }}
+            leave={{ opacity: 0, duration: 300, ease: 'easeOutQuint' }}>
+            {!selected.animating && selected.animIn ? index === 1 ? (
+              <Scene1 key="1" onBack={this.handleBack} />
+            ) : index === 2 ? (
+              <Scene2 key="2" onBack={this.handleBack} />
+            ) : index === 3 ? (
+              <Scene3 key="3" onBack={this.handleBack} />
+            ) : (
+              <Scene4 key="4" onBack={this.handleBack} />
+            ) : null}
+          </TweenOneGroup>
+        </div>
+      </section>
     );
   }
 }

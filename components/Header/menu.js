@@ -4,13 +4,13 @@ export default {
     text: '首页',
     url: '/'
   },
-  menu3: {
-    text: '智能硬件',
-    url: '/hardware'
-  },
   menu4: {
     text: '解决方案',
     url: '/scene'
+  },
+  menu3: {
+    text: '智能硬件',
+    url: '/hardware'
   },
   menu5: {
     text: '应用商店',

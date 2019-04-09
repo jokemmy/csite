@@ -1,12 +1,10 @@
 
 .view {
-  :global(.page-view) {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .scene-banner,
@@ -79,8 +77,6 @@
   display: inline-block;
   box-shadow: @shadow-down-sm;
   transition:
-    width @anim-speed-3,
-    height @anim-speed-3,
     transform @anim-speed-3,
     box-shadow @anim-speed-3;
   &:nth-child(even) {
@@ -111,37 +107,64 @@
     }
   }
   &:hover::after {
-    opacity: 0.2;
+    opacity: 0.001;
   }
 }
 
-.solution-block,
-.solution-block-content {
-  h2 {
-    z-index: 1;
-    position: relative;
-    color: @light-9;
-    font-size: 40px;
-    line-height: 1.2em;
-    margin-left: 48px;
-    margin-top: 32px;
-  }
-}
-
-.solution-block-content {
-  // transition:
-  //   width @anim-speed-3,
-  //   height @anim-speed-3,
-  //   transform @anim-speed-3;
+.solution-block-container {
+  will-change: width, height, background, opacity, transform;
+  position: absolute;
+  opacity: 0.999;
+  z-index: 2;
   height: 0;
   width: 0;
-  position: absolute;
   left: 0;
   top: 0;
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
 }
+
+.solution-block,
+.solution-block-container {
+  overflow: hidden;
+}
+
+.image-bg {
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  border: none;
+}
+
+.solution-block-title {
+  color: @light-9;
+  font-size: 40px;
+  line-height: 1.2em;
+  margin-left: 48px;
+  margin-top: 32px;
+  opacity: 0.999;
+  transition: opacity @anim-speed-3;
+  z-index: 1;
+  width: 1em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  &.transparent {
+    opacity: 0.001;
+  }
+  &.hidden {
+    display: none;
+  }
+  &.animating {
+    visibility: visible;
+  }
+}
+
 
 @media only screen and (max-width: 1200px) {
   .solutions {
@@ -165,13 +188,14 @@
 }
 
 .block {
+  width: 100vw;
   padding: 180px 0;
   position: relative;
   overflow: auto;
-  background-position: top center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  // background-position: top center;
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-attachment: fixed;
   display: flex;
   flex-direction: column;
 }

@@ -6,7 +6,7 @@ import rawLessVariables from '!!raw-loader!@assets/custom.less';
 
 export const themeVariables = lessToJS(
   rawLessVariables,
-  { resolveVariables: true, dictionary: true/*, stripPrefix: true*/ }
+  { resolveVariables: true }
 );
 
 export const themes = {
