@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1291.528px" height="857.957px" viewBox="0 0 1291.528 857.957" enable-background="new 0 0 1291.528 857.957"
+	 xml:space="preserve">
+<polygon fill="none" points="693.366,301.55 631.148,263.333 640.749,250.39 702.963,288.608 "/>
+<rect x="670.799" y="201.891" fill="none" width="51.158" height="13"/>
+<rect x="805.836" y="284.923" fill="none" width="51.16" height="13"/>
+<rect x="874.124" y="177.867" fill="none" width="51.162" height="13"/>
+<rect x="680.979" y="64.755" fill="none" width="51.16" height="13"/>
+<rect x="478.545" y="315.35" fill="none" width="51.16" height="13"/>
+<rect x="666.78" y="405.478" fill="none" width="51.16" height="13"/>
+<rect x="666.78" y="443.834" fill="none" width="51.16" height="13"/>
+<path fill="#FFFFFF" stroke="#0E77CA" stroke-width="2" stroke-miterlimit="10" d="M764.508,373.559"/>
+<polygon fill="none" points="243.174,280.248 211.531,260.4 220.476,247.064 252.12,266.912 "/>
+<path fill="#FFFFFF" stroke="#0E77CA" stroke-width="2" stroke-miterlimit="10" d="M766.743,376.234"/>
+<g>
+	<g>
+		<rect x="616.856" y="170.067" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.669" height="25.5"/>
+		<text transform="matrix(1 0 0 1 618.8545 187.7549)" font-family="'MicrosoftYaHei'" font-size="12">物理信息数据</text>
+	</g>
+	<g>
+		<rect x="775.649" y="271.038" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 789.5688 287.5576)" font-family="'MicrosoftYaHei'" font-size="12">业务数据</text>
+	</g>
+	<g>
+		<rect x="883.532" y="154.395" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="113.602" height="25.5"/>
+		<text transform="matrix(1 0 0 1 899.7036 172.917)" font-family="'MicrosoftYaHei'" font-size="14">IoT物联平台</text>
+	</g>
+	<g>
+		<rect x="690.385" y="41.285" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 704.3071 57.8066)" font-family="'MicrosoftYaHei'" font-size="12">运维保障</text>
+	</g>
+	<g>
+		<rect x="1041.805" y="228.913" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 1068.7271 246.4346)" font-family="'MicrosoftYaHei'" font-size="12">上报</text>
+	</g>
+	<g>
+		<rect x="280.665" y="166.294" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 293.5845 182.8154)" font-family="'MicrosoftYaHei'" font-size="12">部门能耗</text>
+	</g>
+	<g>
+		<rect x="280.665" y="126.74" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 293.8359 143.2607)" font-family="'MicrosoftYaHei'" font-size="12">建筑能耗</text>
+	</g>
+	<g>
+		<rect x="280.665" y="209.993" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 292.7725 226.5137)" font-family="'MicrosoftYaHei'" font-size="12">设施能耗</text>
+	</g>
+	<g>
+		<rect x="464.624" y="309.1" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 478.5444 325.6201)" font-family="'MicrosoftYaHei'" font-size="12">商业用能</text>
+	</g>
+	<g>
+		<rect x="464.624" y="269.644" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 478.5444 286.165)" font-family="'MicrosoftYaHei'" font-size="12">宿舍用能</text>
+	</g>
+	<g>
+		<rect x="652.858" y="399.228" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="83.713" height="25.5"/>
+		<text transform="matrix(1 0 0 1 669.7778 415.749)" font-family="'MicrosoftYaHei'" font-size="12">智能空调</text>
+	</g>
+	<g>
+		<rect x="652.858" y="437.584" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="83.713" height="25.5"/>
+		<text transform="matrix(1 0 0 1 669.7778 454.8643)" font-family="'MicrosoftYaHei'" font-size="12">智能照明</text>
+	</g>
+	<g>
+		<rect x="856.141" y="503.172" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.67" height="25.5"/>
+		<text transform="matrix(1 0 0 1 869.2935 520.4854)" font-family="'MicrosoftYaHei'" font-size="12">配变电所</text>
+	</g>
+	<g>
+		<rect x="856.141" y="540.813" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.67" height="25.5"/>
+		<text transform="matrix(1 0 0 1 869.397 558.334)" font-family="'MicrosoftYaHei'" font-size="12">电气火灾</text>
+	</g>
+	<g>
+		<rect x="856.141" y="578.305" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.67" height="25.5"/>
+		<text transform="matrix(1 0 0 1 870.2935 594.7871)" font-family="'MicrosoftYaHei'" font-size="12">给水管网</text>
+	</g>
+	<g>
+		<rect x="38.547" y="560.424" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 63.4683 576.9453)" font-family="'MicrosoftYaHei'" font-size="12">师生</text>
+	</g>
+	<g>
+		<rect x="167.635" y="492.557" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.667" height="25.5"/>
+		<text transform="matrix(1 0 0 1 181.5552 510.0791)" font-family="'MicrosoftYaHei'" font-size="12">水电维修</text>
+	</g>
+	<g>
+		<rect x="168.293" y="662.092" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.667" height="25.5"/>
+		<text transform="matrix(1 0 0 1 182.2134 679.6133)" font-family="'MicrosoftYaHei'" font-size="12">能源管理</text>
+	</g>
+	<g>
+		<rect x="282.333" y="569.227" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.667" height="25.5"/>
+		<text transform="matrix(1 0 0 1 307.252 587.748)" font-family="'MicrosoftYaHei'" font-size="12">部门</text>
+	</g>
+	<g>
+		<rect x="104.756" y="610.805" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.667" height="25.5"/>
+		<text transform="matrix(1 0 0 1 129.6763 627.3262)" font-family="'MicrosoftYaHei'" font-size="12">物业</text>
+	</g>
+	<g>
+		<rect x="449.206" y="65.005" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 463.125 81.5273)" font-family="'MicrosoftYaHei'" font-size="12">用能报告</text>
+	</g>
+	<g>
+		<rect x="959.067" y="395.736" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="87.527" height="25.5"/>
+		<text transform="matrix(1 0 0 1 979.9868 413.2568)" font-family="'MicrosoftYaHei'" font-size="12">数据分析</text>
+	</g>
+	<g>
+		<rect x="652.858" y="471.584" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="83.713" height="25.5"/>
+		<text transform="matrix(1 0 0 1 670.7778 488.1064)" font-family="'MicrosoftYaHei'" font-size="12">雨水回收</text>
+	</g>
+	<g>
+		<rect x="856.141" y="615.792" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.67" height="25.5"/>
+		<text transform="matrix(1 0 0 1 888.6274 632.2715)" font-family="'MicrosoftYaHei'" font-size="12">...</text>
+	</g>
+	<g>
+		<rect x="684.124" y="215.412" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.672" height="25.5"/>
+		<text transform="matrix(1 0 0 1 698.0454 232.9326)" font-family="'MicrosoftYaHei'" font-size="12">用能数据</text>
+	</g>
+	<g>
+		<rect x="845.698" y="312.871" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 859.6177 329.3916)" font-family="'MicrosoftYaHei'" font-size="12">运维数据</text>
+	</g>
+	<g>
+		<rect x="510.111" y="105.202" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.667" height="25.5"/>
+		<text transform="matrix(1 0 0 1 524.0303 121.7227)" font-family="'MicrosoftYaHei'" font-size="12">运维报告</text>
+	</g>
+	<g>
+		<rect x="378.756" y="515.671" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="99.789" height="26"/>
+		<text transform="matrix(1 0 0 1 392.4395 532.8301)" font-family="'MicrosoftYaHei'" font-size="12">应用发布门户</text>
+	</g>
+	<g>
+		<rect x="464.624" y="348.059" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.668" height="25.5"/>
+		<text transform="matrix(1 0 0 1 497.5449 364.5791)" font-family="'MicrosoftYaHei'" font-size="12">...</text>
+	</g>
+	<g>
+		<rect x="652.551" y="505.307" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="84.02" height="25.5"/>
+		<text transform="matrix(1.1104 0 0 1 689.106 521.8271)" font-family="'MicrosoftYaHei'" font-size="12">...</text>
+	</g>
+	<g>
+		<rect x="1158.723" y="599.426" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.67" height="25.5"/>
+		<text transform="matrix(1 0 0 1 1170.8755 616.7393)" font-family="'MicrosoftYaHei'" font-size="12">物联组网</text>
+	</g>
+	<g>
+		<rect x="1158.723" y="637.066" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.67" height="25.5"/>
+		<text transform="matrix(1 0 0 1 1170.979 654.5879)" font-family="'MicrosoftYaHei'" font-size="12">运行调度</text>
+	</g>
+	<g>
+		<rect x="1158.723" y="674.559" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.67" height="25.5"/>
+		<text transform="matrix(1 0 0 1 1170.8755 691.041)" font-family="'MicrosoftYaHei'" font-size="12">智慧管家</text>
+	</g>
+	<g>
+		<rect x="1158.723" y="712.046" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="75.67" height="25.5"/>
+		<text transform="matrix(1 0 0 1 1191.2095 728.5254)" font-family="'MicrosoftYaHei'" font-size="12">...</text>
+	</g>
+</g>
+<polygon fill="none" points="634.997,513.114 572.78,474.897 582.379,461.954 644.595,500.17 "/>
+</svg>

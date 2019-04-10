@@ -20,6 +20,30 @@
     height: 100%;
   }
 
+  // 文本内容区域
+  .page-section {
+    font-size: 16px;
+    strong {
+      color: @dark-9;
+    }
+    P {
+      color: @dark-8;
+      font-weight: 400;
+      min-height: 1.8em;
+      line-height: 1.8em;
+      white-space: normal;
+      letter-spacing: .05em;
+    }
+  }
+
+  // 页面宽度限制
+  .page-content {
+    max-width: @page-width;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+
+  // hardware
   .page-view {
     height: 100vh;
     position: relative;
@@ -42,6 +66,7 @@
     background-repeat: no-repeat;
   }
 
+  // 锚点
   .page-anchor {
     left: 0;
     position: fixed;
@@ -57,41 +82,18 @@
     background-color: @anchor-background-color;
   }
 
-  .page-section {
-    position: relative;
-    margin-bottom: 64px;
-    font-size: 16px;
-    strong {
-      color: @dark-9;
-    }
-    P {
-      color: @dark-8;
-      font-weight: 400;
-      min-height: 1.8em;
-      line-height: 1.8em;
-      white-space: normal;
-      letter-spacing: .05em;
-    }
-  }
+  // .page-banner {
+  //   padding-top: @header-height;
+  //   min-height: 80px;
+  //   margin-bottom: 0;
+  // }
 
-  .page-content {
-    max-width: @page-width;
-    padding: 0 24px;
-    margin: 0 auto;
-  }
-
-  .page-banner {
-    padding-top: @header-height;
-    min-height: 80px;
-    margin-bottom: 0;
-  }
-
-  @media only screen and (max-width: 767px) {
-    .page-banner {
-      padding-top: @header-height - 16px;
-      min-height: 80px;
-      margin-bottom: 0;
-    }
-  }
+  // @media only screen and (max-width: 767px) {
+  //   .page-banner {
+  //     padding-top: @header-height - 16px;
+  //     min-height: 80px;
+  //     margin-bottom: 0;
+  //   }
+  // }
 }
 

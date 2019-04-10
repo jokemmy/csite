@@ -1,23 +1,41 @@
 
 .about-block {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-banner-1,
+.about-banner-2 {
   background-position: top center;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
   background-size: cover;
 }
 
-.about-block-space {
-  justify-content: space-between;
-}
-
-.about-block-1 {
+.about-banner-1 {
   background-image: url(../../assets/images/about/banner-1.jpg);
 }
 
-.about-block-2 {
+.about-banner-2 {
   background-image: url(../../assets/images/about/banner-2.jpg);
+}
+
+.about-block-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  &::before {
+    left: 0;
+    top: 0;
+    content: '';
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    .about-banner-1();
+  }
 }
 
 .about-block-title {
@@ -28,10 +46,14 @@
   text-shadow: 2px 4px 2px @dark-2;
 }
 
+.about-block-light,
 .about-block-content {
   flex: 0 0 auto;
-  background-color: @light-8;
   padding: 64px 0;
+}
+
+.about-block-light {
+  background-color: @light-8;
 }
 
 .dark {
