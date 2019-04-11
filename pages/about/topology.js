@@ -1,11 +1,11 @@
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import fs from 'flystore';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import TweenOne from 'rc-tween-one';
 import ScrollAnim from 'rc-scroll-anim';
-import { get, set, getScroll } from 'rc-util/lib/Dom/css';
+import { get, set/*, getScroll*/ } from 'rc-util/lib/Dom/css';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
 import topology1 from '@assets/images/about/topology-1.svg';
 import topology2 from '@assets/images/about/topology-2.svg';
@@ -327,12 +327,12 @@ class Topology extends React.Component {
   }
 
   componentDidMount() {
-    const { scrollTop } = getScroll();
-    if ( scrollTop > 0 ) {
-      const scroll = document.createEvent( 'Events' );
-      scroll.initEvent( 'scroll', true, true );
-      window.dispatchEvent( scroll );
-    }
+    // const { scrollTop } = getScroll();
+    // if ( scrollTop > 0 ) {
+    //   const scroll = document.createEvent( 'Events' );
+    //   scroll.initEvent( 'scroll', true, true );
+    //   window.dispatchEvent( scroll );
+    // }
     this.resizStore = store.watch( 'resize', this.handleResize );
     this.resizeEvent = addEventListener( window, 'resize', this.handleResize );
   }

@@ -1,9 +1,8 @@
 
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
-import { Parallax } from 'rc-scroll-anim';
 import ParallaxBackground from '@components/ParallaxBackground';
-import banner1 from '@assets/images/about/banner-1.jpg';
+// import banner1 from '@assets/images/about/banner-1.jpg';
 // import banner2 from '@assets/images/about/banner-2.jpg';
 import Advantage from './advantage';
 import Topology from './topology';
@@ -19,7 +18,7 @@ class About extends React.Component {
       //   anchors: [ '我们做的是什么', '核心能力与优势' ]
       // },
       header: {
-        transparent: true,
+        transparent: true
         // mode: 'light'
       },
       footer: {
@@ -40,11 +39,11 @@ class About extends React.Component {
     return (
       <Fragment>
         <ParallaxBackground
-          image={banner1}
-          className={classnames( styles.aboutBlock, styles.aboutBanner1 )}>
+          imageClass={styles.aboutBanner1}
+          className={styles.aboutBlock}>
           <div className={styles.aboutBlockLight}>
             <div className="page-content page-section">
-              <h2 className={styles.aboutBlockTitle} style={{ textAlign: 'left' }}>
+              <h2 className={styles.aboutBlockTitle}>
                 我们做的是什么
               </h2>
               <p>
@@ -74,13 +73,15 @@ class About extends React.Component {
             <Topology />
           </div>
         </section>
-        <section className={classnames( styles.aboutBlock, styles.aboutBanner2 )}>
-          <div className={classnames( 'page-block', styles.dark )}>
+        <ParallaxBackground
+          imageClass={styles.aboutBanner2}
+          className={styles.aboutBlock}>
+          <div className={styles.dark}>
             <div className="page-content">
               <Advantage />
             </div>
           </div>
-        </section>
+        </ParallaxBackground>
       </Fragment>
     );
   }

@@ -11,7 +11,8 @@
 .scene-banner-1,
 .scene-banner-2,
 .scene-banner-3,
-.scene-banner-4 {
+.scene-banner-4,
+.scene-banner-5 {
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -37,40 +38,25 @@
   background-image: url(../../assets/images/scene/banner-4.jpg);
 }
 
-.solutions {
-  top: 45%;
-  left: 50%;
-  width: 70%;
-  height: 80%;
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  max-width: @page-width-lg;
-  max-height: 900px;
-  transform: translate(-50%, -50%);
-  h1 {
-    height: 80px;
-    display: block;
-    color: @light-9;
-    font-size: 40px;
-    line-height: 100px;
-    white-space: nowrap;
-    text-shadow: 2px 4px 10px @dark-6;
-    span {
-      font-size: 32px;
-      margin-left: 32px;
-    }
-  }
+.scene-banner-5 {
+  background-image: url(../../assets/images/scene/banner-5.jpg);
 }
 
-.solutions-content {
+.solutions {
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 75%;
   display: flex;
-  flex: 1 1 auto;
+  max-height: 900px;
+  position: absolute;
+  max-width: @page-width-lg;
+  transform: translate(-50%, -50%);
   justify-content: space-between;
 }
 
 .solution-block {
-  width: 22%;
+  width: 18%;
   flex: 0 0 auto;
   cursor: pointer;
   position: relative;
@@ -90,9 +76,9 @@
     left: 0;
     content: '';
     position: absolute;
-    height: 100%;
     width: 100%;
-    opacity: 1;
+    height: 100%;
+    opacity: 0.999;
     background-color: @dark-5;
     transition: opacity @anim-speed-3;
   }
@@ -112,7 +98,7 @@
 }
 
 .solution-block-container {
-  will-change: width, height, background, opacity, transform;
+  will-change: width, height, opacity, transform;
   position: absolute;
   opacity: 0.999;
   z-index: 2;
@@ -120,9 +106,6 @@
   width: 0;
   left: 0;
   top: 0;
-  background-size: cover;
-  background-position: top left;
-  background-repeat: no-repeat;
 }
 
 .solution-block,
@@ -130,15 +113,15 @@
   overflow: hidden;
 }
 
-.image-bg {
-  min-height: 100%;
-  min-width: 100%;
+.solution-block-container-image {
+  will-change: transform;
+  transform: translateZ(0);
+  transform-origin: top left;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  border: none;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 0;
 }
 
 .solution-block-title {
@@ -165,19 +148,15 @@
   }
 }
 
-
 @media only screen and (max-width: 1200px) {
   .solutions {
-    width: 80%;
-    h1 {
-      font-size: 32px;
-    }
+    width: 90%;
   }
   .solution-block {
-    width: 25%;
-    h2 {
-      font-size: 32px;
-    }
+    width: 20%;
+  }
+  .solution-block-title {
+    font-size: 32px;
   }
 }
 

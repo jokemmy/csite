@@ -3,6 +3,7 @@ import React from 'react';
 import omit from 'omit.js';
 import Media from 'react-media';
 import classnames from 'classnames';
+import { getScroll } from 'rc-util/lib/Dom/css';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
 import Mask from '@components/Mask';
 import { ThemeContext, themeVariables } from '@components/Themes';
@@ -25,8 +26,13 @@ class Base extends React.Component {
   };
 
   componentDidMount() {
-    this.handleScroll();
     this.scrollEvent = addEventListener( document, 'scroll', this.handleScroll );
+    const { scrollTop } = getScroll();
+    if ( scrollTop > 0 ) {
+      const scroll = document.createEvent( 'Events' );
+      scroll.initEvent( 'scroll', true, true );
+      window.dispatchEvent( scroll );
+    }
   }
 
   componentWillUnmount() {

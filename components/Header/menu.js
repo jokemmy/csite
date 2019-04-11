@@ -48,10 +48,5 @@ export default {
   menu2: {
     text: '欣动价值',
     url: '/about'
-  },
-  menu6: {
-    text: '立即体验',
-    url: 'https://emms.thingspower.com.cn/emms/face/login',
-    className: 'experience'
   }
 };

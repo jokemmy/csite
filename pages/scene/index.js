@@ -1,8 +1,9 @@
 
 import React from 'react';
+import is from 'whatitis';
 import classnames from 'classnames';
 import TweenOne from 'rc-tween-one';
-import { set } from 'rc-util/lib/Dom/css';
+import { set, get, getClientSize } from 'rc-util/lib/Dom/css';
 import { ThemeContext } from '@components/Themes';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
 // import banner1 from '@assets/images/scene/banner-1.jpg';
@@ -54,6 +55,7 @@ class Scene extends React.Component {
       selected: {}
     };
     this.pageRef = React.createRef();
+    this.pageImageRef = React.createRef();
   }
 
   handleEnter = ({ index, title, className }) => ({ currentTarget }) => {
@@ -65,22 +67,34 @@ class Scene extends React.Component {
     if ( !selected.animIn && !selected.animating ) {
       const { mouseHovered } = this.state;
       const newPosition = currentTarget.getBoundingClientRect();
+      const scale = this.getScale( currentTarget );
       const fixedStyle = {
-        width: `${newPosition.width}px`,
+        transform: `translate3d(${newPosition.left}px, ${newPosition.top}px, 0)`,
         height: `${newPosition.height}px`,
-        transform: `translateX(${newPosition.left}px) translateY(${newPosition.top}px)`
+        width: `${newPosition.width}px`
+      };
+      const fixedImageStyle = {
+        transform: `translate3d(-50%, 0, 0) scale3d(${scale}, ${scale}, 1)`,
+        left: '50%'
       };
       const fixedLastStyle = {
         transition: this.getTransition(),
-        transform: 'translateX(0) translateY(0)',
+        transform: 'translate3d(0, 0, 0)',
         height: '100vh',
         width: '100vw'
+      };
+      const fixedImageLastStyle = {
+        left: 0,
+        transition: this.getTransition(),
+        transform: 'translate3d(0, 0, 0) scale3d(1, 1, 1)'
       };
       this.state.selected = { ...mouseHovered, animating: true, animIn: true }; // eslint-disable-line
       this.forceUpdate(() => {
         set( this.pageRef.current, fixedStyle );
+        set( this.pageImageRef.current, fixedImageStyle );
         requestAnimationFrame(() => {
           set( this.pageRef.current, fixedLastStyle );
+          set( this.pageImageRef.current, fixedImageLastStyle );
         });
       });
     }
@@ -91,19 +105,29 @@ class Scene extends React.Component {
     if ( selected.animIn && !selected.animating ) {
       const { dom } = selected;
       const position = dom.getBoundingClientRect();
+      const scale = this.getScale( position.height );
       const fixedStyle = {
+        transition: this.getTransition()
+      };
+      const fixedImageStyle = {
         transition: this.getTransition()
       };
       const fixedLastStyle = {
         width: `${position.width}px`,
         height: `${position.height}px`,
-        transform: `translateX(${position.left}px) translateY(${position.top}px)`
+        transform: `translate3d(${position.left}px, ${position.top}px, 0)`
+      };
+      const fixedImageLastStyle = {
+        left: '50%',
+        transform: `translate3d(-50%, 0, 0) scale3d(${scale}, ${scale}, 1)`
       };
       this.state.selected = { ...selected, animating: true, animIn: false }; // eslint-disable-line
       this.forceUpdate(() => {
         set( this.pageRef.current, fixedStyle );
+        set( this.pageImageRef.current, fixedImageStyle );
         requestAnimationFrame(() => {
           set( this.pageRef.current, fixedLastStyle );
+          set( this.pageImageRef.current, fixedImageLastStyle );
         });
       });
     }
@@ -122,6 +146,7 @@ class Scene extends React.Component {
       this.state.selected = {}; // eslint-disable-line
       requestAnimationFrame(() => {
         this.pageRef.current.removeAttribute( 'style' );
+        this.pageImageRef.current.removeAttribute( 'style' );
       });
     } else if ( selected.animating && e.target === e.currentTarget ) {
       if ( isTransform ) {
@@ -151,42 +176,44 @@ class Scene extends React.Component {
     const { themeVariables } = this.context;
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
     return Object.entries({
+      left: { ease: 'ease', duration: animSpeed },
       width: { ease: 'ease', duration: animSpeed },
       height: { ease: 'ease', duration: animSpeed },
-      opacity: { ease: 'ease', duration: animSpeed / 4 },
       transform: { ease: 'ease', duration: animSpeed },
-      'background-position': { ease: 'ease', duration: animSpeed }
+      opacity: { ease: 'ease', duration: animSpeed / 4 }
     }).map(([ property, { ease, duration }]) => {
       return `${property} ${duration}ms ${ease}`;
     }).join( ',' );
   };
 
+  getScale = ( target ) => {
+    const clientSize = getClientSize();
+    const height = is.Number( target ) ? target : target.getBoundingClientRect().height;
+    return height / clientSize.height;
+  };
+
   render() {
-
     const { index, selected } = this.state;
-
     return (
       <section className={classnames( 'page-view', styles.view, styles.sceneBanner )}>
         <div className={styles.solutions}>
-          <h1>解决方案<span>Best Solutions</span></h1>
-          <div className={styles.solutionsContent}>
-            {[ '智慧全区', '智慧校园', '智慧建筑', '其他场景' ].map(( title, index ) => {
-              return (
-                <div
-                  key={title}
-                  onMouseEnter={this.handleEnter({ index: index + 1, title, className: styles[`sceneBanner${index + 1}`] })}
-                  className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`])}
-                  onClick={this.handleClick}>
-                  <h2 className={styles.solutionBlockTitle}>{title}</h2>
-                </div>
-              );
-            })}
-          </div>
+          {[ '智慧校园', '智慧园区', '智慧建筑', '智慧能源', '其他场景' ].map(( title, index ) => {
+            return (
+              <div
+                key={title}
+                onClick={this.handleClick}
+                onMouseEnter={this.handleEnter({ index: index + 1, title, className: styles[`sceneBanner${index + 1}`] })}
+                className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`])}>
+                <h2 className={styles.solutionBlockTitle}>{title}</h2>
+              </div>
+            );
+          })}
         </div>
         <div
           ref={this.pageRef}
-          onTransitionEnd={this.handleTransitionEnd( selected.animIn )}
-          className={classnames( styles.solutionBlockContainer, selected.className )}>
+          className={styles.solutionBlockContainer}
+          onTransitionEnd={this.handleTransitionEnd( selected.animIn )}>
+          <div ref={this.pageImageRef} className={classnames( styles.solutionBlockContainerImage, selected.className )} />
           <h2 className={classnames( styles.solutionBlockTitle, {
             [styles.hidden]: selected.animIn && !selected.animating,
             [styles.transparent]: selected.animIn && selected.animating
