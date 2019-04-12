@@ -5,12 +5,12 @@ import banner from '@assets/images/hardware/banner.jpg';
 import productions from './productions';
 import styles from './hardware.less';
 
+
 function Hardware() {
   return (
     <Fragment>
-      <section className="page-view" style={{ height: 300 }}>
-        <div className="page-view-bg" style={{ backgroundImage: `url(${banner})` }} />
-        <div className={styles.listContent}>
+      <section className="page-view page-view-bg" style={{ backgroundImage: `url(${banner})` }}>
+        <div className={styles.list}>
           <h1>智能硬件<span>Smart Hardware</span></h1>
         </div>
       </section>

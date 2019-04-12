@@ -3,10 +3,9 @@ import React from 'react';
 import omit from 'omit.js';
 import Media from 'react-media';
 import classnames from 'classnames';
-import { getScroll } from 'rc-util/lib/Dom/css';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
 import Mask from '@components/Mask';
-import { ThemeContext, themeVariables } from '@components/Themes';
+import { ThemeContext, themeVariables, thiemeEasings } from '@components/Themes';
 import { pushLoader, popLoader, withLoaded } from '@lib/loaded';
 import './basic.less';
 import './fonts.less';
@@ -27,12 +26,9 @@ class Base extends React.Component {
 
   componentDidMount() {
     this.scrollEvent = addEventListener( document, 'scroll', this.handleScroll );
-    const { scrollTop } = getScroll();
-    if ( scrollTop > 0 ) {
-      const scroll = document.createEvent( 'Events' );
-      scroll.initEvent( 'scroll', true, true );
-      window.dispatchEvent( scroll );
-    }
+    const scroll = document.createEvent( 'Events' );
+    scroll.initEvent( 'scroll', true, true );
+    window.dispatchEvent( scroll );
   }
 
   componentWillUnmount() {
@@ -64,7 +60,7 @@ class Base extends React.Component {
     const { scrollClasses } = this.state;
     const { children, isMobile, isLoaded, className, ...props } = omit( this.props, ['scrollClass']);
     return (
-      <ThemeContext.Provider value={{ themeVariables, isMobile, isLoaded }}>
+      <ThemeContext.Provider value={{ themeVariables, thiemeEasings, isMobile, isLoaded }}>
         <div {...props} className={classnames( 'page-basic', className, scrollClasses.join( ' ' ))}>
           {children}
         </div>

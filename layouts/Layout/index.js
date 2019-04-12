@@ -6,8 +6,9 @@ import Header from '@components/Header';
 import Anchor from '@components/Anchor';
 import Footer from '@components/Footer';
 import Body from '@components/Body';
-import bodyStyles from '@components/Body/body.less';
 
+
+const bodyStyles = Body.styles;
 
 class Layout extends React.Component {
   render() {

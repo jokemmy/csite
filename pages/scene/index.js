@@ -1,27 +1,14 @@
 
 import React from 'react';
-import is from 'whatitis';
 import classnames from 'classnames';
 import TweenOne from 'rc-tween-one';
-import { set, get, getClientSize } from 'rc-util/lib/Dom/css';
+import { set, getClientSize } from 'rc-util/lib/Dom/css';
 import { ThemeContext } from '@components/Themes';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
-// import banner1 from '@assets/images/scene/banner-1.jpg';
-// import banner2 from '@assets/images/scene/banner-2.jpg';
-// import banner3 from '@assets/images/scene/banner-3.jpg';
-// import banner4 from '@assets/images/scene/banner-4.jpg';
-/*import Banner from '@components/Banner';
-import SvgIcon from '@components/SvgIcon';
-import banner from '@assets/images/scene/banner.jpg';
 import banner1 from '@assets/images/scene/banner-1.jpg';
 import banner2 from '@assets/images/scene/banner-2.jpg';
 import banner3 from '@assets/images/scene/banner-3.jpg';
 import banner4 from '@assets/images/scene/banner-4.jpg';
-import back from '@assets/images/scene/back.svg?sprite';
-import zhinengfenxi from '@assets/images/scene/zhinengfenxi.svg?sprite';
-import wuliankeji from '@assets/images/scene/wuliankeji.svg?sprite';
-import xitongronghe from '@assets/images/scene/xitongronghe.svg?sprite';
-import lianwangzhihui from '@assets/images/scene/lianwangzhihui.svg?sprite';*/
 import Scene1 from './scene1';
 import Scene2 from './scene2';
 import Scene3 from './scene3';
@@ -30,6 +17,7 @@ import styles from './scene.less';
 
 
 const TweenOneGroup = TweenOne.TweenOneGroup;
+const images = [ banner1, banner2, banner3, banner4 ];
 
 class Scene extends React.Component {
 
@@ -51,75 +39,83 @@ class Scene extends React.Component {
     this.state = {
       index: 0,
       animating: false,
-      mouseHovered: {},
       selected: {}
     };
     this.pageRef = React.createRef();
+    this.pageFontRef = React.createRef();
     this.pageImageRef = React.createRef();
   }
 
-  handleEnter = ({ index, title, className }) => ({ currentTarget }) => {
-    this.state.mouseHovered = { index, title, className, dom: currentTarget }; // eslint-disable-line
-  };
-
-  handleClick = ({ currentTarget }) => {
+  handleClick = ({ index, title, image }) => ({ currentTarget }) => {
     const { selected } = this.state;
     if ( !selected.animIn && !selected.animating ) {
-      const { mouseHovered } = this.state;
-      const newPosition = currentTarget.getBoundingClientRect();
-      const scale = this.getScale( currentTarget );
-      const fixedStyle = {
-        transform: `translate3d(${newPosition.left}px, ${newPosition.top}px, 0)`,
-        height: `${newPosition.height}px`,
-        width: `${newPosition.width}px`
+      this.state.selected = { // eslint-disable-line
+        index,
+        title,
+        image,
+        dom: currentTarget,
+        animating: true,
+        animIn: true
       };
-      const fixedImageStyle = {
-        transform: `translate3d(-50%, 0, 0) scale3d(${scale}, ${scale}, 1)`,
-        left: '50%'
-      };
-      const fixedLastStyle = {
-        transition: this.getTransition(),
-        transform: 'translate3d(0, 0, 0)',
-        height: '100vh',
-        width: '100vw'
-      };
-      const fixedImageLastStyle = {
-        left: 0,
-        transition: this.getTransition(),
-        transform: 'translate3d(0, 0, 0) scale3d(1, 1, 1)'
-      };
-      this.state.selected = { ...mouseHovered, animating: true, animIn: true }; // eslint-disable-line
-      this.forceUpdate(() => {
-        set( this.pageRef.current, fixedStyle );
-        set( this.pageImageRef.current, fixedImageStyle );
+      this.forceUpdate();
+    }
+  };
+
+  handleImageLoad = () => {
+    const { selected } = this.state;
+    const position = selected.dom.getBoundingClientRect();
+    const imageStyle = this.getImageStyle();
+    const fixedStyle = {
+      transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`,
+      height: `${position.height}px`,
+      width: `${position.width}px`
+    };
+    const fixedImageStyle = {
+      ...imageStyle.style,
+      transform: this.getImageTransform( position, imageStyle.size )
+    };
+    const fixedLastStyle = {
+      transition: this.getTransition( true ),
+      transform: 'translateX(0) translateY(0) translateZ(0)',
+      height: '100vh',
+      width: '100vw'
+    };
+    const fixedImageLastStyle = {
+      transition: this.getImageTransition( true ),
+      transform: 'translateX(0) translateY(0) translateZ(0) scale(1)'
+    };
+    this.state.selected = { ...selected, animating: true, animIn: true }; // eslint-disable-line
+    set( this.pageRef.current, fixedStyle );
+    set( this.pageImageRef.current, fixedImageStyle );
+    this.forceUpdate(() => {
+      // 火狐延迟一帧
+      requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           set( this.pageRef.current, fixedLastStyle );
           set( this.pageImageRef.current, fixedImageLastStyle );
         });
       });
-    }
+    });
   };
 
   handleBack = () => {
     const { selected } = this.state;
     if ( selected.animIn && !selected.animating ) {
-      const { dom } = selected;
-      const position = dom.getBoundingClientRect();
-      const scale = this.getScale( position.height );
+      const position = selected.dom.getBoundingClientRect();
+      const imageStyle = this.getImageStyle();
       const fixedStyle = {
-        transition: this.getTransition()
+        transition: this.getTransition( false )
       };
       const fixedImageStyle = {
-        transition: this.getTransition()
+        transition: this.getImageTransition( false )
       };
       const fixedLastStyle = {
         width: `${position.width}px`,
         height: `${position.height}px`,
-        transform: `translate3d(${position.left}px, ${position.top}px, 0)`
+        transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`
       };
       const fixedImageLastStyle = {
-        left: '50%',
-        transform: `translate3d(-50%, 0, 0) scale3d(${scale}, ${scale}, 1)`
+        transform: this.getImageTransform( position, imageStyle.size )
       };
       this.state.selected = { ...selected, animating: true, animIn: false }; // eslint-disable-line
       this.forceUpdate(() => {
@@ -147,6 +143,7 @@ class Scene extends React.Component {
       requestAnimationFrame(() => {
         this.pageRef.current.removeAttribute( 'style' );
         this.pageImageRef.current.removeAttribute( 'style' );
+        this.forceUpdate();
       });
     } else if ( selected.animating && e.target === e.currentTarget ) {
       if ( isTransform ) {
@@ -172,37 +169,69 @@ class Scene extends React.Component {
     }
   };
 
-  getTransition = () => {
-    const { themeVariables } = this.context;
+  getTransition = ( isIn ) => {
+    const { themeVariables, thiemeEasings } = this.context;
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
+    const ease = isIn ? thiemeEasings['@easeOutExpo'] : thiemeEasings['@easeOutQuart'];
     return Object.entries({
-      left: { ease: 'ease', duration: animSpeed },
-      width: { ease: 'ease', duration: animSpeed },
-      height: { ease: 'ease', duration: animSpeed },
-      transform: { ease: 'ease', duration: animSpeed },
-      opacity: { ease: 'ease', duration: animSpeed / 4 }
+      width: { ease, duration: animSpeed },
+      height: { ease, duration: animSpeed },
+      transform: { ease, duration: animSpeed },
+      opacity: { ease: '', duration: animSpeed / 4 }
     }).map(([ property, { ease, duration }]) => {
       return `${property} ${duration}ms ${ease}`;
     }).join( ',' );
   };
 
-  getScale = ( target ) => {
-    const clientSize = getClientSize();
-    const height = is.Number( target ) ? target : target.getBoundingClientRect().height;
-    return height / clientSize.height;
+  getImageTransition = ( isIn ) => {
+    const { themeVariables, thiemeEasings } = this.context;
+    const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
+    return Object.entries({
+      transform: {
+        ease: isIn ? thiemeEasings['@easeOutQuart'] : thiemeEasings['@easeOutExpo'],
+        duration: animSpeed
+      }
+    }).map(([ property, { ease, duration }]) => {
+      return `${property} ${duration}ms ${ease}`;
+    }).join( ',' );
+  };
+
+  getImageTransform = ( position, imageSize ) => {
+    const scale = position.height / imageSize.height;
+    const imageWidth = imageSize.width * scale;
+    return `translateX(-${( imageWidth - position.width ) / 2}px) translateY(0) translateZ(0) scale(${scale})`;
+  };
+
+  getImageStyle = () => {
+    const image = this.pageImageRef.current;
+    const { width, height } = getClientSize();
+    const imageRatio = image.width / image.height;
+    const targetSizeRatio = width / height;
+    return {
+      style: imageRatio > targetSizeRatio ? {
+        height: '100vh'
+      } : {
+        width: '100vw'
+      },
+      size: {
+        width: imageRatio > targetSizeRatio ? imageRatio * height : width,
+        height: imageRatio > targetSizeRatio ? height : width / imageRatio
+      }
+    };
   };
 
   render() {
     const { index, selected } = this.state;
     return (
       <section className={classnames( 'page-view', styles.view, styles.sceneBanner )}>
-        <div className={styles.solutions}>
+        <div className={classnames( styles.solutions, {
+          [styles.solutionHover]: !selected.animating
+        })}>
           {[ '智慧校园', '智慧园区', '智慧建筑', '智慧能源', '其他场景' ].map(( title, index ) => {
             return (
               <div
                 key={title}
-                onClick={this.handleClick}
-                onMouseEnter={this.handleEnter({ index: index + 1, title, className: styles[`sceneBanner${index + 1}`] })}
+                onClick={this.handleClick({ index: index + 1, title, image: images[index] })}
                 className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`])}>
                 <h2 className={styles.solutionBlockTitle}>{title}</h2>
               </div>
@@ -211,10 +240,15 @@ class Scene extends React.Component {
         </div>
         <div
           ref={this.pageRef}
-          className={styles.solutionBlockContainer}
-          onTransitionEnd={this.handleTransitionEnd( selected.animIn )}>
-          <div ref={this.pageImageRef} className={classnames( styles.solutionBlockContainerImage, selected.className )} />
-          <h2 className={classnames( styles.solutionBlockTitle, {
+          onTransitionEnd={this.handleTransitionEnd( selected.animIn )}
+          className={classnames( styles.solutionBlockContainer, { 'no-events': selected.animating })}>
+          <img
+            alt=""
+            src={selected.image}
+            ref={this.pageImageRef}
+            onLoad={this.handleImageLoad}
+            className={styles.solutionBlockContainerImage} />
+          <h2 ref={this.pageFontRef} className={classnames( styles.solutionBlockTitle, {
             [styles.hidden]: selected.animIn && !selected.animating,
             [styles.transparent]: selected.animIn && selected.animating
           })}>{selected.title}</h2>

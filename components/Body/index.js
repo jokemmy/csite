@@ -1,5 +1,5 @@
 
-import './body.less';
+import styles from './body.less';
 
 
 function Body({ children }) {
@@ -9,5 +9,7 @@ function Body({ children }) {
     </div>
   );
 }
+
+Body.styles = styles;
 
 export default Body;
