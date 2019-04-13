@@ -18,6 +18,24 @@
   url('../../assets/fonts/app/SiYuanExtraLight/webfont.svg#webfont') format('svg'); /* iOS 4.1- */
 }
 
+@font-face {
+  font-family: 'Public SiYuan';
+  src: url('../../assets/fonts/public/SiYuan/webfont.eot'); /* IE9 */
+  src: url('../../assets/fonts/public/SiYuan/webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../../assets/fonts/public/SiYuan/webfont.woff') format('woff'), /* chrome、firefox */
+  url('../../assets/fonts/public/SiYuan/webfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../../assets/fonts/public/SiYuan/webfont.svg#webfont') format('svg'); /* iOS 4.1- */
+}
+
+@font-face {
+  font-family: 'Public SiYuan Extra Light';
+  src: url('../../assets/fonts/public/SiYuanExtraLight/webfont.eot'); /* IE9 */
+  src: url('../../assets/fonts/public/SiYuanExtraLight/webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../../assets/fonts/public/SiYuanExtraLight/webfont.woff') format('woff'), /* chrome、firefox */
+  url('../../assets/fonts/public/SiYuanExtraLight/webfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../../assets/fonts/public/SiYuanExtraLight/webfont.svg#webfont') format('svg'); /* iOS 4.1- */
+}
+
 .font {
   font-size: 16px;
   font-style: normal;
@@ -34,6 +52,16 @@
 
   .AppSiYuanExtraLight {
     font-family: "App SiYuan Extra Light" !important;
+    .font();
+  }
+
+  .PublicSiYuan {
+    font-family: "Public SiYuan" !important;
+    .font();
+  }
+
+  .PublicSiYuanExtraLight {
+    font-family: "Public SiYuan Extra Light" !important;
     .font();
   }
 }

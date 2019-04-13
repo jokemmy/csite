@@ -132,6 +132,17 @@ class Carousel extends React.Component {
     }
   };
 
+  handleSlider = () => {
+    const { children } = this.props;
+    const { index, scrolling } = this.state;
+    const count = React.Children.toArray( children ).length - 1;
+    if ( scrolling === false ) {
+      if ( index < count ) {
+        this.handleChange( index + 1 );
+      }
+    }
+  }
+
   render() {
     const { index, direction, isEnable } = this.state;
     const { children, className, disabled, showPoints, showArrow, ...props } = omit( this.props, ['onEnd']);
@@ -165,7 +176,7 @@ class Carousel extends React.Component {
               enter={{ opacity: 0, type: 'from', duration: 2000 }}
               leave={{ opacity: 0, duration: 2000 }}>
               {showArrow && count - 1 > index ? (
-                <div key="arrow" className={styles.arrowDown}>
+                <div key="arrow" className={styles.arrowDown} onClick={this.handleSlider}>
                   <div className={styles.arrowDownAnim}>
                     <em />
                     <em />

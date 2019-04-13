@@ -1,9 +1,15 @@
 
 import React from 'react';
+import Link from 'next/link';
 import classnames from 'classnames';
+import SvgIcon from '@components/SvgIcon';
 import Parallax from '@components/Parallax';
 import Paper from '@components/Parallax/Paper';
-import banner from '@assets/images/app/banner-1.jpg';
+import banner from '@assets/images/app/banner-1/banner-1.jpg';
+import svg1 from '@assets/images/app/banner-1/svg-1.svg?sprite';
+import svg2 from '@assets/images/app/banner-1/svg-2.svg?sprite';
+import svg3 from '@assets/images/app/banner-1/svg-3.svg?sprite';
+import svg4 from '@assets/images/app/banner-1/svg-4.svg?sprite';
 import styles from './parallax.less';
 
 
@@ -20,6 +26,7 @@ const options = {
 };
 
 class WallPaper extends React.Component {
+
   render() {
     const { className, ...props } = this.props;
     return (
@@ -27,14 +34,39 @@ class WallPaper extends React.Component {
         <Paper depth={0.2}>
           <div className={styles.paperBackground} style={{ backgroundImage: `url(${banner})` }} />
         </Paper>
-        <div className={styles.content}>
-          <div className={styles.toptic}>
-            <h1 className={classnames( styles.topticTitle, 'AppSiYuanExtraLight' )}>
-              智慧服务 · 智慧管理 · 智慧运行
+        <div className={styles.centerContent}>
+          <div className={classnames( styles.topic, 'AppSiYuan' )}>
+            <h1 className={classnames( styles.topicTitle, 'AppSiYuanExtraLight' )}>
+              智慧能源集成服务提供商
             </h1>
-            <p className={classnames( styles.topticDesc, 'AppSiYuan' )}>
-              依托物联网技术和信息化手段，高度契合能源管理业务需求，打造全新的智慧能源运管体系，为客户提供全方位、一体化的整合式服务。
+            <p className={styles.topicDesc}>
+              打造全新的智慧能源运管体系，为客户提供全方位、一体化的整合式服务。
             </p>
+            <div className={styles.topicExtend}>
+              <div className={styles.topicIcon}>
+                <SvgIcon icon={svg1} />
+                <div className={styles.topicLabel}>智慧能源</div>
+              </div>
+              <div className={styles.topicIcon}>
+                <SvgIcon icon={svg2} />
+                <div className={styles.topicLabel}>智慧园区</div>
+              </div>
+              <div className={styles.topicIcon}>
+                <SvgIcon icon={svg3} />
+                <div className={styles.topicLabel}>智慧校园</div>
+              </div>
+              <div className={styles.topicIcon}>
+                <SvgIcon icon={svg4} />
+                <div className={styles.topicLabel}>智慧建筑</div>
+              </div>
+            </div>
+            <div className={styles.topicAction}>
+              <Link as="/scene" href="/scene">
+                <a className={styles.topicButton}>
+                  了解更多
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
       </Parallax>

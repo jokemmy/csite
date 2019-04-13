@@ -99,7 +99,7 @@ class Header extends Component {
     this.mobileMenu = this.mobileMenu || this.getMobileMenu( menuData );
 
     return (
-      <header {...props} ref={this.headerRef} className={classnames( 'page-header', className, {
+      <header {...props} ref={this.headerRef} className={classnames( 'PublicSiYuan', 'page-header', className, {
         [styles.transparent]: transparent,
         [styles.dark]: mode === 'dark',
         [styles.light]: mode === 'light'

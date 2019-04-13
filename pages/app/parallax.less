@@ -4,19 +4,14 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
-  // background-color: @blue-6;
   :global(.paper) {
     height: 0;
-    // height: 100%;
-    // position: absolute;
-    // left: 0;
-    // top: 0;
   }
 }
 
 .paper-background {
-  margin-top: -30px;
-  margin-left: -30px;
+  top: -30px;
+  left: -30px;
   height: calc(100vh + 60px);
   width: calc(100vw + 60px);
   background-repeat: no-repeat;
@@ -25,39 +20,118 @@
   position: relative;
   &::before {
     content: '';
-    position: absolute;
-    height: 100%;
     width: 100%;
-    background-color: @dark-5;
+    height: 100%;
+    position: absolute;
+    background-color: @dark-4;
   }
 }
 
-.content {
-  width: 60%;
+.left-content,
+.center-content {
   height: 100%;
   position: relative;
+  pointer-events: auto;
 }
 
-.toptic {
-  top: 50%;
-  left: 50%;
-  max-width: calc(100% - 60px);
-  transform: translate(-50%, -50%);
-  position: absolute;
+.left-content {
+  left: 10%;
+  width: 40%;
+  display: flex;
 }
 
-.toptic-title {
+.center-content {
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.topic {
+  margin: auto;
+  height: 400px;
+}
+
+.topic-title {
   white-space: nowrap;
   color: @light-10;
-  font-size: 44px;
+  font-size: 48px;
+  margin-bottom: 8px;
 }
 
-.toptic-desc {
-  font-size: 16px;
+.topic-desc {
+  font-size: 14px;
   color: @light-8;
   line-height: 1.8;
+  margin-bottom: 24px;
 }
 
-.toptic-action {
-  
+.topic-extend {
+  display: flex;
+  padding: 16px 0;
+  margin-bottom: 32px;
+  justify-content: center;
+}
+
+.topic-icon {
+  width: 80px;
+  height: 80px;
+  color: @light-8;
+  margin-right: 72px;
+  border-radius: 100%;
+  display: inline-block;
+  border: 1px solid @light-7;
+  font-size: 48px;
+  line-height: 80px;
+  position: relative;
+  text-align: center;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.topic-label {
+  left: 50%;
+  color: @light-8;
+  position: absolute;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 8px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.topic-action {
+  padding: 16px 0;
+}
+
+.topic-button {
+  height: 40px;
+  color: @light-8;
+  min-width: 100px;
+  line-height: 40px;
+  border: 1px solid @light-8;
+  display: inline-block;
+  border-radius: 20px;
+  padding: 0 24px;
+  cursor: pointer;
+  background-color: transparent;
+  transition:
+    color @anim-speed-1,
+    border-color @anim-speed-1,
+    background-color @anim-speed-1;
+  &:hover {
+    color: @light-10;
+    border-color: @light-10;
+    background-color: @light-4;
+  }
+  &:active {
+    text-decoration: none;
+  }
+}
+
+.left-content {
+  .topic-extend {
+    justify-content: flex-start;
+  }
 }

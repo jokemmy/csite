@@ -199,7 +199,7 @@ class Scene extends React.Component {
   getImageTransform = ( position, imageSize ) => {
     const scale = position.height / imageSize.height;
     const imageWidth = imageSize.width * scale;
-    return `translateX(-${( imageWidth - position.width ) / 2}px) translateY(0) translateZ(0) scale(${scale})`;
+    return `translateX(-${( imageWidth - position.width ) * 0.66}px) translateY(0) translateZ(0) scale(${scale})`;
   };
 
   getImageStyle = () => {
@@ -227,7 +227,7 @@ class Scene extends React.Component {
         <div className={classnames( styles.solutions, {
           [styles.solutionHover]: !selected.animating
         })}>
-          {[ '智慧校园', '智慧园区', '智慧建筑', '智慧能源', '其他场景' ].map(( title, index ) => {
+          {[ '智慧校园', '智慧园区', '智慧建筑', '智慧能源' ].map(( title, index ) => {
             return (
               <div
                 key={title}

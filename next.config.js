@@ -99,7 +99,7 @@ module.exports = compose([
       // enable/disable svgo plugins here
     },
     svgSpriteLoader: {
-
+      symbolId: '[hash:base64:8]'
     },
     webp: {
       preset: 'default',

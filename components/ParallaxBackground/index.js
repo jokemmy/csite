@@ -6,34 +6,39 @@ import { Parallax } from 'rc-scroll-anim';
 import styles from './parallaxBackground.less';
 
 
-const locationId = `parallax-anchor-1`;
-
 class ParallaxBackground extends React.Component {
 
   static defaultProps = {
-    range: [ -80, 80 ]
+    range: [ -64, 64 ]
   };
 
-
+  componentDidMount() {
+    this.uid = uuid();
+    this.forceUpdate();
+  }
 
   render() {
-    const { children, className, range, image, imageClass, ...props } = this.props;
+    const { children, className, range, image, imageClass, style, ...props } = this.props;
     const imageStyle = !imageClass && image ? { backgroundImage: `url(${image})` } : {};
     const distance = ( range[1] - range[0]) / 2;
     return (
-      <div {...props} className={classnames( className, styles.container )}>
-
-          <Parallax
-            animation={{ y: distance }}
-            className={styles.anchorTop}>
+      <div
+        {...props}
+        style={Object.assign({ height: '100vh' }, style || {})}
+        className={classnames( className, styles.container )}>
+        <Parallax
+          animation={{ y: distance }}
+          style={{ position: 'absolute', top: 0, left: 0, height: 0, zIndex: -1, marginTop: -distance }}>
+          {this.uid ? (
             <Parallax
-              location={locationId}
+              style={imageStyle}
+              location={this.uid}
               animation={{ y: distance }}
-              className={classnames( styles.parallax, imageClass )}
-              style={Object.assign( imageStyle, { marginTop: -distance })} />
-          </Parallax>
+              className={classnames( styles.parallax, imageClass )} />
+          ) : null}
+        </Parallax>
         {children}
-        <div id={locationId} className={styles.anchorBottom} />
+        <div id={this.uid} style={{ position: 'absolute', bottom: 0, left: 0, height: 0 }} />
       </div>
     );
   }

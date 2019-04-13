@@ -1,5 +1,5 @@
 
-import { Fragment } from 'react';
+// import { Fragment } from 'react';
 import Banner from '@components/Banner';
 import Parallax1 from './Parallax1';
 import Parallax2 from './Parallax2';
@@ -11,15 +11,13 @@ import Parallax5 from './Parallax5';
 
 function App() {
   return (
-    <Fragment>
-      <Banner>
-        <Parallax1 />
-        <Parallax2 />
-        <Parallax3 />
-        <Parallax4 />
-        <Parallax5 />
-      </Banner>
-    </Fragment>
+    <Banner>
+      <Parallax1 />
+      <Parallax2 />
+      <Parallax3 />
+      <Parallax4 />
+      <Parallax5 />
+    </Banner>
   );
 }
 

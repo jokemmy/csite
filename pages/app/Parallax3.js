@@ -1,9 +1,14 @@
 
 import React from 'react';
+// import Link from 'next/link';
 import classnames from 'classnames';
+import SvgIcon from '@components/SvgIcon';
 import Parallax from '@components/Parallax';
 import Paper from '@components/Parallax/Paper';
-import banner from '@assets/images/app/banner-3.jpg';
+import banner from '@assets/images/app/banner-3/banner-3.jpg';
+import svg1 from '@assets/images/app/banner-3/svg-1.svg?sprite';
+import svg2 from '@assets/images/app/banner-3/svg-2.svg?sprite';
+import svg3 from '@assets/images/app/banner-3/svg-3.svg?sprite';
 import styles from './parallax.less';
 
 
@@ -27,14 +32,35 @@ class WallPaper extends React.Component {
         <Paper depth={0.2}>
           <div className={styles.paperBackground} style={{ backgroundImage: `url(${banner})` }} />
         </Paper>
-        <div className={styles.content}>
-          <div className={styles.toptic}>
-            <h1 className={classnames( styles.topticTitle, 'AppSiYuanExtraLight' )}>
-              云服务 . 智慧应用
+        <div className={styles.leftContent}>
+          <div className={classnames( styles.topic, 'AppSiYuan' )}>
+            <h1 className={classnames( styles.topicTitle, 'AppSiYuanExtraLight' )}>
+              云数据中心
             </h1>
-            <p className={classnames( styles.topticDesc, 'AppSiYuan' )}>
-              围绕核心功能，分类构建功能应用体系，涉及多个业务领域，为用户带来统一高效的管理。
+            <p className={styles.topicDesc}>
+              充分利用云计算和大数据技术，适配各个行业需求，为客户提供托管云、混合云等场景下的解决方案，实现业务全面云化，推进行业数字化转型。
             </p>
+            <div className={styles.topicExtend}>
+              <div className={styles.topicIcon}>
+                <SvgIcon icon={svg1} />
+                <div className={styles.topicLabel}>极致性能</div>
+              </div>
+              <div className={styles.topicIcon}>
+                <SvgIcon icon={svg2} />
+                <div className={styles.topicLabel}>智能分析</div>
+              </div>
+              <div className={styles.topicIcon}>
+                <SvgIcon icon={svg3} />
+                <div className={styles.topicLabel}>节能环保</div>
+              </div>
+            </div>
+{/*            <div className={styles.topicAction}>
+              <Link as="/hardware" href="/hardware">
+                <a className={styles.topicButton}>
+                  了解更多
+                </a>
+              </Link>
+            </div>*/}
           </div>
         </div>
       </Parallax>
