@@ -46,13 +46,14 @@ class Scene extends React.Component {
     this.pageImageRef = React.createRef();
   }
 
-  handleClick = ({ index, title, image }) => ({ currentTarget }) => {
+  handleClick = ({ index, title, image, className }) => ({ currentTarget }) => {
     const { selected } = this.state;
     if ( !selected.animIn && !selected.animating ) {
       this.state.selected = { // eslint-disable-line
         index,
         title,
         image,
+        className,
         dom: currentTarget,
         animating: true,
         animIn: true
@@ -72,7 +73,7 @@ class Scene extends React.Component {
     };
     const fixedImageStyle = {
       ...imageStyle.style,
-      transform: this.getImageTransform( position, imageStyle.size )
+      transform: this.getImageCoverTransform( imageStyle.size, position, 0.75 )
     };
     const fixedLastStyle = {
       transition: this.getTransition( true ),
@@ -82,7 +83,7 @@ class Scene extends React.Component {
     };
     const fixedImageLastStyle = {
       transition: this.getImageTransition( true ),
-      transform: 'translateX(0) translateY(0) translateZ(0) scale(1)'
+      transform: this.getImageCoverTransform( imageStyle.size, getClientSize())
     };
     this.state.selected = { ...selected, animating: true, animIn: true }; // eslint-disable-line
     set( this.pageRef.current, fixedStyle );
@@ -107,7 +108,8 @@ class Scene extends React.Component {
         transition: this.getTransition( false )
       };
       const fixedImageStyle = {
-        transition: this.getImageTransition( false )
+        transition: this.getImageTransition( false ),
+        transform: this.getImageCoverTransform( imageStyle.size, getClientSize())
       };
       const fixedLastStyle = {
         width: `${position.width}px`,
@@ -115,7 +117,7 @@ class Scene extends React.Component {
         transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`
       };
       const fixedImageLastStyle = {
-        transform: this.getImageTransform( position, imageStyle.size )
+        transform: this.getImageCoverTransform( imageStyle.size, position, 0.75 )
       };
       this.state.selected = { ...selected, animating: true, animIn: false }; // eslint-disable-line
       this.forceUpdate(() => {
@@ -196,22 +198,29 @@ class Scene extends React.Component {
     }).join( ',' );
   };
 
-  getImageTransform = ( position, imageSize ) => {
-    const scale = position.height / imageSize.height;
-    const imageWidth = imageSize.width * scale;
-    return `translateX(-${( imageWidth - position.width ) * 0.66}px) translateY(0) translateZ(0) scale(${scale})`;
+  getImageCoverTransform = ( size, target, posX = 0.5, posY = 0.5 ) => {
+    const imageRatio = size.width / size.height;
+    const targetSizeRatio = target.width / target.height;
+    if ( imageRatio > targetSizeRatio ) {
+      const scale = target.height / size.height;
+      const imageWidth = size.width * scale;
+      return `translateX(${( imageWidth - target.width ) * -posX}px) translateY(0) translateZ(0) scale(${scale})`;
+    }
+    const scale = target.width / size.width;
+    const imageHeight = size.height * scale;
+    return `translateX(0) translateY(${( imageHeight - target.height ) * -posY}px) translateZ(0) scale(${scale})`;
   };
 
-  getImageStyle = () => {
+  getImageStyle = ( cover ) => {
     const image = this.pageImageRef.current;
-    const { width, height } = getClientSize();
+    const { width, height } = cover || getClientSize();
     const imageRatio = image.width / image.height;
     const targetSizeRatio = width / height;
     return {
       style: imageRatio > targetSizeRatio ? {
-        height: '100vh'
+        height
       } : {
-        width: '100vw'
+        width
       },
       size: {
         width: imageRatio > targetSizeRatio ? imageRatio * height : width,
@@ -223,15 +232,15 @@ class Scene extends React.Component {
   render() {
     const { index, selected } = this.state;
     return (
-      <section className={classnames( 'page-view', styles.view, styles.sceneBanner )}>
+      <section className={classnames( styles.view, styles.sceneBanner )}>
         <div className={classnames( styles.solutions, {
           [styles.solutionHover]: !selected.animating
         })}>
-          {[ '智慧校园', '智慧园区', '智慧建筑', '智慧能源' ].map(( title, index ) => {
+          {[ '智慧能源', '智慧校园', '智慧建筑', '智慧园区' ].map(( title, index ) => {
             return (
               <div
                 key={title}
-                onClick={this.handleClick({ index: index + 1, title, image: images[index] })}
+                onClick={this.handleClick({ index: index + 1, title, image: images[index], className: styles[`sceneBanner${index + 1}`] })}
                 className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`])}>
                 <h2 className={styles.solutionBlockTitle}>{title}</h2>
               </div>
@@ -242,11 +251,15 @@ class Scene extends React.Component {
           ref={this.pageRef}
           onTransitionEnd={this.handleTransitionEnd( selected.animIn )}
           className={classnames( styles.solutionBlockContainer, { 'no-events': selected.animating })}>
+          {selected.animIn && !selected.animating ? (
+            <div onClick={this.handleBack} className={classnames( styles.solutionBlockContainerBanner, selected.className )} />
+          ) : null}
           <img
             alt=""
             src={selected.image}
             ref={this.pageImageRef}
             onLoad={this.handleImageLoad}
+            style={selected.animIn && !selected.animating ? { display: 'none' } : {}}
             className={styles.solutionBlockContainerImage} />
           <h2 ref={this.pageFontRef} className={classnames( styles.solutionBlockTitle, {
             [styles.hidden]: selected.animIn && !selected.animating,
