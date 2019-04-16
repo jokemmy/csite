@@ -43,16 +43,15 @@ class Hardware extends React.Component {
     this.pageImageRef = React.createRef();
   }
 
-  handleClick = ({ index, title, image }) => ({ currentTarget }) => {
+  handleClick = ({ index, title, image, className }) => ({ currentTarget }) => {
     const { selected } = this.state;
     if ( !selected.animIn && !selected.animating ) {
       this.state.selected = { // eslint-disable-line
         index,
         title,
         image,
-        dom: currentTarget,
-        animating: true,
-        animIn: true
+        className,
+        dom: currentTarget
       };
       this.forceUpdate();
     }
@@ -61,15 +60,10 @@ class Hardware extends React.Component {
   handleImageLoad = () => {
     const { selected } = this.state;
     const position = selected.dom.getBoundingClientRect();
-    const imageStyle = this.getImageStyle();
-    const fixedStyle = {
-      transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`,
-      height: `${position.height}px`,
-      width: `${position.width}px`
-    };
+    const fixedStyle = this.getBlockStyle( position );
+    const imageSize = this.getImageSize();
     const fixedImageStyle = {
-      ...imageStyle.style,
-      transform: this.getImageTransform( position, imageStyle.size )
+      ...this.getImageStyle( imageSize, position )
     };
     const fixedLastStyle = {
       transition: this.getTransition( true ),
@@ -79,12 +73,12 @@ class Hardware extends React.Component {
     };
     const fixedImageLastStyle = {
       transition: this.getImageTransition( true ),
-      transform: 'translateX(0) translateY(0) translateZ(0) scale(1)'
+      transform: this.getImageCoverTransform( imageSize, getClientSize())
     };
     this.state.selected = { ...selected, animating: true, animIn: true }; // eslint-disable-line
-    set( this.pageRef.current, fixedStyle );
-    set( this.pageImageRef.current, fixedImageStyle );
     this.forceUpdate(() => {
+      set( this.pageRef.current, fixedStyle );
+      set( this.pageImageRef.current, fixedImageStyle );
       // 火狐延迟一帧
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -99,28 +93,30 @@ class Hardware extends React.Component {
     const { selected } = this.state;
     if ( selected.animIn && !selected.animating ) {
       const position = selected.dom.getBoundingClientRect();
-      const imageStyle = this.getImageStyle();
+      const imageSize = this.getImageSize();
       const fixedStyle = {
         transition: this.getTransition( false )
       };
       const fixedImageStyle = {
         transition: this.getImageTransition( false )
-      };
+      };console.log("position:", position)
       const fixedLastStyle = {
         width: `${position.width}px`,
         height: `${position.height}px`,
         transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`
       };
       const fixedImageLastStyle = {
-        transform: this.getImageTransform( position, imageStyle.size )
+        transform: this.getImageCoverTransform( imageSize, position )
       };
       this.state.selected = { ...selected, animating: true, animIn: false }; // eslint-disable-line
       this.forceUpdate(() => {
         set( this.pageRef.current, fixedStyle );
         set( this.pageImageRef.current, fixedImageStyle );
         requestAnimationFrame(() => {
-          set( this.pageRef.current, fixedLastStyle );
-          set( this.pageImageRef.current, fixedImageLastStyle );
+          requestAnimationFrame(() => {
+            set( this.pageRef.current, fixedLastStyle );
+            set( this.pageImageRef.current, fixedImageLastStyle );
+          });
         });
       });
     }
@@ -169,7 +165,7 @@ class Hardware extends React.Component {
   getTransition = ( isIn ) => {
     const { themeVariables, thiemeEasings } = this.context;
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
-    const ease = isIn ? thiemeEasings['@easeOutExpo'] : thiemeEasings['@easeOutQuart'];
+    const ease = isIn ? thiemeEasings['@easeOutExpo'] : thiemeEasings['@easeOutCirc'];
     return Object.entries({
       width: { ease, duration: animSpeed },
       height: { ease, duration: animSpeed },
@@ -185,7 +181,7 @@ class Hardware extends React.Component {
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
     return Object.entries({
       transform: {
-        ease: isIn ? thiemeEasings['@easeOutQuart'] : thiemeEasings['@easeOutExpo'],
+        ease: isIn ? thiemeEasings['@easeOutCirc'] : thiemeEasings['@easeOutExpo'],
         duration: animSpeed
       }
     }).map(([ property, { ease, duration }]) => {
@@ -193,36 +189,45 @@ class Hardware extends React.Component {
     }).join( ',' );
   };
 
-  getImageTransform = ( position, imageSize ) => {
-    const image = this.pageImageRef.current;
-    const imageRatio = image.width / image.height;
-    const targetSizeRatio = position.width / position.height;
-    if ( imageRatio > targetSizeRatio ) {
-      const scale = position.height / imageSize.height;
-      const imageWidth = imageSize.width * scale;
-      return `translateX(${( imageWidth - position.width ) * -0.5}px) translateY(0) translateZ(0) scale(${scale})`;
-    }
-    const scale = position.width / imageSize.width;
-    const imageHeight = imageSize.height * scale;
-    return `translateX(0) translateY(${( imageHeight - position.height ) * -0.5}px) translateZ(0) scale(${scale})`;
+  getBlockStyle = ( position ) => {
+    return {
+      width: `${position.width}px`,
+      height: `${position.height}px`,
+      transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`
+    };
   };
 
-  getImageStyle = () => {
+  getImageSize = () => {
     const image = this.pageImageRef.current;
     const { width, height } = getClientSize();
     const imageRatio = image.width / image.height;
-    const targetSizeRatio = width / height;
+    const targetRatio = width / height;
     return {
-      style: imageRatio > targetSizeRatio ? {
-        height: '100vh'
-      } : {
-        width: '100vw'
-      },
-      size: {
-        width: imageRatio > targetSizeRatio ? imageRatio * height : width,
-        height: imageRatio > targetSizeRatio ? height : width / imageRatio
-      }
+      width: imageRatio > targetRatio ? imageRatio * height : width,
+      height: imageRatio > targetRatio ? height : width / imageRatio
     };
+  };
+
+  getImageStyle = ( coverSize, target, percent ) => {
+    return {
+      ...coverSize,
+      transform: this.getImageCoverTransform( coverSize, target, percent )
+    };
+  };
+
+  getImageCoverTransform = ( image, target, percent = 0.5 ) => {
+    const imageRatio = image.width / image.height;
+    const targetRatio = target.width / target.height;
+    if ( imageRatio > targetRatio ) {
+      const scale = target.height / image.height;
+      const imageWidth = image.width * scale;
+      const w = ( imageWidth - target.width ) * -percent;
+      return `translateX(${w}px) translateY(0) translateZ(0) scale(${Math.ceil( scale * 1000 ) / 1000})`;
+    }
+    const scale = target.width / image.width;
+    const imageHeight = image.height * scale;
+    const h = ( imageHeight - target.height ) * -percent;
+    return `translateX(0) translateY(${h}px) translateZ(0) scale(${Math.ceil( scale * 1000 ) / 1000})`;
   };
 
   render() {
@@ -236,7 +241,7 @@ class Hardware extends React.Component {
                 return (
                   <div
                     key={title}
-                    onClick={this.handleClick({ index: index + 1, title, image: images[index] })}
+                    onClick={this.handleClick({ index: index + 1, title, image: images[index], className: styles[`itemImage${index + 1}`] })}
                     className={classnames( styles.item, styles[`itemImage${index + 1}`])}>
                     <h2 className={styles.categoryTitle}>{title}</h2>
                   </div>
@@ -245,12 +250,19 @@ class Hardware extends React.Component {
             </div>
           </div>
         </section>
-        <section ref={this.pageRef} className={styles.container}>
+        <section
+          ref={this.pageRef}
+          className={styles.container}
+          onTransitionEnd={this.handleTransitionEnd( selected.animIn )}>
+          {selected.animIn && !selected.animating ? (
+            <div onClick={this.handleBack} className={classnames( styles.containerBanner, selected.className )} />
+          ) : null}
           <img
             alt=""
             src={selected.image}
             ref={this.pageImageRef}
             onLoad={this.handleImageLoad}
+            style={selected.animIn && !selected.animating ? { display: 'none' } : {}}
             className={styles.containerImage} />
           <h2 ref={this.pageFontRef} className={classnames( styles.categoryTitle, {
             [styles.hidden]: selected.animIn && !selected.animating,

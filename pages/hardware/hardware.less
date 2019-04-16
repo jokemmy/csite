@@ -79,48 +79,39 @@
       filter @anim-speed-2,
       opacity @anim-speed-2;
   }
-}
-
-.item-image-1::before {
-  background-image:
-    linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
-    url(../../assets/images/hardware/category-1.jpg);
-}
-
-.item-image-2::before {
-  background-image:
-    linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
-    url(../../assets/images/hardware/category-2.jpg);
-}
-
-.item-image-3::before {
-  background-image:
-    linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
-    url(../../assets/images/hardware/category-3.jpg);
-}
-
-.item-image-4::before {
-  background-image:
-    linear-gradient(rgba(0 ,0, 0, 0.2), rgba(0 ,0, 0, 0.6)),
-    url(../../assets/images/hardware/category-4.jpg);
-}
-
-.item-image-5::before {
-  background-image:
-    linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
-    url(../../assets/images/hardware/category-5.jpg);
-}
-
-.item-image-6::before {
-  background-image:
-    linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
-    url(../../assets/images/hardware/category-6.jpg);
-}
-
-.item, .item-grid {
   &:hover::before {
     opacity: 0.999;
     filter: grayscale(0%);
+  }
+  &.item-image-1::before {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-1.jpg);
+  }
+  &.item-image-2::before {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-2.jpg);
+  }
+  &.item-image-3::before {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-3.jpg);
+  }
+  &.item-image-4::before {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2), rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-4.jpg);
+  }
+  &.item-image-5::before {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-5.jpg);
+  }
+  &.item-image-6::before {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-6.jpg);
   }
 }
 
@@ -131,7 +122,6 @@
   overflow: hidden;
   position: fixed;
   opacity: 0.999;
-  padding: 24px;
   z-index: 2;
   height: 0;
   width: 0;
@@ -152,10 +142,13 @@
 }
 
 .category-title {
+  top: 24px;
+  left: 24px;
   opacity: 0.999;
   color: @light-9;
-  font-weight: normal;
   font-size: 24px;
+  font-weight: normal;
+  position: absolute;
   transition: opacity @anim-speed-3;
   &.transparent {
     opacity: 0.001;
@@ -165,5 +158,44 @@
   }
   &.animating {
     visibility: visible;
+  }
+}
+
+.container-banner {
+  width: 100vw;
+  height: 100vh;
+  // pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  &.item-image-1 {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-1.jpg);
+  }
+  &.item-image-2 {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-2.jpg);
+  }
+  &.item-image-3 {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-3.jpg);
+  }
+  &.item-image-4 {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2), rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-4.jpg);
+  }
+  &.item-image-5 {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-5.jpg);
+  }
+  &.item-image-6 {
+    background-image:
+      linear-gradient(rgba(0 ,0, 0, 0.2) 40%, rgba(0 ,0, 0, 0.6)),
+      url(../../assets/images/hardware/category-6.jpg);
   }
 }

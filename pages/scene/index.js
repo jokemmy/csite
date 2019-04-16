@@ -54,9 +54,7 @@ class Scene extends React.Component {
         title,
         image,
         className,
-        dom: currentTarget,
-        animating: true,
-        animIn: true
+        dom: currentTarget
       };
       this.forceUpdate();
     }
@@ -65,15 +63,10 @@ class Scene extends React.Component {
   handleImageLoad = () => {
     const { selected } = this.state;
     const position = selected.dom.getBoundingClientRect();
-    const imageStyle = this.getImageStyle();
-    const fixedStyle = {
-      transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`,
-      height: `${position.height}px`,
-      width: `${position.width}px`
-    };
+    const fixedStyle = this.getBlockStyle( position );
+    const imageSize = this.getImageSize();
     const fixedImageStyle = {
-      ...imageStyle.style,
-      transform: this.getImageCoverTransform( imageStyle.size, position, 0.75 )
+      ...this.getImageStyle( imageSize, position, 0.75 )
     };
     const fixedLastStyle = {
       transition: this.getTransition( true ),
@@ -83,12 +76,12 @@ class Scene extends React.Component {
     };
     const fixedImageLastStyle = {
       transition: this.getImageTransition( true ),
-      transform: this.getImageCoverTransform( imageStyle.size, getClientSize())
+      transform: this.getImageCoverTransform( imageSize, getClientSize())
     };
     this.state.selected = { ...selected, animating: true, animIn: true }; // eslint-disable-line
-    set( this.pageRef.current, fixedStyle );
-    set( this.pageImageRef.current, fixedImageStyle );
     this.forceUpdate(() => {
+      set( this.pageRef.current, fixedStyle );
+      set( this.pageImageRef.current, fixedImageStyle );
       // 火狐延迟一帧
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -103,13 +96,12 @@ class Scene extends React.Component {
     const { selected } = this.state;
     if ( selected.animIn && !selected.animating ) {
       const position = selected.dom.getBoundingClientRect();
-      const imageStyle = this.getImageStyle();
+      const imageSize = this.getImageSize();
       const fixedStyle = {
         transition: this.getTransition( false )
       };
       const fixedImageStyle = {
-        transition: this.getImageTransition( false ),
-        transform: this.getImageCoverTransform( imageStyle.size, getClientSize())
+        transition: this.getImageTransition( false )
       };
       const fixedLastStyle = {
         width: `${position.width}px`,
@@ -117,15 +109,17 @@ class Scene extends React.Component {
         transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`
       };
       const fixedImageLastStyle = {
-        transform: this.getImageCoverTransform( imageStyle.size, position, 0.75 )
+        transform: this.getImageCoverTransform( imageSize, position, 0.75 )
       };
       this.state.selected = { ...selected, animating: true, animIn: false }; // eslint-disable-line
       this.forceUpdate(() => {
         set( this.pageRef.current, fixedStyle );
         set( this.pageImageRef.current, fixedImageStyle );
         requestAnimationFrame(() => {
-          set( this.pageRef.current, fixedLastStyle );
-          set( this.pageImageRef.current, fixedImageLastStyle );
+          requestAnimationFrame(() => {
+            set( this.pageRef.current, fixedLastStyle );
+            set( this.pageImageRef.current, fixedImageLastStyle );
+          });
         });
       });
     }
@@ -174,7 +168,7 @@ class Scene extends React.Component {
   getTransition = ( isIn ) => {
     const { themeVariables, thiemeEasings } = this.context;
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
-    const ease = isIn ? thiemeEasings['@easeOutExpo'] : thiemeEasings['@easeOutQuart'];
+    const ease = isIn ? thiemeEasings['@easeOutExpo'] : thiemeEasings['@easeOutCirc'];
     return Object.entries({
       width: { ease, duration: animSpeed },
       height: { ease, duration: animSpeed },
@@ -190,7 +184,7 @@ class Scene extends React.Component {
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
     return Object.entries({
       transform: {
-        ease: isIn ? thiemeEasings['@easeOutQuart'] : thiemeEasings['@easeOutExpo'],
+        ease: isIn ? thiemeEasings['@easeOutCirc'] : thiemeEasings['@easeOutExpo'],
         duration: animSpeed
       }
     }).map(([ property, { ease, duration }]) => {
@@ -198,35 +192,45 @@ class Scene extends React.Component {
     }).join( ',' );
   };
 
-  getImageCoverTransform = ( size, target, posX = 0.5, posY = 0.5 ) => {
-    const imageRatio = size.width / size.height;
-    const targetSizeRatio = target.width / target.height;
-    if ( imageRatio > targetSizeRatio ) {
-      const scale = target.height / size.height;
-      const imageWidth = size.width * scale;
-      return `translateX(${( imageWidth - target.width ) * -posX}px) translateY(0) translateZ(0) scale(${scale})`;
-    }
-    const scale = target.width / size.width;
-    const imageHeight = size.height * scale;
-    return `translateX(0) translateY(${( imageHeight - target.height ) * -posY}px) translateZ(0) scale(${scale})`;
+  getBlockStyle = ( position ) => {
+    return {
+      width: `${position.width}px`,
+      height: `${position.height}px`,
+      transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`
+    };
   };
 
-  getImageStyle = ( cover ) => {
+  getImageSize = () => {
     const image = this.pageImageRef.current;
-    const { width, height } = cover || getClientSize();
+    const { width, height } = getClientSize();
     const imageRatio = image.width / image.height;
-    const targetSizeRatio = width / height;
+    const targetRatio = width / height;
     return {
-      style: imageRatio > targetSizeRatio ? {
-        height
-      } : {
-        width
-      },
-      size: {
-        width: imageRatio > targetSizeRatio ? imageRatio * height : width,
-        height: imageRatio > targetSizeRatio ? height : width / imageRatio
-      }
+      width: imageRatio > targetRatio ? imageRatio * height : width,
+      height: imageRatio > targetRatio ? height : width / imageRatio
     };
+  };
+
+  getImageStyle = ( coverSize, target, percent ) => {
+    return {
+      ...coverSize,
+      transform: this.getImageCoverTransform( coverSize, target, percent )
+    };
+  };
+
+  getImageCoverTransform = ( image, target, percent = 0.5 ) => {
+    const imageRatio = image.width / image.height;
+    const targetRatio = target.width / target.height;
+    if ( imageRatio > targetRatio ) {
+      const scale = target.height / image.height;
+      const imageWidth = image.width * scale;
+      const w = ( imageWidth - target.width ) * -percent;
+      return `translateX(${w}px) translateY(0) translateZ(0) scale(${Math.ceil( scale * 1000 ) / 1000})`;
+    }
+    const scale = target.width / image.width;
+    const imageHeight = image.height * scale;
+    const h = ( imageHeight - target.height ) * -percent;
+    return `translateX(0) translateY(${h}px) translateZ(0) scale(${Math.ceil( scale * 1000 ) / 1000})`;
   };
 
   render() {
@@ -234,14 +238,19 @@ class Scene extends React.Component {
     return (
       <section className={classnames( styles.view, styles.sceneBanner )}>
         <div className={classnames( styles.solutions, {
-          [styles.solutionHover]: !selected.animating
+          [styles.solutionHover]: !selected.animating && !selected.animIn,
+          'no-events': selected.animating || selected.animIn
         })}>
           {[ '智慧能源', '智慧校园', '智慧建筑', '智慧园区' ].map(( title, index ) => {
             return (
               <div
                 key={title}
                 onClick={this.handleClick({ index: index + 1, title, image: images[index], className: styles[`sceneBanner${index + 1}`] })}
-                className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`])}>
+                className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`], {
+                  [styles.unVisibility]: selected.animIn
+                    ? selected.index === index + 1 && ( selected.animating || selected.animIn )
+                    : selected.index === index + 1 && this.state.index !== 0
+                })}>
                 <h2 className={styles.solutionBlockTitle}>{title}</h2>
               </div>
             );
