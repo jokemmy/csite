@@ -26,27 +26,6 @@
     }
   }
 
-  // .experience {
-  //   background-color: #0070c9;
-  //   background: linear-gradient(#42a1ec, #0070c9);
-  //   border-color: #07c;
-  //   border-width: 1px;
-  //   border-style: solid;
-  //   border-radius: 16px;
-  //   color: @light-9 !important;
-  //   cursor: pointer;
-  //   display: inline;
-  //   line-height: 32px;
-  //   font-weight: bold;
-  //   text-align: center;
-  //   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
-  //   &:active {
-  //     background-color: #0067b9;
-  //     background: linear-gradient(#3d94d9, #0067b9);
-  //     border-color: #006dbc;
-  //   }
-  // }
-
   @media only screen and (max-width: 767px) {
     .page-header {
       padding: 0;
@@ -101,6 +80,20 @@
     height: 0;
   }
 }
+
+:global(.page-header-dark .page-header) {
+  background-color: @header-background-color;
+}
+
+:global(.page-header-hold) {
+  .menu {
+    height: @header-height;
+  }
+}
+
+// :global(.header-dark) .page-header {
+
+// }
 
 // 小屏菜单
 .phone-menu {

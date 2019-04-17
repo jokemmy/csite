@@ -10,7 +10,7 @@ import category3 from '@assets/images/hardware/category-3.jpg';
 import category4 from '@assets/images/hardware/category-4.jpg';
 import category5 from '@assets/images/hardware/category-5.jpg';
 import category6 from '@assets/images/hardware/category-6.jpg';
-import productions from './productions';
+import Category from './category';
 import styles from './hardware.less';
 
 
@@ -21,7 +21,14 @@ class Hardware extends React.Component {
   static contextType = ThemeContext;
 
   static getInitialProps = async function( ctx_ ) {
+    const darkTop = `>=${300 - 64}`;
     const layoutProps = {
+      pageProps: {
+        scrollClass: {
+          '>=0': 'page-header-hold',
+          [darkTop]: 'page-header-dark'
+        }
+      },
       header: {
         transparent: true
       },
@@ -98,8 +105,9 @@ class Hardware extends React.Component {
         transition: this.getTransition( false )
       };
       const fixedImageStyle = {
-        transition: this.getImageTransition( false )
-      };console.log("position:", position)
+        transition: this.getImageTransition( false ),
+        ...this.getImageStyle( imageSize, getClientSize())
+      };
       const fixedLastStyle = {
         width: `${position.width}px`,
         height: `${position.height}px`,
@@ -231,18 +239,30 @@ class Hardware extends React.Component {
   };
 
   render() {
-    const { selected } = this.state;
+    const { index, selected } = this.state;
     return (
       <Fragment>
         <section className={styles.view}>
           <div className={styles.navigation}>
-            <div className={styles.category}>
+            <div className={classnames( styles.category, {
+              [styles.hover]: !selected.animating && !selected.animIn,
+              [styles.unVisibility]: selected.animIn && !selected.animating,
+              'no-events': selected.animating || selected.animIn
+            })}>
               {[ '智能网关类', '终端设备类', '接口转换类', '智能网由类', '前置服务类', '集成机柜类' ].map(( title, index ) => {
                 return (
                   <div
                     key={title}
-                    onClick={this.handleClick({ index: index + 1, title, image: images[index], className: styles[`itemImage${index + 1}`] })}
-                    className={classnames( styles.item, styles[`itemImage${index + 1}`])}>
+                    onClick={this.handleClick({
+                      title,
+                      index: index + 1,
+                      image: images[index],
+                      className: styles[`itemImage${index + 1}`] })}
+                    className={classnames( styles.item, styles[`itemImage${index + 1}`], {
+                      [styles.unVisibility]: selected.animIn
+                        ? selected.index === index + 1 && ( selected.animating || selected.animIn )
+                        : selected.index === index + 1 && this.state.index !== 0
+                    })}>
                     <h2 className={styles.categoryTitle}>{title}</h2>
                   </div>
                 );
@@ -254,9 +274,9 @@ class Hardware extends React.Component {
           ref={this.pageRef}
           className={styles.container}
           onTransitionEnd={this.handleTransitionEnd( selected.animIn )}>
-          {selected.animIn && !selected.animating ? (
+          {/*selected.animIn && !selected.animating ? (
             <div onClick={this.handleBack} className={classnames( styles.containerBanner, selected.className )} />
-          ) : null}
+          ) : null*/}
           <img
             alt=""
             src={selected.image}
@@ -269,6 +289,9 @@ class Hardware extends React.Component {
             [styles.transparent]: selected.animIn && selected.animating
           })}>{selected.title}</h2>
         </section>
+        {index !== 0 ? (
+          <Category onBack={this.handleBack} index={index} bannerImage={selected.image} />
+        ) : null}
       </Fragment>
     );
   }

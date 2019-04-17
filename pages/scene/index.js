@@ -1,7 +1,7 @@
 
 import React from 'react';
 import classnames from 'classnames';
-import TweenOne from 'rc-tween-one';
+// import TweenOne from 'rc-tween-one';
 import { set, getClientSize } from 'rc-util/lib/Dom/css';
 import { ThemeContext } from '@components/Themes';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
@@ -16,7 +16,7 @@ import Scene4 from './scene4';
 import styles from './scene.less';
 
 
-const TweenOneGroup = TweenOne.TweenOneGroup;
+// const TweenOneGroup = TweenOne.TweenOneGroup;
 const images = [ banner1, banner2, banner3, banner4 ];
 
 class Scene extends React.Component {
@@ -101,7 +101,8 @@ class Scene extends React.Component {
         transition: this.getTransition( false )
       };
       const fixedImageStyle = {
-        transition: this.getImageTransition( false )
+        transition: this.getImageTransition( false ),
+        ...this.getImageStyle( imageSize, getClientSize())
       };
       const fixedLastStyle = {
         width: `${position.width}px`,
@@ -239,13 +240,19 @@ class Scene extends React.Component {
       <section className={classnames( styles.view, styles.sceneBanner )}>
         <div className={classnames( styles.solutions, {
           [styles.solutionHover]: !selected.animating && !selected.animIn,
+          [styles.unVisibility]: selected.animIn && !selected.animating,
           'no-events': selected.animating || selected.animIn
         })}>
           {[ '智慧能源', '智慧校园', '智慧建筑', '智慧园区' ].map(( title, index ) => {
             return (
               <div
                 key={title}
-                onClick={this.handleClick({ index: index + 1, title, image: images[index], className: styles[`sceneBanner${index + 1}`] })}
+                onClick={this.handleClick({
+                  title,
+                  index: index + 1,
+                  image: images[index],
+                  className: styles[`sceneBanner${index + 1}`]
+                })}
                 className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`], {
                   [styles.unVisibility]: selected.animIn
                     ? selected.index === index + 1 && ( selected.animating || selected.animIn )
@@ -260,9 +267,9 @@ class Scene extends React.Component {
           ref={this.pageRef}
           onTransitionEnd={this.handleTransitionEnd( selected.animIn )}
           className={classnames( styles.solutionBlockContainer, { 'no-events': selected.animating })}>
-          {selected.animIn && !selected.animating ? (
+          {/*selected.animIn && !selected.animating ? (
             <div onClick={this.handleBack} className={classnames( styles.solutionBlockContainerBanner, selected.className )} />
-          ) : null}
+          ) : null*/}
           <img
             alt=""
             src={selected.image}
@@ -274,22 +281,22 @@ class Scene extends React.Component {
             [styles.hidden]: selected.animIn && !selected.animating,
             [styles.transparent]: selected.animIn && selected.animating
           })}>{selected.title}</h2>
-          <TweenOneGroup
+{/*          <TweenOneGroup
             component=""
             appear={false}
             enter={{ opacity: 0, type: 'from', duration: 400, ease: 'easeInCubic' }}
-            leave={{ opacity: 0, duration: 300, ease: 'easeOutQuint' }}>
-            {!selected.animating && selected.animIn ? index === 1 ? (
-              <Scene1 key="1" onBack={this.handleBack} />
-            ) : index === 2 ? (
-              <Scene2 key="2" onBack={this.handleBack} />
-            ) : index === 3 ? (
-              <Scene3 key="3" onBack={this.handleBack} />
-            ) : (
-              <Scene4 key="4" onBack={this.handleBack} />
-            ) : null}
-          </TweenOneGroup>
+            leave={{ opacity: 0, duration: 300, ease: 'easeOutQuint' }}>*/}
+          {/*</TweenOneGroup>*/}
         </div>
+        {!selected.animating && selected.animIn ? index === 1 ? (
+          <Scene1 key="1" onBack={this.handleBack} bannerImage={selected.image} />
+        ) : index === 2 ? (
+          <Scene2 key="2" onBack={this.handleBack} bannerImage={selected.image} />
+        ) : index === 3 ? (
+          <Scene3 key="3" onBack={this.handleBack} bannerImage={selected.image} />
+        ) : (
+          <Scene4 key="4" onBack={this.handleBack} bannerImage={selected.image} />
+        ) : null}
       </section>
     );
   }

@@ -2,6 +2,7 @@
 .view {
   width: 100vw;
   height: 100vh;
+  position: fixed;
 }
 
 .scene-banner,
@@ -85,9 +86,10 @@
     background-color: @dark-4;
     transition: opacity @anim-speed-3;
   }
-  &.un-visibility {
-    visibility: hidden;
-  }
+}
+
+.un-visibility {
+  visibility: hidden;
 }
 
 .solution-hover {
@@ -147,6 +149,10 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
 }
 
 .solution-block-title {

@@ -1,0 +1,52 @@
+
+.block {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  transform-style: preserve-3d;
+  position: relative;
+  z-index: 3;
+}
+
+.block-oh {
+  overflow: hidden;
+}
+
+.block-banner {
+  width: 100vw;
+  height: 300px;
+  flex: 0 0 auto;
+  touch-action: none;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.block-banner-image {
+  top: 0;
+  left: 0;
+  z-index: -1;
+  position: fixed;
+  min-width: 100vw;
+  touch-action: none;
+  pointer-events: none;
+  will-change: transform;
+  transform-origin: 0 0;
+  // transform: translateX(0) translateY(0) translateZ(0);
+  // transition: transform @anim-speed-2 @easeOutCubic;
+  backface-visibility: hidden;
+}
+
+.block-content {
+  flex: 0 0 auto;
+  min-height: calc(100vh - 300px);
+  will-change: transform;
+  background-color: @light-10;
+  transform: translateY(100vh);
+  transition: transform @anim-speed-2 @easeOutExpo;
+  backface-visibility: hidden;
+}
