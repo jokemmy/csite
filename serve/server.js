@@ -26,11 +26,12 @@ app.prepare().then(() => {
   server.use( koabody());
   server.use( compress());
 
-  // // 添加服务端简洁链接支持
-  // router.get( '/hardware', async ctx => {
-  //   await app.render( ctx.req, ctx.res, '/hardware', ctx.query );
-  //   ctx.respond = false;
-  // });
+  // 添加服务端简洁链接支持
+  router.get( '/hardware/:category', async ctx => {
+    const params = { category: ctx.params.category };
+    await app.render( ctx.req, ctx.res, '/hardware', params );
+    ctx.respond = false;
+  });
 
   router.get( '/store/:type', async ctx => {
     const params = { type: ctx.params.type };

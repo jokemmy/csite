@@ -1,29 +1,34 @@
 
 .block {
+  width: 100vw;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  transform-style: preserve-3d;
   position: relative;
   z-index: 3;
 }
 
-.block-oh {
-  overflow: hidden;
-}
-
 .block-banner {
   width: 100vw;
-  height: 300px;
+  height: 350px;
   flex: 0 0 auto;
-  touch-action: none;
-  pointer-events: none;
+  overflow: hidden;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
+}
+
+.block-animating {
+  overflow: hidden;
+  transform-style: preserve-3d;
+  .block-banner {
+    touch-action: none;
+    pointer-events: none;
+    position: fixed;
+  }
 }
 
 .block-banner-image {
@@ -36,14 +41,13 @@
   pointer-events: none;
   will-change: transform;
   transform-origin: 0 0;
-  // transform: translateX(0) translateY(0) translateZ(0);
-  // transition: transform @anim-speed-2 @easeOutCubic;
   backface-visibility: hidden;
 }
 
 .block-content {
+  width: 100vw;
   flex: 0 0 auto;
-  min-height: calc(100vh - 300px);
+  min-height: calc(100vh - 350px);
   will-change: transform;
   background-color: @light-10;
   transform: translateY(100vh);

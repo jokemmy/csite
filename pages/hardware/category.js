@@ -1,14 +1,15 @@
 
 import React from 'react';
 import classnames from 'classnames';
-// import TweenOne from 'rc-tween-one';
 import { set, getClientSize } from 'rc-util/lib/Dom/css';
 import { ThemeContext } from '@components/Themes';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
-import productions from './productions';
+import { productions } from './productions';
 import Production from './production';
 import styles from './category.less';
 
+
+const Banner = Production.Banner;
 
 class SectionBlock extends React.Component {
 
@@ -22,6 +23,7 @@ class SectionBlock extends React.Component {
     };
     this.bannerRef = React.createRef();
     this.contentRef = React.createRef();
+    this.fakeBannerRef = React.createRef();
   }
 
   componentDidMount() {
@@ -32,13 +34,21 @@ class SectionBlock extends React.Component {
     if ( target === currentTarget ) {
       this.state.animating = false; // eslint-disable-line
       this.state.animOver = true; // eslint-disable-line
-      this.forceUpdate();
+      this.forceUpdate(() => {
+        const dom = this.fakeBannerRef.current;
+        SectionBlock.getBannerPosition = () => {
+          return dom.getBoundingClientRect();
+        };
+      });
     }
   };
 
   animationStart = () => {
     const clientSize = getClientSize();
     const { transition, ...imageSize } = this.getImageStyle();
+    SectionBlock.getBannerPosition = () => {
+      return this.bannerRef.current.getBoundingClientRect();
+    };
     this.state.animating = true; // eslint-disable-line
     set( this.bannerRef.current, {
       ...imageSize,
@@ -47,13 +57,16 @@ class SectionBlock extends React.Component {
     this.forceUpdate(() => {
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          set( this.bannerRef.current, {
-            transition,
-            transform: this.getImageCoverTransform( imageSize, { width: getClientSize().width, height: 300 })
-          });
-          set( this.contentRef.current, {
-            transform: 'translateY(300px)'
-          });
+          const position = { width: getClientSize().width, height: 350 };
+          if ( this.bannerRef.current ) {
+            set( this.bannerRef.current, {
+              transition,
+              transform: this.getImageCoverTransform( imageSize, position )
+            });
+            set( this.contentRef.current, {
+              transform: 'translateY(350px)'
+            });
+          }
         });
       });
     });
@@ -89,14 +102,15 @@ class SectionBlock extends React.Component {
 
   render() {
     const { animating, animOver } = this.state;
-    const { className, onBack, index, bannerImage, ...props } = this.props;
+    const { className, index, bannerImage, category, ...props } = this.props;
     return (
       <section {...props} className={classnames( styles.block, className, {
+        [styles.blockAnimating]: !animOver,
         [styles.blockOh]: !animOver
       })}>
         {animOver ? (
-          <div className={styles.blockBanner} style={{ backgroundImage: `url(${bannerImage})` }}>
-
+          <div ref={this.fakeBannerRef} className={styles.blockBanner} style={{ backgroundImage: `url(${bannerImage})` }}>
+            <Banner category={category} />
           </div>
         ) : null}
         <img
@@ -110,7 +124,7 @@ class SectionBlock extends React.Component {
           ref={this.contentRef}
           className={styles.blockContent}>
           {animOver ? (
-            <Production productions={productions[index]} />
+            <Production productions={productions[index - 1]} />
           ) : null}
         </div>
       </section>

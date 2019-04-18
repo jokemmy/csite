@@ -1,6 +1,7 @@
 
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
+import Router, { withRouter } from 'next/router';
 import { ThemeContext } from '@components/Themes';
 import { set, getClientSize } from 'rc-util/lib/Dom/css';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
@@ -10,12 +11,14 @@ import category3 from '@assets/images/hardware/category-3.jpg';
 import category4 from '@assets/images/hardware/category-4.jpg';
 import category5 from '@assets/images/hardware/category-5.jpg';
 import category6 from '@assets/images/hardware/category-6.jpg';
+import { categorys } from './productions';
 import Category from './category';
 import styles from './hardware.less';
 
 
 const images = [ category1, category2, category3, category4, category5, category6 ];
 
+@withRouter
 class Hardware extends React.Component {
 
   static contextType = ThemeContext;
@@ -26,7 +29,7 @@ class Hardware extends React.Component {
       pageProps: {
         scrollClass: {
           '>=0': 'page-header-hold',
-          [darkTop]: 'page-header-dark'
+          [darkTop]: 'page-header-dark banner-menu-fixed'
         }
       },
       header: {
@@ -38,16 +41,60 @@ class Hardware extends React.Component {
     return { layoutProps };
   };
 
+  static getDerivedStateFromProps = ( props, state ) => {
+    // 参数 category: >=1&<=6
+    const { router } = props;
+    const index = ~~router.query.category;
+    if ( index > 0 && index <= categorys.length ) {
+      if ( state.index === 0 ) {
+        return null;
+      }
+      return {
+        index,
+        selected: {
+          index,
+          title: categorys[index - 1].name,
+          image: images[index - 1],
+          className: styles[`itemImage${index}`],
+          animIn: true,
+          animating: false,
+          dom: null
+        }
+      };
+    } else if ( state.index !== index && index === 0 ) {
+      return !state.toBack ? {
+        toBack: true
+      } : null;
+    } else if ( router.query.category ) {
+      Router.replace( '/hardware', '/hardware', { shallow: true });
+    }
+    return null;
+  };
+
   constructor( props ) {
     super( props );
+    const { router } = this.props;
+    const index = parseInt( router.query.category );
     this.state = {
-      index: 0,
+      toBack: false,
+      index: index || 0,
       animating: false,
       selected: {}
     };
     this.pageRef = React.createRef();
     this.pageFontRef = React.createRef();
+    this.categoryRef = React.createRef();
     this.pageImageRef = React.createRef();
+  }
+
+  componentDidUpdate( prevProps_, prevState ) {
+    const { toBack, selected } = this.state;
+    if ( !prevState.toBack && toBack ) {
+      this.setState({
+        toBack: false,
+        selected: { ...selected, dom: this.categoryRef.current }
+      }, this.handleBack );
+    }
   }
 
   handleClick = ({ index, title, image, className }) => ({ currentTarget }) => {
@@ -60,7 +107,9 @@ class Hardware extends React.Component {
         className,
         dom: currentTarget
       };
-      this.forceUpdate();
+      this.forceUpdate(() => {
+        Router.push( `/hardware?category=${index}`, `/hardware/${index}`, { shallow: true });
+      });
     }
   };
 
@@ -100,20 +149,26 @@ class Hardware extends React.Component {
     const { selected } = this.state;
     if ( selected.animIn && !selected.animating ) {
       const position = selected.dom.getBoundingClientRect();
+      const bannerPosition = Category.getBannerPosition();
       const imageSize = this.getImageSize();
+      const imageCoverSize = this.getImageSize( bannerPosition );
+      const imageStyle = this.getImageStyle( imageSize, bannerPosition );
       const fixedStyle = {
-        transition: this.getTransition( false )
+        width: `${imageCoverSize.width}px`,
+        height: `${imageCoverSize.height}px`,
+        transform: `translateX(${( bannerPosition.width - imageCoverSize.width ) / 2}px) translateY(${( bannerPosition.height - imageCoverSize.height ) / 2}px) translateZ(0)`
       };
       const fixedImageStyle = {
-        transition: this.getImageTransition( false ),
-        ...this.getImageStyle( imageSize, getClientSize())
+        ...imageStyle
       };
       const fixedLastStyle = {
+        transition: this.getTransition( false ),
         width: `${position.width}px`,
         height: `${position.height}px`,
         transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`
       };
       const fixedImageLastStyle = {
+        transition: this.getImageTransition( false ),
         transform: this.getImageCoverTransform( imageSize, position )
       };
       this.state.selected = { ...selected, animating: true, animIn: false }; // eslint-disable-line
@@ -159,7 +214,8 @@ class Hardware extends React.Component {
           });
         } else {
           this.setState({
-            index: 0
+            index: 0,
+            toBack: false
           }, () => {
             requestAnimationFrame(() => {
               set( this.pageRef.current, { opacity: 0.001 });
@@ -205,9 +261,9 @@ class Hardware extends React.Component {
     };
   };
 
-  getImageSize = () => {
+  getImageSize = ( cover ) => {
     const image = this.pageImageRef.current;
-    const { width, height } = getClientSize();
+    const { width, height } = cover || getClientSize();
     const imageRatio = image.width / image.height;
     const targetRatio = width / height;
     return {
@@ -249,12 +305,13 @@ class Hardware extends React.Component {
               [styles.unVisibility]: selected.animIn && !selected.animating,
               'no-events': selected.animating || selected.animIn
             })}>
-              {[ '智能网关类', '终端设备类', '接口转换类', '智能网由类', '前置服务类', '集成机柜类' ].map(( title, index ) => {
+              {categorys.map(({ name }, index ) => {
                 return (
                   <div
-                    key={title}
+                    key={name}
+                    ref={index + 1 === this.state.index ? this.categoryRef : null}
                     onClick={this.handleClick({
-                      title,
+                      title: name,
                       index: index + 1,
                       image: images[index],
                       className: styles[`itemImage${index + 1}`] })}
@@ -263,7 +320,7 @@ class Hardware extends React.Component {
                         ? selected.index === index + 1 && ( selected.animating || selected.animIn )
                         : selected.index === index + 1 && this.state.index !== 0
                     })}>
-                    <h2 className={styles.categoryTitle}>{title}</h2>
+                    <h2 className={styles.categoryTitle}>{name}</h2>
                   </div>
                 );
               })}
@@ -281,7 +338,7 @@ class Hardware extends React.Component {
             alt=""
             src={selected.image}
             ref={this.pageImageRef}
-            onLoad={this.handleImageLoad}
+            onLoad={!selected.animIn ? this.handleImageLoad :null}
             style={selected.animIn && !selected.animating ? { display: 'none' } : {}}
             className={styles.containerImage} />
           <h2 ref={this.pageFontRef} className={classnames( styles.categoryTitle, {
@@ -289,28 +346,15 @@ class Hardware extends React.Component {
             [styles.transparent]: selected.animIn && selected.animating
           })}>{selected.title}</h2>
         </section>
-        {index !== 0 ? (
-          <Category onBack={this.handleBack} index={index} bannerImage={selected.image} />
+        {selected.animIn && index !== 0 ? (
+          <Category
+            index={index}
+            category={categorys[index - 1]}
+            bannerImage={selected.image} />
         ) : null}
       </Fragment>
     );
   }
 }
-
-/*      <div className={styles.prods}>
-        {productions.map(( production, index ) => {
-          const isOdd = index % 2 === 1;
-          return (
-            <section key={index} className={`page-block ${isOdd ? 'odd' : 'even'}`}>
-              <div className={classnames( 'page-content', styles.prod )}>
-                <div className={styles.prodPic}>
-                  <img alt={production.name} src={production.image} />
-                </div>
-                <div className={styles.prodDesc} dangerouslySetInnerHTML={{ __html: production.html }} />
-              </div>
-            </section>
-          );
-        })}
-      </div>*/
 
 export default Hardware;
