@@ -6,11 +6,17 @@
 }
 
 .parallax {
-  width: 100vw;
-  height: 100vh;
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  touch-action: none;
+  pointer-events: none;
+  & > div {
+    width: 100vw;
+    height: 100vh;
+    touch-action: none;
+    pointer-events: none;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 // .anchorTop {

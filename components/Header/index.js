@@ -106,7 +106,8 @@ class Header extends Component {
       })}>
         <div className="header-container">
           <figure className="header-logo">
-            <img alt="logo" src={mode === 'light' ? logoColor : logo} />
+            <img alt="logo" className="header-color-logo-image" src={logoColor} />
+            <img alt="logo" className="header-light-logo-image" src={logo} />
           </figure>
           {isMobile ? (
             <span className={classnames( styles.phoneMenu, { [styles.open]: phoneOpen })}>

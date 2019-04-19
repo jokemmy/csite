@@ -6,7 +6,7 @@ import Typed from '@components/Typed';
 // import banner1 from '@assets/images/about/banner-1.jpg';
 // import banner2 from '@assets/images/about/banner-2.jpg';
 import Advantage from './advantage';
-import Topology from './topology';
+// import Topology from './topology';
 import styles from './about.less';
 
 
@@ -30,7 +30,8 @@ class About extends React.Component {
       },
       pageProps: {
         scrollClass: {
-          [scrollTop]: 'page-header-hold page-header-light'
+          '>=0': 'page-header-hold',
+          [scrollTop]: 'page-header-light page-header-logo-color'
         }
       }
     };
@@ -122,7 +123,6 @@ class About extends React.Component {
               采用前端硬件设备+后端大数据平台模式，将人与基础设施、服务管理建立紧密联系，
               打通各级、各行业智慧应用平台，形成系统化的解决方案。
             </p>
-            <Topology />
           </div>
         </section>
         <ParallaxBackground

@@ -8,6 +8,7 @@
     padding: 0 48px;
     text-align: right;
     background-color: @header-background-color;
+    transition: background-color @anim-speed-2 @easeOutSine;
   }
 
   .header-container {
@@ -23,6 +24,10 @@
     img {
       height: @header-height - 16px;
     }
+  }
+
+  .header-color-logo-image {
+    display: none;
   }
 
   @media only screen and (max-width: 767px) {
@@ -97,6 +102,24 @@
     &:hover {
       color: @dark-10;
     }
+  }
+}
+
+:global(.page-header-logo-light) {
+  :global(.header-color-logo-image) {
+    display: none;
+  }
+  :global(.header-light-logo-image) {
+    display: inline;
+  }
+}
+
+:global(.page-header-logo-color) {
+  :global(.header-color-logo-image) {
+    display: inline;
+  }
+  :global(.header-light-logo-image) {
+    display: none;
   }
 }
 
