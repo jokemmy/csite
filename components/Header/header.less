@@ -8,7 +8,6 @@
     padding: 0 48px;
     text-align: right;
     background-color: @header-background-color;
-    // transition: background-color @anim-speed-4 @easeOutQuart;
   }
 
   .header-container {
@@ -81,13 +80,23 @@
   }
 }
 
+:global(.page-header-hold) {
+  .menu {
+    height: @header-height;
+  }
+}
+
 :global(.page-header-dark .page-header) {
   background-color: @header-background-color;
 }
 
-:global(.page-header-hold) {
-  .menu {
-    height: @header-height;
+:global(.page-header-light .page-header) {
+  background-color: @light-10;
+  .link {
+    color: @dark-7;
+    &:hover {
+      color: @dark-10;
+    }
   }
 }
 

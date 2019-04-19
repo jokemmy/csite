@@ -83,5 +83,13 @@ export const productions = [
     html: require( 'text-loader!./TCONV-MR4.tpl' )
   }],
   // 集成机柜
-  []
+  [{
+    name: 'GR10-TG',
+    image: require( './img/GR10-TG.png' ),
+    html: require( 'text-loader!./GR10-TG.tpl' )
+  }, {
+    name: 'GR10-TR',
+    image: require( './img/GR10-TR.png' ),
+    html: require( 'text-loader!./GR10-TR.tpl' )
+  }]
 ];

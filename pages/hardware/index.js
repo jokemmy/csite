@@ -85,6 +85,7 @@ class Hardware extends React.Component {
     this.pageFontRef = React.createRef();
     this.categoryRef = React.createRef();
     this.pageImageRef = React.createRef();
+    this.pageFakeContantRef = React.createRef();
   }
 
   componentDidUpdate( prevProps_, prevState ) {
@@ -118,8 +119,17 @@ class Hardware extends React.Component {
     const position = selected.dom.getBoundingClientRect();
     const fixedStyle = this.getBlockStyle( position );
     const imageSize = this.getImageSize();
+    const clientSize = getClientSize();
     const fixedImageStyle = {
       ...this.getImageStyle( imageSize, position )
+    };
+    const fixedFakeContantStyle = {
+      // opacity: 0,
+      transform: 'translateY(100vh)'
+    };
+    const fixedFakeContantLastStyle = {
+      // opacity: 1,
+      transform: 'translateY(350px)'
     };
     const fixedLastStyle = {
       transition: this.getTransition( true ),
@@ -129,17 +139,19 @@ class Hardware extends React.Component {
     };
     const fixedImageLastStyle = {
       transition: this.getImageTransition( true ),
-      transform: this.getImageCoverTransform( imageSize, getClientSize())
+      transform: this.getImageCoverTransform( imageSize, { width: clientSize.width, height: 350 })
     };
     this.state.selected = { ...selected, animating: true, animIn: true }; // eslint-disable-line
     this.forceUpdate(() => {
       set( this.pageRef.current, fixedStyle );
       set( this.pageImageRef.current, fixedImageStyle );
+      set( this.pageFakeContantRef.current, fixedFakeContantStyle );
       // 火狐延迟一帧
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           set( this.pageRef.current, fixedLastStyle );
           set( this.pageImageRef.current, fixedImageLastStyle );
+          set( this.pageFakeContantRef.current, fixedFakeContantLastStyle );
         });
       });
     });
@@ -161,6 +173,14 @@ class Hardware extends React.Component {
       const fixedImageStyle = {
         ...imageStyle
       };
+      const fixedFakeContantStyle = {
+        opacity: 0.999,
+        transform: 'translateY(350px)'
+      };
+      const fixedFakeContantLastStyle = {
+        opacity: 0.001,
+        transform: 'translateY(100vh)'
+      };
       const fixedLastStyle = {
         transition: this.getTransition( false ),
         width: `${position.width}px`,
@@ -175,10 +195,12 @@ class Hardware extends React.Component {
       this.forceUpdate(() => {
         set( this.pageRef.current, fixedStyle );
         set( this.pageImageRef.current, fixedImageStyle );
+        set( this.pageFakeContantRef.current, fixedFakeContantStyle );
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             set( this.pageRef.current, fixedLastStyle );
             set( this.pageImageRef.current, fixedImageLastStyle );
+            set( this.pageFakeContantRef.current, fixedFakeContantLastStyle );
           });
         });
       });
@@ -199,6 +221,7 @@ class Hardware extends React.Component {
       requestAnimationFrame(() => {
         this.pageRef.current.removeAttribute( 'style' );
         this.pageImageRef.current.removeAttribute( 'style' );
+        this.pageFakeContantRef.current.removeAttribute( 'style' );
         this.forceUpdate();
       });
     } else if ( selected.animating && e.target === e.currentTarget ) {
@@ -346,6 +369,10 @@ class Hardware extends React.Component {
             [styles.transparent]: selected.animIn && selected.animating
           })}>{selected.title}</h2>
         </section>
+        <div
+          ref={this.pageFakeContantRef}
+          className={styles.fakeContant}
+          style={!selected.animating ? { display: 'none' } : {}} />
         {selected.animIn && index !== 0 ? (
           <Category
             index={index}

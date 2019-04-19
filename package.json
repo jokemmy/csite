@@ -26,6 +26,7 @@
     "react-hammerjs": "^1.0.1",
     "react-media": "^1.9.2",
     "styled-jsx": "^3.2.1",
+    "typed.js": "^2.0.10",
     "uuid": "^3.3.2",
     "whatenvis": "^1.1.6",
     "whatitis": "^1.1.2"
