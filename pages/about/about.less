@@ -1,19 +1,15 @@
 
 .about-banner {
   height: 600px;
-  overflow: hidden;
-}
-
-.about-banner-block {
-  top: 50%;
   display: flex;
-  position: relative;
-  min-height: 600px !important;
-  transform: translateY(-50%);
+  overflow: hidden;
+  background-color: #1a1921;
 }
 
 .about-banner-content {
   margin: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .about-banner-title {
@@ -38,14 +34,36 @@
   background-image: url(../../assets/images/about/banner-2.jpg);
 }
 
+.about-banner-3 {
+  background-image: url(../../assets/images/about/banner-3.jpg);
+}
+
 .about-block {
+  overflow: hidden;
   text-align: center;
+  position: relative;
+  padding: 80px 0;
+  :global(.page-content) {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.about-block-image {
+  top: 50%;
+  width: 100%;
+  position: absolute;
+  min-height: 100% !important;
+  transform: translateY(-50%);
 }
 
 .about-block-title {
-  color: @dark-8;
   font-size: 2.5em;
-  margin: 1em 0;
+}
+
+.about-block-dark-title {
+  .about-block-title();
+  color: @light-10;
 }
 
 .about-block-core-3 {
@@ -65,7 +83,76 @@
 }
 
 .about-block-advantage {
-
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  max-width: @page-width * 0.8;
+  margin: 48px auto;
+  padding: ( 30% / sqrt( 3 ) * 2 ) / 8 + 0.5% 0;
+  li {
+    width: 30%;
+    font-size: 2em;
+    color: @light-10;
+    padding-bottom: 30% / sqrt( 3 ) * 2;
+    transform: scale(0.95);
+    position: relative;
+    flex: 0 1 auto;
+    margin: -( 30% / sqrt( 3 ) * 2 ) / 8 + 0.5% 0.5%;
+    &:before, &:after {
+      content: '';
+    }
+    &:before, &:after, .ad-1, .ad-2, .ad-3, .ad-4, .ad-5 {
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    &:before {
+      transform: scale(1.05);
+      background-color: @light-10;
+    }
+    &:after {
+      opacity: 0.5;
+      transform: scale(1);
+      background-color: @dark-10;
+      transition: opacity @anim-speed-2;
+    }
+    &:hover:after {
+      opacity: 0.001;
+    }
+    .ad-1 {
+      background-image: url(../../assets/images/about/ad-1.jpg);
+    }
+    .ad-2 {
+      background-image: url(../../assets/images/about/ad-2.jpg);
+    }
+    .ad-3 {
+      background-image: url(../../assets/images/about/ad-3.jpg);
+    }
+    .ad-4 {
+      background-image: url(../../assets/images/about/ad-4.jpg);
+    }
+    .ad-5 {
+      background-image: url(../../assets/images/about/ad-5.jpg);
+    }
+    > div:last-child {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      position: absolute;
+      text-align: center;
+      transform:  translateY(-50%);
+    }
+  }
 }
 
 .dark {

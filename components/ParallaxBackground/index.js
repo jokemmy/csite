@@ -29,7 +29,7 @@ class ParallaxBackground extends React.Component {
         <Parallax
           animation={{ y: distance }}
           className={styles.parallax}
-          style={{ position: 'absolute', top: 0, left: 0, height: 0, zIndex: -1, marginTop: -distance }}>
+          style={{ position: 'absolute', top: 0, left: 0, height: '100%', zIndex: -1, marginTop: -distance }}>
           {this.uid ? (
             <Parallax
               style={imageStyle}

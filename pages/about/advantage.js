@@ -72,6 +72,17 @@ function Advantage() {
       <Icon x="82%" y="75%" icon={zhinengguanjia} />
       <Icon x="86%" y="5%" icon={zhongyangkongtiao} />
       <Icon x="37%" y="60%" icon={zizhuqushuishoufei} />
+      <div className={styles.lines}>
+        <div>
+          应用支持平台
+        </div>
+        <div>
+          数据中心平台
+        </div>
+        <div>
+          物联感知平台
+        </div>
+      </div>
     </div>
   );
 }
