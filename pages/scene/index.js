@@ -1,7 +1,7 @@
 
 import React from 'react';
 import classnames from 'classnames';
-// import TweenOne from 'rc-tween-one';
+import Router, { withRouter } from 'next/router';
 import { set, getClientSize } from 'rc-util/lib/Dom/css';
 import { ThemeContext } from '@components/Themes';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
@@ -16,9 +16,26 @@ import Scene4 from './scene4';
 import styles from './scene.less';
 
 
-// const TweenOneGroup = TweenOne.TweenOneGroup;
 const images = [ banner1, banner2, banner3, banner4 ];
+const scenes = [{
+  as: '/scene/1',
+  url: '/scene?id=1',
+  name: '智慧能源'
+}, {
+  as: '/scene/2',
+  url: '/scene?id=2',
+  name: '智慧校园'
+}, {
+  as: '/scene/3',
+  url: '/scene?id=3',
+  name: '智慧建筑'
+}, {
+  as: '/scene/4',
+  url: '/scene?id=4',
+  name: '智慧园区'
+}];
 
+@withRouter
 class Scene extends React.Component {
 
   static contextType = ThemeContext;
@@ -34,16 +51,60 @@ class Scene extends React.Component {
     return { layoutProps };
   };
 
+  static getDerivedStateFromProps = ( props, state ) => {
+    // 参数 category: >=1&<=6
+    const { router } = props;
+    const index = ~~router.query.id;
+    if ( index > 0 && index <= scenes.length ) {console.log("state.index:", state.index)
+      if ( state.index === 0 ) {
+        return null;
+      }
+      return {
+        index,
+        selected: {
+          index,
+          title: scenes[index - 1].name,
+          image: images[index - 1],
+          className: styles[`sceneBanner${index}`],
+          animIn: true,
+          animating: false,
+          dom: null
+        }
+      };
+    } else if ( state.index !== index && index === 0 ) {
+      return !state.toBack ? {
+        toBack: true
+      } : null;
+    } else if ( router.query.category ) {
+      Router.replace( '/scene', '/scene', { shallow: true });
+    }
+    return null;
+  };
+
   constructor( props ) {
     super( props );
+    const { router } = this.props;
+    const index = ~~router.query.id;
     this.state = {
-      index: 0,
+      toBack: false,
+      index: index || 0,
       animating: false,
       selected: {}
     };
     this.pageRef = React.createRef();
     this.pageFontRef = React.createRef();
     this.pageImageRef = React.createRef();
+    this.sceneRef = React.createRef();
+  }
+
+  componentDidUpdate( prevProps_, prevState ) {
+    const { toBack, selected } = this.state;
+    if ( !prevState.toBack && toBack ) {
+      this.setState({
+        toBack: false,
+        selected: { ...selected, dom: this.sceneRef.current }
+      }, this.handleBack );
+    }
   }
 
   handleClick = ({ index, title, image, className }) => ({ currentTarget }) => {
@@ -56,7 +117,9 @@ class Scene extends React.Component {
         className,
         dom: currentTarget
       };
-      this.forceUpdate();
+      this.forceUpdate(() => {
+        Router.push( `/scene?id=${index}`, `/scene/${index}`, { shallow: true });
+      });
     }
   };
 
@@ -98,18 +161,21 @@ class Scene extends React.Component {
       const position = selected.dom.getBoundingClientRect();
       const imageSize = this.getImageSize();
       const fixedStyle = {
-        transition: this.getTransition( false )
+        width: '100vw',
+        height: '100vh',
+        transform: `translateX(0) translateY(0) translateZ(0)`
       };
       const fixedImageStyle = {
-        transition: this.getImageTransition( false ),
         ...this.getImageStyle( imageSize, getClientSize())
       };
       const fixedLastStyle = {
         width: `${position.width}px`,
         height: `${position.height}px`,
+        transition: this.getTransition( false ),
         transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`
       };
       const fixedImageLastStyle = {
+        transition: this.getImageTransition( false ),
         transform: this.getImageCoverTransform( imageSize, position, 0.75 )
       };
       this.state.selected = { ...selected, animating: true, animIn: false }; // eslint-disable-line
@@ -155,7 +221,8 @@ class Scene extends React.Component {
           });
         } else {
           this.setState({
-            index: 0
+            index: 0,
+            toBack: false
           }, () => {
             requestAnimationFrame(() => {
               set( this.pageRef.current, { opacity: 0.001 });
@@ -243,12 +310,13 @@ class Scene extends React.Component {
           [styles.unVisibility]: selected.animIn && !selected.animating,
           'no-events': selected.animating || selected.animIn
         })}>
-          {[ '智慧能源', '智慧校园', '智慧建筑', '智慧园区' ].map(( title, index ) => {
+          {scenes.map(({ name }, index ) => {
             return (
               <div
-                key={title}
+                key={name}
+                ref={index + 1 === this.state.index ? this.sceneRef : null}
                 onClick={this.handleClick({
-                  title,
+                  title: name,
                   index: index + 1,
                   image: images[index],
                   className: styles[`sceneBanner${index + 1}`]
@@ -258,7 +326,7 @@ class Scene extends React.Component {
                     ? selected.index === index + 1 && ( selected.animating || selected.animIn )
                     : selected.index === index + 1 && this.state.index !== 0
                 })}>
-                <h2 className={styles.solutionBlockTitle}>{title}</h2>
+                <h2 className={styles.solutionBlockTitle}>{name}</h2>
               </div>
             );
           })}
@@ -274,7 +342,7 @@ class Scene extends React.Component {
             alt=""
             src={selected.image}
             ref={this.pageImageRef}
-            onLoad={this.handleImageLoad}
+            onLoad={!selected.animIn ? this.handleImageLoad :null}
             style={selected.animIn && !selected.animating ? { display: 'none' } : {}}
             className={styles.solutionBlockContainerImage} />
           <h2 ref={this.pageFontRef} className={classnames( styles.solutionBlockTitle, {
@@ -289,13 +357,13 @@ class Scene extends React.Component {
           {/*</TweenOneGroup>*/}
         </div>
         {!selected.animating && selected.animIn ? index === 1 ? (
-          <Scene1 key="1" onBack={this.handleBack} bannerImage={selected.image} />
+          <Scene1 key="1" bannerImage={selected.image} />
         ) : index === 2 ? (
-          <Scene2 key="2" onBack={this.handleBack} bannerImage={selected.image} />
+          <Scene2 key="2" bannerImage={selected.image} />
         ) : index === 3 ? (
-          <Scene3 key="3" onBack={this.handleBack} bannerImage={selected.image} />
+          <Scene3 key="3" bannerImage={selected.image} />
         ) : (
-          <Scene4 key="4" onBack={this.handleBack} bannerImage={selected.image} />
+          <Scene4 key="4" bannerImage={selected.image} />
         ) : null}
       </section>
     );

@@ -33,9 +33,15 @@ app.prepare().then(() => {
     ctx.respond = false;
   });
 
-  router.get( '/store/:type', async ctx => {
-    const params = { type: ctx.params.type };
-    await app.render( ctx.req, ctx.res, '/store', params );
+  router.get( '/store/:code', async ctx => {
+    const params = { code: ctx.params.code };
+    await app.render( ctx.req, ctx.res, '/store/goods', params );
+    ctx.respond = false;
+  });
+
+  router.get( '/scene/:id', async ctx => {
+    const params = { id: ctx.params.id };
+    await app.render( ctx.req, ctx.res, '/scene', params );
     ctx.respond = false;
   });
 

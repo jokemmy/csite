@@ -10,6 +10,7 @@
     "classnames": "^2.2.6",
     "flystore": "^1.1.2",
     "js-shortid": "^0.1.1",
+    "marked": "^0.6.2",
     "moment": "^2.24.0",
     "next": "^8.0.3",
     "object.pick": "^1.3.0",

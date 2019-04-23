@@ -74,7 +74,7 @@ class Hardware extends React.Component {
   constructor( props ) {
     super( props );
     const { router } = this.props;
-    const index = parseInt( router.query.category );
+    const index = ~~router.query.category;
     this.state = {
       toBack: false,
       index: index || 0,
@@ -121,6 +121,8 @@ class Hardware extends React.Component {
     const imageSize = this.getImageSize();
     const clientSize = getClientSize();
     const fixedImageStyle = {
+      opacity: 0,
+      visibility: 'visible',
       ...this.getImageStyle( imageSize, position )
     };
     const fixedFakeContantStyle = {
@@ -138,6 +140,8 @@ class Hardware extends React.Component {
       width: '100vw'
     };
     const fixedImageLastStyle = {
+      opacity: 1,
+      visibility: 'visible',
       transition: this.getImageTransition( true ),
       transform: this.getImageCoverTransform( imageSize, { width: clientSize.width, height: 350 })
     };
@@ -171,6 +175,8 @@ class Hardware extends React.Component {
         transform: `translateX(${( bannerPosition.width - imageCoverSize.width ) / 2}px) translateY(${( bannerPosition.height - imageCoverSize.height ) / 2}px) translateZ(0)`
       };
       const fixedImageStyle = {
+        opacity: 1,
+        visibility: 'visible',
         ...imageStyle
       };
       const fixedFakeContantStyle = {
@@ -188,6 +194,8 @@ class Hardware extends React.Component {
         transform: `translateX(${position.left}px) translateY(${position.top}px) translateZ(0)`
       };
       const fixedImageLastStyle = {
+        opacity: 0,
+        visibility: 'visible',
         transition: this.getImageTransition( false ),
         transform: this.getImageCoverTransform( imageSize, position )
       };
@@ -267,6 +275,7 @@ class Hardware extends React.Component {
     const { themeVariables, thiemeEasings } = this.context;
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
     return Object.entries({
+      opacity: { ease: '', duration: animSpeed },
       transform: {
         ease: isIn ? thiemeEasings['@easeOutCirc'] : thiemeEasings['@easeOutExpo'],
         duration: animSpeed
@@ -339,9 +348,9 @@ class Hardware extends React.Component {
                       image: images[index],
                       className: styles[`itemImage${index + 1}`] })}
                     className={classnames( styles.item, styles[`itemImage${index + 1}`], {
-                      [styles.unVisibility]: selected.animIn
-                        ? selected.index === index + 1 && ( selected.animating || selected.animIn )
-                        : selected.index === index + 1 && this.state.index !== 0
+                      // [styles.unVisibility]: selected.animIn
+                      //   ? selected.index === index + 1 && ( selected.animating || selected.animIn )
+                      //   : selected.index === index + 1 && this.state.index !== 0
                     })}>
                     <h2 className={styles.categoryTitle}>{name}</h2>
                   </div>

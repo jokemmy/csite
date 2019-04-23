@@ -13,20 +13,21 @@ import styles from './scene1.less';
 
 class SectionBlock extends React.Component {
   render() {
-    const { className, onBack, bannerImage, ...props } = this.props;
+    const { className, bannerImage, ...props } = this.props;
     return (
-      <section {...props} className={classnames( styles.block, className )}>
-        <TweenOne
-          className={styles.blockBanner}
-          animation={{ height: 300, delay: 300, duration: 2000, ease: 'easeOutExpo' }}>
-          <div className={styles.blockBannerImage} style={{ backgroundImage: `url(${bannerImage})` }} />
-        </TweenOne>
-        <div className={styles.blockContent}>
+      <div {...props} className={classnames( styles.block, className )}>
+        <section className={styles.blockBanner} style={{ backgroundImage: `url(${bannerImage})` }}>
+          <TweenOne
+            className={styles.blockBannerMask}
+            animation={{ opacity: 0.001, type: 'from', duration: 1000, ease: 'easeOutExpo' }} />
+
+        </section>
+        <section className={styles.blockContent}>
           <div className="page-content">
 
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     );
   }
 }

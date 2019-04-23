@@ -1,11 +1,14 @@
 
+import Link from 'next/link';
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
+import Router, { withRouter } from 'next/router';
 import SvgIcon from '@components/SvgIcon';
-import systems from './systems';
+import apps from './apps';
 import styles from './store.less';
 
 
+@withRouter
 class Store extends React.Component {
 
   static getInitialProps = async function( ctx_ ) {
@@ -18,20 +21,21 @@ class Store extends React.Component {
   render() {
     return (
       <Fragment>
-        <div className={styles.banner}>
-        </div>
+        <div className={styles.banner} />
         <div className={classnames( 'page-content', styles.appList )}>
-          {systems.map(({ name, icon, description }) => {
+          {apps.map(({ name, icon, description, href, as }) => {
             return (
-              <div key={name} className={styles.app}>
-                <div className={styles.icon}>
-                  <SvgIcon icon={icon} />
+              <Link key={name} href={href} as={as}>
+                <div className={styles.app}>
+                  <div className={styles.icon}>
+                    <SvgIcon icon={icon} />
+                  </div>
+                  <div className={styles.content}>
+                    <h2 className={styles.name}>{name}</h2>
+                    <p className={styles.description}>{description}</p>
+                  </div>
                 </div>
-                <div className={styles.content}>
-                  <h2 className={styles.name}>{name}</h2>
-                  <p className={styles.description}>{description}</p>
-                </div>
-              </div>
+              </Link>
             );
           })}
         </div>

@@ -1,16 +1,27 @@
 
 .block {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+  // display: flex;
+  // min-height: 100vh;
+  // flex-direction: column;
 }
 
 .block-banner {
   height: 100vh;
-  position: relative;
   flex: 0 0 auto;
-  touch-action: none;
-  pointer-events: none;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  // touch-action: none;
+  // pointer-events: none;
+}
+
+.block-banner-mask {
+  background-color: @dark-5;
+  position: absolute;
+  opacity: 0.999;
+  height: 100%;
+  width: 100%;
 }
 
 .block-banner-image {
