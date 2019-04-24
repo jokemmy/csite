@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import Router, { withRouter } from 'next/router';
 import { set, getClientSize } from 'rc-util/lib/Dom/css';
@@ -55,9 +55,20 @@ class Scene extends React.Component {
     // 参数 category: >=1&<=6
     const { router } = props;
     const index = ~~router.query.id;
-    if ( index > 0 && index <= scenes.length ) {console.log("state.index:", state.index)
-      if ( state.index === 0 ) {
+    if ( index > 0 && index <= scenes.length ) {
+      if ( state.index === 0 && Object.keys( state.selected ).length ) {
         return null;
+      } else if ( state.index === 0 ) {
+        return {
+          toFront: true,
+          selected: {
+            index,
+            title: scenes[index - 1].name,
+            image: images[index - 1],
+            className: styles[`sceneBanner${index}`],
+            dom: null
+          }
+        };
       }
       return {
         index,
@@ -87,6 +98,7 @@ class Scene extends React.Component {
     const index = ~~router.query.id;
     this.state = {
       toBack: false,
+      toFront: false,
       index: index || 0,
       animating: false,
       selected: {}
@@ -98,12 +110,18 @@ class Scene extends React.Component {
   }
 
   componentDidUpdate( prevProps_, prevState ) {
-    const { toBack, selected } = this.state;
+    const { toBack, toFront, selected } = this.state;
     if ( !prevState.toBack && toBack ) {
       this.setState({
         toBack: false,
         selected: { ...selected, dom: this.sceneRef.current }
       }, this.handleBack );
+    }
+    if ( !prevState.toFront && toFront ) {
+      this.setState({
+        toFront: false,
+        selected: { ...selected, dom: this.sceneRef.current }
+      });
     }
   }
 
@@ -304,40 +322,39 @@ class Scene extends React.Component {
   render() {
     const { index, selected } = this.state;
     return (
-      <section className={classnames( styles.view, styles.sceneBanner )}>
-        <div className={classnames( styles.solutions, {
-          [styles.solutionHover]: !selected.animating && !selected.animIn,
-          [styles.unVisibility]: selected.animIn && !selected.animating,
-          'no-events': selected.animating || selected.animIn
-        })}>
-          {scenes.map(({ name }, index ) => {
-            return (
-              <div
-                key={name}
-                ref={index + 1 === this.state.index ? this.sceneRef : null}
-                onClick={this.handleClick({
-                  title: name,
-                  index: index + 1,
-                  image: images[index],
-                  className: styles[`sceneBanner${index + 1}`]
-                })}
-                className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`], {
-                  [styles.unVisibility]: selected.animIn
-                    ? selected.index === index + 1 && ( selected.animating || selected.animIn )
-                    : selected.index === index + 1 && this.state.index !== 0
-                })}>
-                <h2 className={styles.solutionBlockTitle}>{name}</h2>
-              </div>
-            );
-          })}
-        </div>
+      <Fragment>
+        <section className={classnames( styles.view, styles.sceneBanner )}>
+          <div className={classnames( styles.solutions, {
+            [styles.solutionHover]: !selected.animating && !selected.animIn,
+            [styles.unVisibility]: selected.animIn && !selected.animating,
+            'no-events': selected.animating || selected.animIn
+          })}>
+            {scenes.map(({ name }, index ) => {
+              return (
+                <div
+                  key={name}
+                  ref={index + 1 === selected.index ? this.sceneRef : null}
+                  onClick={this.handleClick({
+                    title: name,
+                    index: index + 1,
+                    image: images[index],
+                    className: styles[`sceneBanner${index + 1}`]
+                  })}
+                  className={classnames( styles.solutionBlock, styles[`sceneBanner${index + 1}`], {
+                    [styles.unVisibility]: selected.animIn
+                      ? selected.index === index + 1 && ( selected.animating || selected.animIn )
+                      : selected.index === index + 1 && this.state.index !== 0
+                  })}>
+                  <h2 className={styles.solutionBlockTitle}>{name}</h2>
+                </div>
+              );
+            })}
+          </div>
+        </section>
         <div
           ref={this.pageRef}
           onTransitionEnd={this.handleTransitionEnd( selected.animIn )}
           className={classnames( styles.solutionBlockContainer, { 'no-events': selected.animating })}>
-          {/*selected.animIn && !selected.animating ? (
-            <div onClick={this.handleBack} className={classnames( styles.solutionBlockContainerBanner, selected.className )} />
-          ) : null*/}
           <img
             alt=""
             src={selected.image}
@@ -349,12 +366,6 @@ class Scene extends React.Component {
             [styles.hidden]: selected.animIn && !selected.animating,
             [styles.transparent]: selected.animIn && selected.animating
           })}>{selected.title}</h2>
-{/*          <TweenOneGroup
-            component=""
-            appear={false}
-            enter={{ opacity: 0, type: 'from', duration: 400, ease: 'easeInCubic' }}
-            leave={{ opacity: 0, duration: 300, ease: 'easeOutQuint' }}>*/}
-          {/*</TweenOneGroup>*/}
         </div>
         {!selected.animating && selected.animIn ? index === 1 ? (
           <Scene1 key="1" bannerImage={selected.image} />
@@ -365,7 +376,7 @@ class Scene extends React.Component {
         ) : (
           <Scene4 key="4" bannerImage={selected.image} />
         ) : null}
-      </section>
+      </Fragment>
     );
   }
 }

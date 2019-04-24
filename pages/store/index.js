@@ -1,8 +1,9 @@
 
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
-import Router, { withRouter } from 'next/router';
+import { withRouter } from 'next/router';
 import SvgIcon from '@components/SvgIcon';
 import apps from './apps';
 import styles from './store.less';
@@ -25,14 +26,16 @@ class Store extends React.Component {
         <div className={classnames( 'page-content', styles.appList )}>
           {apps.map(({ name, icon, description, href, as }) => {
             return (
-              <Link key={name} href={href} as={as}>
+              <Link key={name} href={href || ''} as={as}>
                 <div className={styles.app}>
                   <div className={styles.icon}>
                     <SvgIcon icon={icon} />
                   </div>
                   <div className={styles.content}>
                     <h2 className={styles.name}>{name}</h2>
-                    <p className={styles.description}>{description}</p>
+                    <p className={styles.description}>
+                      {( description || '' ).length > 38 ? `${( description || '' ).slice( 0, 38 )}...` : ( description || '' )}
+                    </p>
                   </div>
                 </div>
               </Link>

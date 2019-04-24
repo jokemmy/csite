@@ -46,8 +46,19 @@ class Hardware extends React.Component {
     const { router } = props;
     const index = ~~router.query.category;
     if ( index > 0 && index <= categorys.length ) {
-      if ( state.index === 0 ) {
+      if ( state.index === 0 && Object.keys( state.selected ).length ) {
         return null;
+      } else if ( state.index === 0 ) {
+        return {
+          toFront: true,
+          selected: {
+            index,
+            title: categorys[index - 1].name,
+            image: images[index - 1],
+            className: styles[`itemImage${index}`],
+            dom: null
+          }
+        };
       }
       return {
         index,
@@ -77,6 +88,7 @@ class Hardware extends React.Component {
     const index = ~~router.query.category;
     this.state = {
       toBack: false,
+      toFront: false,
       index: index || 0,
       animating: false,
       selected: {}
@@ -89,12 +101,18 @@ class Hardware extends React.Component {
   }
 
   componentDidUpdate( prevProps_, prevState ) {
-    const { toBack, selected } = this.state;
+    const { toBack, toFront, selected } = this.state;
     if ( !prevState.toBack && toBack ) {
       this.setState({
         toBack: false,
         selected: { ...selected, dom: this.categoryRef.current }
       }, this.handleBack );
+    }
+    if ( !prevState.toFront && toFront ) {
+      this.setState({
+        toFront: false,
+        selected: { ...selected, dom: this.categoryRef.current }
+      });
     }
   }
 
@@ -341,7 +359,7 @@ class Hardware extends React.Component {
                 return (
                   <div
                     key={name}
-                    ref={index + 1 === this.state.index ? this.categoryRef : null}
+                    ref={index + 1 === selected.index ? this.categoryRef : null}
                     onClick={this.handleClick({
                       title: name,
                       index: index + 1,
