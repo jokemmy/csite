@@ -10,7 +10,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-image:
-    linear-gradient(rgba(0 ,0, 0, 0) 0%, rgba(0 ,0, 0, 0.3)),
+    // linear-gradient(rgba(0 ,0, 0, 0) 0%, rgba(0 ,0, 0, 0.3)),
     url(../../assets/images/hardware/banner.jpg);
 }
 
@@ -55,6 +55,7 @@
   color: @light-8;
   font-size: 24px;
   cursor: pointer;
+  min-height: 136px;
   touch-action: manipulation;
   background-color: rgba(59,132,182,0.9);
   overflow: hidden;
@@ -169,6 +170,13 @@
   &.animating {
     visibility: visible;
   }
+}
+
+.category-icon {
+  position: absolute;
+  font-size: 88px;
+  bottom: 24px;
+  right: 24px;
 }
 
 .fake-contant {

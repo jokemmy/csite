@@ -1,6 +1,7 @@
 
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
+import SvgIcon from '@components/SvgIcon';
 import Router, { withRouter } from 'next/router';
 import { ThemeContext } from '@components/Themes';
 import { set, getClientSize } from 'rc-util/lib/Dom/css';
@@ -11,12 +12,19 @@ import category3 from '@assets/images/hardware/category-3.jpg';
 import category4 from '@assets/images/hardware/category-4.jpg';
 import category5 from '@assets/images/hardware/category-5.jpg';
 import category6 from '@assets/images/hardware/category-6.jpg';
+import categorySvg1 from '@assets/images/hardware/category-icon-1.svg?sprite';
+import categorySvg2 from '@assets/images/hardware/category-icon-2.svg?sprite';
+import categorySvg3 from '@assets/images/hardware/category-icon-3.svg?sprite';
+import categorySvg4 from '@assets/images/hardware/category-icon-4.svg?sprite';
+import categorySvg5 from '@assets/images/hardware/category-icon-5.svg?sprite';
+import categorySvg6 from '@assets/images/hardware/category-icon-6.svg?sprite';
 import { categorys } from './productions';
 import Category from './category';
 import styles from './hardware.less';
 
 
 const images = [ category1, category2, category3, category4, category5, category6 ];
+const icons = [ categorySvg1, categorySvg2, categorySvg3, categorySvg4, categorySvg5, categorySvg6 ];
 
 @withRouter
 class Hardware extends React.Component {
@@ -364,13 +372,15 @@ class Hardware extends React.Component {
                       title: name,
                       index: index + 1,
                       image: images[index],
-                      className: styles[`itemImage${index + 1}`] })}
+                      className: styles[`itemImage${index + 1}`]
+                    })}
                     className={classnames( styles.item, styles[`itemImage${index + 1}`], {
                       // [styles.unVisibility]: selected.animIn
                       //   ? selected.index === index + 1 && ( selected.animating || selected.animIn )
                       //   : selected.index === index + 1 && this.state.index !== 0
                     })}>
                     <h2 className={styles.categoryTitle}>{name}</h2>
+                    <SvgIcon className={styles.categoryIcon} icon={icons[index]} />
                   </div>
                 );
               })}
@@ -381,9 +391,6 @@ class Hardware extends React.Component {
           ref={this.pageRef}
           className={styles.container}
           onTransitionEnd={this.handleTransitionEnd( selected.animIn )}>
-          {/*selected.animIn && !selected.animating ? (
-            <div onClick={this.handleBack} className={classnames( styles.containerBanner, selected.className )} />
-          ) : null*/}
           <img
             alt=""
             src={selected.image}

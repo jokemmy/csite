@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import styles from './scene4.less';
 
 
-function SectionBlock({ className, onBack, ...props }) {
+function SectionBlock({ className, bannerImage, ...props }) {
   return (
     <section {...props} className={classnames( styles.block, className )}>
       <div className={styles.blockContent}>

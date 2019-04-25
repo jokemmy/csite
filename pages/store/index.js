@@ -34,7 +34,7 @@ class Store extends React.Component {
                   <div className={styles.content}>
                     <h2 className={styles.name}>{name}</h2>
                     <p className={styles.description}>
-                      {( description || '' ).length > 38 ? `${( description || '' ).slice( 0, 38 )}...` : ( description || '' )}
+                      {( description || '' ).length > 38 ? `${( description || '' ).slice( 0, 36 )}...` : ( description || '' )}
                     </p>
                   </div>
                 </div>
