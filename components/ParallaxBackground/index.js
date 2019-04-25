@@ -9,7 +9,7 @@ import styles from './parallaxBackground.less';
 class ParallaxBackground extends React.Component {
 
   static defaultProps = {
-    range: [ -64, 64 ]
+    range: [ -88, 88 ]
   };
 
   componentDidMount() {

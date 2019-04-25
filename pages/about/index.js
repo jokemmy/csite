@@ -11,7 +11,6 @@ import styles from './about.less';
 class About extends React.Component {
 
   static getInitialProps = async function( ctx_ ) {
-    const scrollTop = `>=${600 - 64}`;
     const layoutProps = {
       title: '欣动价值',
       // anchor: {
@@ -29,7 +28,7 @@ class About extends React.Component {
       pageProps: {
         scrollClass: {
           '>=0': 'page-header-hold',
-          [scrollTop]: 'page-header-light page-header-logo-color'
+          '>=600': 'page-header-light page-header-logo-color'
         }
       }
     };

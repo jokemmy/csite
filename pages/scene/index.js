@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import Router, { withRouter } from 'next/router';
-import { set, getClientSize } from 'rc-util/lib/Dom/css';
+import { set, get, getClientSize } from 'rc-util/lib/Dom/css';
 import { ThemeContext } from '@components/Themes';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
 import banner1 from '@assets/images/scene/banner-1.jpg';
@@ -103,6 +103,7 @@ class Scene extends React.Component {
       animating: false,
       selected: {}
     };
+    this.viewRef = React.createRef();
     this.pageRef = React.createRef();
     this.pageFontRef = React.createRef();
     this.pageImageRef = React.createRef();
@@ -145,7 +146,11 @@ class Scene extends React.Component {
     const { selected } = this.state;
     const position = selected.dom.getBoundingClientRect();
     const fixedStyle = this.getBlockStyle( position );
-    const imageSize = this.getImageSize();
+    const viewSize = {
+      width: get( this.viewRef.current, 'width' ),
+      height: get( this.viewRef.current, 'height' )
+    };
+    const imageSize = this.getImageSize( viewSize );
     const fixedImageStyle = {
       ...this.getImageStyle( imageSize, position, 0.75 )
     };
@@ -157,7 +162,7 @@ class Scene extends React.Component {
     };
     const fixedImageLastStyle = {
       transition: this.getImageTransition( true ),
-      transform: this.getImageCoverTransform( imageSize, getClientSize())
+      transform: this.getImageCoverTransform( imageSize, viewSize )
     };
     this.state.selected = { ...selected, animating: true, animIn: true }; // eslint-disable-line
     this.forceUpdate(() => {
@@ -177,14 +182,18 @@ class Scene extends React.Component {
     const { selected } = this.state;
     if ( selected.animIn && !selected.animating ) {
       const position = selected.dom.getBoundingClientRect();
-      const imageSize = this.getImageSize();
+      const viewSize = {
+        width: get( this.viewRef.current, 'width' ),
+        height: get( this.viewRef.current, 'height' )
+      };
+      const imageSize = this.getImageSize( viewSize );
       const fixedStyle = {
         width: '100vw',
         height: '100vh',
         transform: `translateX(0) translateY(0) translateZ(0)`
       };
       const fixedImageStyle = {
-        ...this.getImageStyle( imageSize, getClientSize())
+        ...this.getImageStyle( imageSize, viewSize )
       };
       const fixedLastStyle = {
         width: `${position.width}px`,
@@ -286,9 +295,9 @@ class Scene extends React.Component {
     };
   };
 
-  getImageSize = () => {
+  getImageSize = ( cover ) => {
     const image = this.pageImageRef.current;
-    const { width, height } = getClientSize();
+    const { width, height } = cover || getClientSize();
     const imageRatio = image.width / image.height;
     const targetRatio = width / height;
     return {
@@ -323,7 +332,7 @@ class Scene extends React.Component {
     const { index, selected } = this.state;
     return (
       <Fragment>
-        <section className={classnames( styles.view, styles.sceneBanner )}>
+        <section ref={this.viewRef} className={classnames( styles.view, styles.sceneBanner )}>
           <div className={classnames( styles.solutions, {
             [styles.solutionHover]: !selected.animating && !selected.animIn,
             [styles.unVisibility]: selected.animIn && !selected.animating,

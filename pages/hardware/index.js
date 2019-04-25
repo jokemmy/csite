@@ -102,7 +102,6 @@ class Hardware extends React.Component {
       selected: {}
     };
     this.pageRef = React.createRef();
-    this.pageFontRef = React.createRef();
     this.categoryRef = React.createRef();
     this.pageImageRef = React.createRef();
     this.pageFakeContantRef = React.createRef();
@@ -153,11 +152,11 @@ class Hardware extends React.Component {
     };
     const fixedFakeContantStyle = {
       // opacity: 0,
-      transform: 'translateY(100vh)'
+      transform: 'translateY(100vh) scale(0.6)'
     };
     const fixedFakeContantLastStyle = {
       // opacity: 1,
-      transform: 'translateY(350px)'
+      transform: 'translateY(350px) scale(1)'
     };
     const fixedLastStyle = {
       transition: this.getTransition( true ),
@@ -207,11 +206,11 @@ class Hardware extends React.Component {
       };
       const fixedFakeContantStyle = {
         opacity: 0.999,
-        transform: 'translateY(350px)'
+        transform: 'translateY(350px) scale(1)'
       };
       const fixedFakeContantLastStyle = {
         opacity: 0.001,
-        transform: 'translateY(100vh)'
+        transform: 'translateY(100vh) scale(0.8)'
       };
       const fixedLastStyle = {
         transition: this.getTransition( false ),
@@ -398,10 +397,10 @@ class Hardware extends React.Component {
             onLoad={!selected.animIn ? this.handleImageLoad :null}
             style={selected.animIn && !selected.animating ? { display: 'none' } : {}}
             className={styles.containerImage} />
-          <h2 ref={this.pageFontRef} className={classnames( styles.categoryTitle, {
+{/*          <h2 className={classnames( styles.categoryTitle, {
             [styles.hidden]: selected.animIn && !selected.animating,
             [styles.transparent]: selected.animIn && selected.animating
-          })}>{selected.title}</h2>
+          })}>{selected.title}</h2>*/}
         </section>
         <div
           ref={this.pageFakeContantRef}

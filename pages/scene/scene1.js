@@ -2,12 +2,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import TweenOne from 'rc-tween-one';
-// import back from '@assets/images/scene/back.svg?sprite';
-// import zhinengfenxi from '@assets/images/scene/zhinengfenxi.svg?sprite';
-// import wuliankeji from '@assets/images/scene/wuliankeji.svg?sprite';
-// import xitongronghe from '@assets/images/scene/xitongronghe.svg?sprite';
-// import lianwangzhihui from '@assets/images/scene/lianwangzhihui.svg?sprite';
-// import SvgIcon from '@components/SvgIcon';
 import styles from './scene1.less';
 
 
@@ -21,7 +15,7 @@ class SectionBlock extends React.Component {
             className={styles.blockBannerMask}
             animation={{ opacity: 0.001, type: 'from', duration: 1000, ease: 'easeOutExpo' }} />
           <div className={classnames( 'page-content', styles.blockBannerContent )}>
-            <h1>智慧能源解决方案</h1>
+            <h1><i>智慧能源</i><span>解决方案</span></h1>
           </div>
         </section>
         <section className={styles.blockContent}>
