@@ -48,8 +48,8 @@ class Base extends React.Component {
     const doc = document.body.scrollTop ? document.body : document.documentElement;
     const { cache, classes } = this.checkScroll();
     this.setState({
-      scrollCache: cache,
-      scrollClasses: classes
+      scrollCache: scrollCache.join() === cache.join() ? scrollCache : cache,
+      scrollClasses: scrollClasses.join() === classes.join() ? scrollClasses : classes
     }, () => {
       Object.keys( scrollClass ).forEach(( key ) => {
         const func = new Function( `return ${doc.scrollTop + key}` );

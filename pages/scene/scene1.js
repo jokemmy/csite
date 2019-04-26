@@ -2,6 +2,8 @@
 import React from 'react';
 import classnames from 'classnames';
 import TweenOne from 'rc-tween-one';
+import SvgIcon from '@components/SvgIcon';
+import quote from '@assets/images/scene/quote.svg?sprite';
 import styles from './scene1.less';
 
 
@@ -15,12 +17,22 @@ class SectionBlock extends React.Component {
             className={styles.blockBannerMask}
             animation={{ opacity: 0.001, type: 'from', duration: 1000, ease: 'easeOutExpo' }} />
           <div className={classnames( 'page-content', styles.blockBannerContent )}>
-            <h1><i>智慧能源</i><span>解决方案</span></h1>
+            <h1 className="SceneZcoolGaoDuanHei"><i>智慧能源</i><span className="SceneZcoolXiaoWeiTi">解决方案</span></h1>
+            <blockquote className={styles.dictum}>
+              <SvgIcon className={styles.dictumQuote} icon={quote} />
+              <span className={styles.dictumText}>
+                数据计算
+                <span className={classnames( 'SceneSiYuan', styles.dictumPoint )}>严谨</span>
+                ，使用方便
+                <span className={classnames( 'SceneSiYuan', styles.dictumPoint )}>简单</span>
+                ，是我们产品的设计宗旨。
+              </span>
+            </blockquote>
           </div>
         </section>
         <section className={styles.blockContent}>
           <div className="page-content">
-            <h2 className={styles.creed}>当问题出现时，<br />需要用最适合方法去解决</h2>
+            
             <p>
               通过对园区、高等院校、商业建筑、政府机关、大型公共建筑等用户的设施、
               用能习惯和用能情况进行分析，提供全面的能源管理，实现能源利用最优。
@@ -28,7 +40,7 @@ class SectionBlock extends React.Component {
             <p>
               欣动科技为不同的客户提供定制化的解决方案，包括该解决方案针对客户的成本和效果顾虑，提供不同的实施方案。
             </p>
-            <h2 className={styles.creed}>解决方案的价值所在</h2>
+            <h2 className={styles.creed}>为什么选择我们</h2>
             为能源计量提供数据基础
             为节能减排提供管控平台
             为节能控制提供有效手段

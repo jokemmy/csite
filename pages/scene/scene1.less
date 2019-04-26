@@ -21,7 +21,7 @@
 .block-banner-mask {
   touch-action: none;
   pointer-events: none;
-  background-color: @dark-5;
+  background-color: @dark-7;
   position: absolute;
   opacity: 0.999;
   height: 100%;
@@ -50,24 +50,25 @@
   font-size: 18px;
   text-align: center;
   background-clip: text;
+  user-select: none;
   h1 {
-    font-size: 5em;
+    font-size: 6em;
     color: @light-10;
     position: relative;
-    padding-bottom: 48px;
+    padding-right: 32px;
+    padding-bottom: 32px;
     span {
-      font-size: 32px;
-      margin-left: 32px;
+      font-size: 28px;
       position: absolute;
       white-space: nowrap;
       line-height: 48px;
       bottom: 0;
-      right: -32px;
+      right: 0;
       color: @dark-10;
       background-color: @light-10;
-      border-radius: 24px;
-      padding: 0 16px;
-      font-weight: bold;
+      letter-spacing: 0.2em;
+      padding-left: calc(0.2em + 16px);
+      padding-right: 16px;
     }
   }
 }
@@ -83,4 +84,28 @@
   text-align: center;
   padding: 16px 0;
   margin: 48px 0;
+}
+
+.dictum {
+  max-width: 500px;
+  text-align: left;
+  margin-bottom: 4em;
+  color: @light-8;
+  font-size: 14px;
+}
+
+.dictum-text {
+  font-size: 1.8em;
+}
+
+.dictum-quote {
+  font-size: 1.5;
+  vertical-align: top;
+}
+
+.dictum-point {
+  color: @light-10;
+  font-size: 1.3em;
+  letter-spacing: 0.1em;
+  padding-left: 0.3em;
 }

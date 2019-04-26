@@ -2,13 +2,22 @@
 import classnames from 'classnames';
 import React, { Fragment } from 'react';
 import ParallaxBackground from '@components/ParallaxBackground';
+import SvgIcon from '@components/SvgIcon';
 import Typed from '@components/Typed';
-import Advantage from './advantage';
+import { ThemeContext } from '@components/Themes';
+import core1 from '@assets/images/about/core-1.svg?sprite';
+import core2 from '@assets/images/about/core-2.svg?sprite';
+import core3 from '@assets/images/about/core-3.svg?sprite';
+import platform1 from '@assets/images/about/platform-1.svg?sprite';
+import platform2 from '@assets/images/about/platform-2.svg?sprite';
+import platform3 from '@assets/images/about/platform-3.svg?sprite';
 // import Topology from './topology';
 import styles from './about.less';
 
 
 class About extends React.Component {
+
+  static contextType = ThemeContext;
 
   static getInitialProps = async function( ctx_ ) {
     const layoutProps = {
@@ -36,6 +45,9 @@ class About extends React.Component {
   };
 
   render() {
+
+    const { themeVariables } = this.context;
+
     return (
       <Fragment>
         <div className={classnames( styles.aboutBlock, styles.aboutBanner )}>
@@ -43,7 +55,7 @@ class About extends React.Component {
           <div className={styles.aboutBannerContent}>
             <Typed className={styles.aboutBannerTitle} strings={[
               '我们是“智慧能源的践行者”',
-              '我们的团队实力不容小觑',
+              '数据计算严谨，\n使用方便简单，\n是我们产品的设计宗旨',
               '我们是一家良心企业'
             ]} />
           </div>
@@ -52,7 +64,7 @@ class About extends React.Component {
           <div className="page-content">
             <div className="page-section">
               <h2 className={styles.aboutBlockTitle}>
-                企业概况
+                我们做什么
               </h2>
               <p>
                 江苏欣动信息科技有限公司是国内领先的智慧能源集成服务提供商，
@@ -73,56 +85,71 @@ class About extends React.Component {
               <h2 className={styles.aboutBlockTitle}>
                 三大支撑平台
               </h2>
-              <Advantage />
               <p>
                 以欣动科技自主研发的DD-IoT平台为核心，采用应用支撑平台、数据中心平台、物联感知平台构建起三级平台，
                 利用人工智能+物联网+大数据+云计算技术，采用前端硬件设备+后端大数据平台模式，将人与基础设施、
                 服务管理建立紧密联系，打通各级、各行业智慧应用平台，形成系统化的解决方案。
               </p>
+              <div className={styles.aboutBlockPlatform3} style={{ color: '#fff' }}>
+                <div>
+                  <div className={styles.icon}><SvgIcon icon={platform1} /></div>
+                  <div>现场系统集成</div>
+                </div>
+                <div>
+                  <div className={styles.icon}><SvgIcon icon={platform2} /></div>
+                  <div>实时数据托管</div>
+                </div>
+                <div>
+                  <div className={styles.icon}><SvgIcon icon={platform3} /></div>
+                  <div>远程绿色运营</div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
-        <section className={styles.aboutBlock}>
+        <section className={styles.aboutBlock} style={{ backgroundColor: themeVariables['@gray-3'] }}>
           <div className="page-content">
             <div className="page-section">
               <h2 className={styles.aboutBlockTitle}>
                 核心业务
               </h2>
+              <p>
+                专业的系统集成服务团队，可为客户提供全方位、全过程、一体化的能源管理系统解决方案。
+                为客户提供专业的技术支持和系统托管，确保系统正常运行，为节能诊断、节能审计提供优质的数据基础。
+                以数据为载体，以针对设备系统的诊断、调试、改造、优化和针对管理者的汇报、培训、管理支持为主要手段，
+                帮助客户解决能耗及品质的相关问题，同时建立长效的预防机制，实现长期绿色运营。
+              </p>
               <div className={styles.aboutBlockCore3}>
                 <div>
-                  <div></div>
+                  <div className={styles.icon}><SvgIcon icon={platform1} /></div>
                   <div>现场系统集成</div>
                 </div>
                 <div>
-                  <div></div>
+                  <div className={styles.icon}><SvgIcon icon={platform2} /></div>
                   <div>实时数据托管</div>
                 </div>
                 <div>
-                  <div></div>
+                  <div className={styles.icon}><SvgIcon icon={platform3} /></div>
                   <div>远程绿色运营</div>
                 </div>
               </div>
-              <ul className={styles.aboutBlockCoreList}>
+{/*              <ul className={styles.aboutBlockCoreList}>
                 <li>
                   <h3>现场系统集成</h3>
-                  <p>
-                    专业的系统集成服务团队，可为客户提供全方位、全过程、一体化的能源管理系统解决方案。
-                  </p>
+
                 </li>
                 <li>
                   <h3>实时数据托管</h3>
                   <p>
-                    为客户提供专业的技术支持和系统托管，确保系统正常运行，为节能诊断、节能审计提供优质的数据基础。
                   </p>
                 </li>
                 <li>
                   <h3>远程绿色运营</h3>
                   <p>
-                    以数据为载体，以针对设备系统的诊断、调试、改造、优化和针对管理者的汇报、培训、管理支持为主要手段，
-                    帮助客户解决能耗及品质的相关问题，同时建立长效的预防机制，实现长期绿色运营。
+                    
                   </p>
                 </li>
-              </ul>
+              </ul>*/}
             </div>
           </div>
         </section>
