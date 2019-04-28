@@ -1,9 +1,9 @@
 
+import React from 'react';
 import marked from 'marked';
 import Head from 'next/head';
 import Link from 'next/link';
 import classnames from 'classnames';
-import React, { Fragment } from 'react';
 import { withRouter } from 'next/router';
 import NotFound from '@components/NotFound';
 import apps from './apps';
@@ -30,7 +30,7 @@ class Goods extends React.Component {
   render() {
     const { goods } = this.props;
     return goods ? (
-      <Fragment>
+      <>
         <Head>
           <title>{goods.name}</title>
         </Head>
@@ -53,7 +53,7 @@ class Goods extends React.Component {
             </div>
           </div>
         </div>
-      </Fragment>
+      </>
     ) : <NotFound />;
   }
 }

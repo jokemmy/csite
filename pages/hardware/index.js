@@ -1,6 +1,6 @@
 
+import React from 'react';
 import classnames from 'classnames';
-import React, { Fragment } from 'react';
 import SvgIcon from '@components/SvgIcon';
 import Router, { withRouter } from 'next/router';
 import { ThemeContext } from '@components/Themes';
@@ -354,7 +354,7 @@ class Hardware extends React.Component {
   render() {
     const { index, selected } = this.state;
     return (
-      <Fragment>
+      <>
         <section className={styles.view}>
           <div className={styles.navigation}>
             <div className={classnames( styles.category, {
@@ -412,7 +412,7 @@ class Hardware extends React.Component {
             category={categorys[index - 1]}
             bannerImage={selected.image} />
         ) : null}
-      </Fragment>
+      </>
     );
   }
 }

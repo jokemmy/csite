@@ -1,5 +1,4 @@
 
-// import { Fragment } from 'react';
 import Banner from '@components/Banner';
 import Parallax1 from './Parallax1';
 import Parallax2 from './Parallax2';

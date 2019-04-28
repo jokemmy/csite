@@ -1,8 +1,8 @@
 
+import React from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import classnames from 'classnames';
-import React, { Fragment } from 'react';
 import { withRouter } from 'next/router';
 import SvgIcon from '@components/SvgIcon';
 import apps from './apps';
@@ -21,7 +21,7 @@ class Store extends React.Component {
 
   render() {
     return (
-      <Fragment>
+      <>
         <div className={styles.banner} />
         <div className={classnames( 'page-content', styles.appList )}>
           {apps.map(({ name, icon, description, href, as }) => {
@@ -42,7 +42,7 @@ class Store extends React.Component {
             );
           })}
         </div>
-      </Fragment>
+      </>
     );
   }
 }

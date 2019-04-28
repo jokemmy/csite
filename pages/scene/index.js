@@ -1,5 +1,5 @@
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import Router, { withRouter } from 'next/router';
 import { set, get, getClientSize } from 'rc-util/lib/Dom/css';
@@ -331,7 +331,7 @@ class Scene extends React.Component {
   render() {
     const { index, selected } = this.state;
     return (
-      <Fragment>
+      <>
         <section ref={this.viewRef} className={classnames( styles.view, styles.sceneBanner )}>
           <div className={classnames( styles.solutions, {
             [styles.solutionHover]: !selected.animating && !selected.animIn,
@@ -385,7 +385,7 @@ class Scene extends React.Component {
         ) : (
           <Scene4 key="4" bannerImage={selected.image} />
         ) : null}
-      </Fragment>
+      </>
     );
   }
 }

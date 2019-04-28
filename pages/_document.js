@@ -1,6 +1,5 @@
 
 import moment from 'moment';
-import { Fragment } from 'react';
 import Document, { Main, Head, NextScript } from 'next/document';
 import sprite from 'svg-sprite-loader/runtime/sprite.build';
 

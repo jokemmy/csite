@@ -18,6 +18,10 @@ class SectionBlock extends React.Component {
             animation={{ opacity: 0.001, type: 'from', duration: 1000, ease: 'easeOutExpo' }} />
           <div className={classnames( 'page-content', styles.blockBannerContent )}>
             <h1 className="SceneZcoolGaoDuanHei"><i>智慧能源</i><span className="SceneZcoolXiaoWeiTi">解决方案</span></h1>
+          </div>
+        </section>
+        <section className={styles.blockContent}>
+          <div className="page-content">
             <blockquote className={styles.dictum}>
               <SvgIcon className={styles.dictumQuote} icon={quote} />
               <span className={styles.dictumText}>
@@ -28,11 +32,6 @@ class SectionBlock extends React.Component {
                 ，是我们产品的设计宗旨。
               </span>
             </blockquote>
-          </div>
-        </section>
-        <section className={styles.blockContent}>
-          <div className="page-content">
-            
             <p>
               通过对园区、高等院校、商业建筑、政府机关、大型公共建筑等用户的设施、
               用能习惯和用能情况进行分析，提供全面的能源管理，实现能源利用最优。

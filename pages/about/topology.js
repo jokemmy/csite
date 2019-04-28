@@ -1,5 +1,5 @@
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import fs from 'flystore';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';

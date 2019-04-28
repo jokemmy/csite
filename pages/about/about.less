@@ -3,7 +3,7 @@
   height: 600px;
   display: flex;
   overflow: hidden;
-  background-color: #1a1921;
+  background-color: @gray-8;
 }
 
 .about-banner-content {
@@ -49,6 +49,19 @@
   }
 }
 
+.about-banner-block {
+  background-color: @gray-8;
+  h1, h2, h3, h4, h5, h6 {
+    color: @light-10;
+  }
+  strong {
+    color: @light-9;
+  }
+  P {
+    color: @light-8;
+  }
+}
+
 .about-block-image {
   top: 50%;
   width: 100%;
@@ -86,7 +99,7 @@
     height: 140px;
     width: 140px;
     line-height: 140px;
-    border: 1px solid @dark-6;
+    border: 1px solid #009999;
     border-radius: 50%;
     margin: 16px auto;
   }
@@ -171,19 +184,19 @@
   }
 }
 
-.dark {
-  position: relative;
-  &::before {
-    top: 0;
-    left: 0;
-    content: '';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: @dark-6;
-    z-index: -1;
-  }
-}
+// .dark {
+//   position: relative;
+//   &::before {
+//     top: 0;
+//     left: 0;
+//     content: '';
+//     width: 100%;
+//     height: 100%;
+//     position: absolute;
+//     background-color: @dark-6;
+//     z-index: -1;
+//   }
+// }
 
 @media only screen and (max-width: 767px) {
 
