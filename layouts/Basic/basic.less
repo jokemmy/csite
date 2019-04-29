@@ -30,60 +30,44 @@
   }
 
   // 文本内容区域
-  .page-section,
   .page-content {
+    max-width: @page-width;
+    padding: 0 24px;
+    margin: 0 auto;
     font-size: 16px;
+    line-height: 1.8;
     strong {
       color: @dark-9;
     }
     P {
       color: @dark-8;
       font-weight: 400;
-      line-height: 1.5em;
       white-space: normal;
       letter-spacing: .05em;
     }
   }
 
-  .page-section {
-    padding: 32px 0;
-    font-size: 16px;
-  }
-
-  // 页面宽度限制
-  .page-content {
-    max-width: @page-width;
-    padding: 0 24px;
-    margin: 0 auto;
-  }
-
-  // hardware
-  .page-view {
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .page-view-bg {
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  .page-poem {
+    text-align: center;
+    line-height: 2.2;
+    margin-bottom: 3em;
   }
 
   // 锚点
-  .page-anchor {
-    left: 0;
-    position: fixed;
-    top: @header-height;
-    z-index: @anchor-zIndex;
-    transition:
-      color @anim-speed-3,
-      background-color @anim-speed-3;
-    width: 100vw;
-  }
+  // .page-anchor {
+  //   left: 0;
+  //   position: fixed;
+  //   top: @header-height;
+  //   z-index: @anchor-zIndex;
+  //   transition:
+  //     color @anim-speed-3,
+  //     background-color @anim-speed-3;
+  //   width: 100vw;
+  // }
 
-  .page-scrolled .page-anchor {
-    background-color: @anchor-background-color;
-  }
+  // .page-scrolled .page-anchor {
+  //   background-color: @anchor-background-color;
+  // }
 
   // .page-banner {
   //   padding-top: @header-height;
