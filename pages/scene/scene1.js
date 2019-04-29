@@ -51,12 +51,12 @@ class SectionBlock extends React.Component {
             <h2 style={{ textAlign: 'center' }}>方案价值</h2>
             <div className={styles.worth}>
               <div className={styles.cardQueue}>
-                <span>为能源计量提供数据基础</span>
-                <span>为节能减排提供管控平台</span>
-                <span>为节能控制提供有效手段</span>
-                <span>为用能决策提供科学依据</span>
-                <span>为科学管理提供技术支撑</span>
-                <span>为统计分析提供科学方法</span>
+                <li>为能源计量提供数据基础</li>
+                <li>为节能减排提供管控平台</li>
+                <li>为节能控制提供有效手段</li>
+                <li>为用能决策提供科学依据</li>
+                <li>为科学管理提供技术支撑</li>
+                <li>为统计分析提供科学方法</li>
               </div>
               <img alt="" src={banner} width="50%" />
             </div>
@@ -80,7 +80,7 @@ class SectionBlock extends React.Component {
         </section>
         <section className={styles.blockContent}>
           <div className="page-content">
-            <h2 style={{ textAlign: 'center' }}>平台架构</h2>
+            <h2 style={{ textAlign: 'center' }}>技术架构</h2>
             <div className={styles.platform}>
               <img alt="" src={banner} height="100%" />
             </div>
