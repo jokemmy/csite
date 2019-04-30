@@ -1,6 +1,7 @@
 
 import React from 'react';
-import Head from 'next/head';
+import NextSeo from 'next-seo';
+import { Helmet } from "react-helmet";
 import Page from '@layouts/Page';
 import Header from '@components/Header';
 import Anchor from '@components/Anchor';
@@ -15,9 +16,20 @@ class Layout extends React.Component {
     const { children, title, header, footer, anchor, pageProps } = this.props;
     return (
       <Page {...pageProps} className={bodyStyles.container}>
-        <Head>
+        <NextSeo
+          config={{
+            title: 'Simple Usage Example',
+            description: 'A short description goes here.'
+          }}>
+        </NextSeo>
+        <Helmet>
           <title>{title}</title>
-        </Head>
+          <meta
+            id="viewport"
+            name="viewport"
+            content="user-scalable=no, width=device-width, minimum-scale=1,
+            initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+        </Helmet>
         {header !== false ? <Header {...( header === true || !header ? {} : header )} /> : null}
         {anchor ? <Anchor {...( anchor === true ? {} : anchor )} /> : null}
         <Body>{children}</Body>

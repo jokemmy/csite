@@ -2,6 +2,7 @@
 const omit = require( 'omit.js' );
 const webpack = require( 'webpack' );
 const withFonts = require( 'next-fonts' );
+const withMDX = require( '@next/mdx' );
 const withCSS = require( '@zeit/next-css' );
 const withLess = require( '@zeit/next-less' );
 const compose = require( 'next-compose-plugins' );
@@ -32,6 +33,10 @@ if ( typeof require !== 'undefined' ) {
 }
 
 module.exports = compose([
+
+  [ withMDX, {
+    extension: /\.mdx?$/
+  }],
 
   // less支持
   [ withLess, {
@@ -164,26 +169,6 @@ module.exports = compose([
     // 添加字体目录避免与精灵冲突
     const fontLoader = config.module.rules.find(({ test }) => test.test( '.svg' ) && test.test( '.ttf' ));
     fontLoader.include = path.resolve( __dirname, './assets/fonts' );
-
-
-/* { resourceQuery: /(trace.*original|original.*trace)/,
-       use: [Array] },
-     { resourceQuery: /(include.*original|original.*include)/,
-       use: [Array] },
-     { resourceQuery: /(inline.*original|original.*inline)/,
-       use: [Array] },
-     { resourceQuery: /(url.*original|original.*url)/, use: [Array] },
-     { resourceQuery: /url/, use: [Array] },
-     { resourceQuery: /inline/, use: [Array] },
-     { resourceQuery: /include/, use: [Array] },
-     { resourceQuery: /original/, use: [Array] },
-     { resourceQuery: /lqip(&|$)/, use: [Array] },
-     { resourceQuery: /lqip-colors/, use: [Array] },
-     { resourceQuery: /size/, use: [Array] },
-     { resourceQuery: /trace/, use: [Array] },
-     { resourceQuery: /webp/, use: [Array] },
-     { resourceQuery: /sprite/, use: [Array] },
-     { use: [Array] } ] }*/
 
     // 添加特殊文件夹别名
     [ 'components', 'layouts', 'pages', 'assets', 'lib' ].forEach(( dirName ) => {
