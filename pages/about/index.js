@@ -89,16 +89,16 @@ class About extends React.Component {
             </p>
             <div className={styles.aboutBlockPlatform3} style={{ color: '#fff' }}>
               <div>
-                <div className={styles.icon}><SvgIcon icon={platform1} /></div>
-                <div>现场系统集成</div>
+                <div className={styles.icon}><SvgIcon icon={platform3} /></div>
+                <div>物联感知平台</div>
               </div>
               <div>
                 <div className={styles.icon}><SvgIcon icon={platform2} /></div>
-                <div>实时数据托管</div>
+                <div>数据中心平台</div>
               </div>
               <div>
-                <div className={styles.icon}><SvgIcon icon={platform3} /></div>
-                <div>远程绿色运营</div>
+                <div className={styles.icon}><SvgIcon icon={platform1} /></div>
+                <div>应用支撑平台</div>
               </div>
             </div>
           </div>

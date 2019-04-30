@@ -46,17 +46,17 @@ class SectionBlock extends React.Component {
             </p>
           </div>
         </section>
-        <section className={styles.blockContent}>
+        <section className={classnames( styles.blockContent, styles.halfCircle )}>
           <div className="page-content">
             <h2 style={{ textAlign: 'center' }}>方案价值</h2>
             <div className={styles.worth}>
               <div className={styles.cardQueue}>
-                <li>为能源计量提供数据基础</li>
-                <li>为节能减排提供管控平台</li>
-                <li>为节能控制提供有效手段</li>
-                <li>为用能决策提供科学依据</li>
-                <li>为科学管理提供技术支撑</li>
-                <li>为统计分析提供科学方法</li>
+                <li><span>1</span>为能源计量提供数据基础</li>
+                <li><span>2</span>为节能减排提供管控平台</li>
+                <li><span>3</span>为节能控制提供有效手段</li>
+                <li><span>4</span>为用能决策提供科学依据</li>
+                <li><span>5</span>为科学管理提供技术支撑</li>
+                <li><span>6</span>为统计分析提供科学方法</li>
               </div>
               <img alt="" src={banner} width="50%" />
             </div>
@@ -83,6 +83,14 @@ class SectionBlock extends React.Component {
             <h2 style={{ textAlign: 'center' }}>技术架构</h2>
             <div className={styles.platform}>
               <img alt="" src={banner} height="100%" />
+            </div>
+          </div>
+        </section>
+        <section className={styles.blockContent}>
+          <div className="page-content">
+            <h2 style={{ textAlign: 'center' }}>技术特点</h2>
+            <div className={styles.characteristic}>
+              
             </div>
           </div>
         </section>

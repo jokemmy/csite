@@ -120,6 +120,35 @@
   height: 500px;
 }
 
+// .half-circle {
+//   overflow: hidden;
+//   & > :global(.page-content) {
+//     position: relative;
+//     &::before {
+//       content: '';
+//       border-radius: 50%;
+//       width: @page-width * 1.5;
+//       transform: translateX(-50%);
+//       height: calc(100% + ( 64px + 20px ) * 2);
+//       border: 400px solid transparent;
+//       border-left-color: @gray-2;
+//       border-bottom-width: 10px;
+//       border-top-width: 10px;
+//       position: absolute;
+//       top: -84px;
+//       left: calc(50% + @page-width * 0.1 );
+//     }
+//   }
+// }
+
+.loop(@i) when (@i<=6) {
+  &:nth-child(@{i}) {
+    transform: translateX((@i - 1) * 15px);
+  }
+  .loop(@i + 1);
+}
+
+
 .card-queue {
   margin: auto;
   margin-left: 0;
@@ -127,14 +156,28 @@
   backface-visibility: hidden;
   width: 350px;
   > li {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 32px;
     display: inline-block;
-    background-color: @gray-1;
-    border: 1px solid @dark-2;
-    padding: 16px 32px;
+    padding: 0 32px;
     border-radius: 4px;
-    margin-top: -3px;
+    line-height: 56px;
+    span {
+      display: inline-block;
+      margin-right: 16px;
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+      background-color: @blue-4;
+      font-size: 14px;
+      color: @light-10;
+      text-align: center;
+      font-weight: bold;
+      vertical-align: top;
+      margin-top: 16px;
+      line-height: 24px;
+    }
+    .loop(1)
   }
   // > span:nth-child(1) {
   //   transform: perspective(800px) translateX(20px) translateZ(0);

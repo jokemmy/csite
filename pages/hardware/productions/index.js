@@ -7,22 +7,22 @@ export const categorys = [{
 }, {
   as: '/hardware/2',
   url: '/hardware?category=2',
-  name: '终端设备类',
+  name: '智能网由类',
   description: '将客户通用需求与行业个性化需求有机融合，具有现场/远程可配置、可编程功能，提供可靠的物联网软硬件平台和统一开放的MQTT IoT通讯协议，简化物联网网关的定制和部署，协助加速物联网应用的开发和创新'
 }, {
   as: '/hardware/3',
   url: '/hardware?category=3',
-  name: '接口转换类',
+  name: '前置服务类',
   description: '将客户通用需求与行业个性化需求有机融合，具有现场/远程可配置、可编程功能，提供可靠的物联网软硬件平台和统一开放的MQTT IoT通讯协议，简化物联网网关的定制和部署，协助加速物联网应用的开发和创新'
 }, {
   as: '/hardware/4',
   url: '/hardware?category=4',
-  name: '智能网由类',
+  name: '终端设备类',
   description: '将客户通用需求与行业个性化需求有机融合，具有现场/远程可配置、可编程功能，提供可靠的物联网软硬件平台和统一开放的MQTT IoT通讯协议，简化物联网网关的定制和部署，协助加速物联网应用的开发和创新'
 }, {
   as: '/hardware/5',
   url: '/hardware?category=5',
-  name: '前置服务类',
+  name: '接口转换类',
   description: '将客户通用需求与行业个性化需求有机融合，具有现场/远程可配置、可编程功能，提供可靠的物联网软硬件平台和统一开放的MQTT IoT通讯协议，简化物联网网关的定制和部署，协助加速物联网应用的开发和创新'
 }, {
   as: '/hardware/6',
