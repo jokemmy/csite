@@ -9,20 +9,8 @@ const compose = require( 'next-compose-plugins' );
 const { PHASE_PRODUCTION_BUILD, PHASE_EXPORT } = require( 'next/constants' );
 const optimizedImages = require( 'next-optimized-images' );
 const LessFunc = require( 'less-plugin-functions' );
-// const lessToJS = require( 'less-vars-to-js' );
 const path = require( 'path' );
-// const fs = require( 'fs' );
 
-
-// Where your custom.less file lives
-// const themeVariables = lessToJS(
-//   fs.readFileSync( path.resolve( __dirname, './assets/custom.less' ), 'utf8' )
-// );
-
-// const themeVariables = lessToJS(
-//   fs.readFileSync( path.resolve( __dirname, './node_modules/antd/lib/style/themes/default.less' ), 'utf8' ),
-//   { resolveVariables: true, dictionary: true }
-// );
 
 if ( typeof require !== 'undefined' ) {
   require.extensions['.css'] = file => {}; // eslint-disable-line
@@ -113,6 +101,7 @@ module.exports = compose([
   }]
 
 ], {
+  useFileSystemPublicRoutes: false,
   webpack( config ) {
 
     // 添加 node_modules 内外的 less css 支持

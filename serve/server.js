@@ -5,6 +5,7 @@ const logger = require( 'koa-logger' );
 const koabody = require( 'koa-body' );
 const Router = require( 'koa-router' );
 const compress = require( 'koa-compress' );
+const routers = require( './router' );
 
 
 const port = parseInt( process.env.PORT, 10 ) || 3000;
@@ -26,38 +27,12 @@ app.prepare().then(() => {
   server.use( koabody());
   server.use( compress());
 
-  // 添加服务端简洁链接支持
-  router.get( '/hardware/:category', async ctx => {
-    const params = { category: ctx.params.category };
-    await app.render( ctx.req, ctx.res, '/hardware', params );
+  router.get( '/text', async ctx => {
+    await app.render( ctx.req, ctx.res, '/text', ctx.query );
     ctx.respond = false;
   });
 
-  router.get( '/store/:code', async ctx => {
-    const params = { code: ctx.params.code };
-    await app.render( ctx.req, ctx.res, '/store/goods', params );
-    ctx.respond = false;
-  });
-
-  router.get( '/scene/:id', async ctx => {
-    const params = { id: ctx.params.id };
-    await app.render( ctx.req, ctx.res, '/scene', params );
-    ctx.respond = false;
-  });
-
-  // Default catch-all handler to allow Next.js to handle all other routes
-  router.get( '*', async ctx => {
-    await handle( ctx.req, ctx.res );
-    ctx.respond = false;
-  });
-
-  server.use( async ( ctx, next ) => {
-    ctx.res.statusCode = 200;
-    await next();
-  });
-
-  server.use( router.routes());
-  server.use( router.allowedMethods());
+  routers( server, router, app, handle );
 
   server.listen( port, err => {
     if ( err ) {
