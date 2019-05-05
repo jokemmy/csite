@@ -14,15 +14,15 @@ const bodyStyles = Body.styles;
 class Layout extends React.Component {
 
   render() {
-    const { children, statusCode, title, header, footer, anchor, pageProps } = this.props;
-    return statusCode ? children : (
+    const { children, title, header, footer, anchor, pageProps } = this.props;
+    return (
       <Page {...pageProps} className={bodyStyles.container}>
         <Head>
           <meta charSet="utf-8" />
           <meta name="renderer" content="webkit" />
           <meta name="force-rendering" content="webkit" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-          <meta name="viewport" content="user-scalable=no, width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+          <meta name="viewport" content="user-scalable=no,width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,shrink-to-fit=no" />
           <script src="/static/whatenvis.min.js"></script>
         </Head>
         <NextSeo

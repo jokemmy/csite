@@ -23,9 +23,11 @@ class CustomApp extends App {
 
     return (
       <Container>
-        <Layout {...layoutProps} statusCode={statusCode}>
-          <Component {...componentProps} statusCode={statusCode} />
-        </Layout>
+        {statusCode ? <Component {...componentProps} statusCode={statusCode} /> : (
+          <Layout {...layoutProps}>
+            <Component {...componentProps} />
+          </Layout>
+        )}
       </Container>
     );
   }

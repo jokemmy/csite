@@ -30,6 +30,8 @@ export const ThemeContext = React.createContext({
   themes,
   themeVariables,
   thiemeEasings,
+  footer: true,
+  header: true,
   isLoaded: false,
   isMobile: false
 });
