@@ -27,10 +27,15 @@ const storeTheme = fs( '@theme-config' );
 storeTheme.set( 'config', { ...defaultThemeConfig });
 storeTheme.set( 'change', {});
 
-export const setTheme = ( config ) => {
+export const setTheme = ( config, changeRoute ) => {
   const { route } = Router.router;
-  const themeConfig = storeTheme.get( `change-${route}` );
-  storeTheme.dispense( 'change', Object.assign({}, themeConfig, config ));
+  if ( changeRoute && changeRoute !== route ) {
+    const themeConfig = storeTheme.get( `change-${changeRoute}` );
+    storeTheme.set( `change-${changeRoute}`, Object.assign({}, themeConfig, config ));
+  } else {
+    const themeConfig = storeTheme.get( `change-${route}` );
+    storeTheme.dispense( 'change', Object.assign({}, themeConfig, config ));
+  }
 };
 
 export function withTheme( Comp ) {

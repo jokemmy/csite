@@ -383,13 +383,13 @@ class Scene extends React.Component {
           })}>{selected.title}</h2>
         </div>
         {!selected.animating && selected.animIn ? index === 1 ? (
-          <Scene1 key="1" bannerImage={selected.image} />
+          <Scene1 key="1" router={this.props.router} bannerImage={selected.image} />
         ) : index === 2 ? (
-          <Scene2 key="2" bannerImage={selected.image} />
+          <Scene2 key="2" router={this.props.router} bannerImage={selected.image} />
         ) : index === 3 ? (
-          <Scene3 key="3" bannerImage={selected.image} />
+          <Scene3 key="3" router={this.props.router} bannerImage={selected.image} />
         ) : (
-          <Scene4 key="4" bannerImage={selected.image} />
+          <Scene4 key="4" router={this.props.router} bannerImage={selected.image} />
         ) : null}
       </>
     );

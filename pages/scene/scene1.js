@@ -12,11 +12,11 @@ import styles from './scene1.less';
 class SectionBlock extends React.Component {
 
   componentDidMount() {
-    setTheme({ footer: true });
+    setTheme({ footer: true }, this.props.router.route );
   }
 
   componentWillUnmount() {
-    setTheme({ footer: false });
+    setTheme({ footer: false }, this.props.router.route );
   }
 
   render() {
@@ -100,7 +100,6 @@ class SectionBlock extends React.Component {
           <div className="page-content">
             <h2 style={{ textAlign: 'center' }}>技术特点</h2>
             <div className={styles.characteristic}>
-              
             </div>
           </div>
         </section>

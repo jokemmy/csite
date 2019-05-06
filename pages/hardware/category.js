@@ -27,7 +27,7 @@ class SectionBlock extends React.Component {
   }
 
   componentDidMount() {
-    setTheme({ footer: true });
+    setTheme({ footer: true }, this.props.router.route );
     SectionBlock.getBannerPosition = () => {
       return this.fakeBannerRef.current.getBoundingClientRect();
     };
@@ -35,7 +35,7 @@ class SectionBlock extends React.Component {
   }
 
   componentWillUnmount() {
-    setTheme({ footer: false });
+    setTheme({ footer: false }, this.props.router.route );
   }
 
   // handleTransitionEnd = ({ target, currentTarget }) => {

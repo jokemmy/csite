@@ -408,6 +408,7 @@ class Hardware extends React.Component {
         {selected.animIn && index !== 0 ? (
           <Category
             index={index}
+            router={this.props.router}
             category={categorys[index - 1]}
             bannerImage={selected.image} />
         ) : null}
