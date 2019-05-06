@@ -2,7 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 // import { set, getClientSize } from 'rc-util/lib/Dom/css';
-import { ThemeContext } from '@components/Themes';
+import { ThemeContext, setTheme } from '@components/Themes';
 // import { requestAnimationFrame } from '@lib/requestAnimationFrame';
 import { productions } from './productions';
 import Production from './production';
@@ -27,10 +27,15 @@ class SectionBlock extends React.Component {
   }
 
   componentDidMount() {
+    setTheme({ footer: true });
     SectionBlock.getBannerPosition = () => {
       return this.fakeBannerRef.current.getBoundingClientRect();
     };
     // this.animationStart();
+  }
+
+  componentWillUnmount() {
+    setTheme({ footer: false });
   }
 
   // handleTransitionEnd = ({ target, currentTarget }) => {
@@ -73,7 +78,7 @@ class SectionBlock extends React.Component {
   // };
 
   // getImageStyle = () => {
-  //   const { themeVariables, thiemeEasings } = this.context;
+  //   const { themeVariables, themeEasings } = this.context;
   //   const image = this.bannerRef.current;
   //   const { width, height } = getClientSize();
   //   const imageRatio = image.width / image.height;
@@ -81,7 +86,7 @@ class SectionBlock extends React.Component {
   //   return {
   //     width: imageRatio > targetRatio ? imageRatio * height : width,
   //     height: imageRatio > targetRatio ? height : width / imageRatio,
-  //     transition: `transform ${themeVariables['@anim-speed-2']} ${thiemeEasings['@easeOutQuad']}`
+  //     transition: `transform ${themeVariables['@anim-speed-2']} ${themeEasings['@easeOutQuad']}`
   //   };
   // };
 

@@ -3,10 +3,11 @@ import React from 'react';
 import omit from 'omit.js';
 import Media from 'react-media';
 import classnames from 'classnames';
+import { getClientSize } from 'rc-util/lib/Dom/css';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
 import Mask from '@components/Mask';
-import { ThemeContext, themeVariables, thiemeEasings } from '@components/Themes';
+import { ThemeContext, themeVariables, themeEasings } from '@components/Themes';
 import { pushLoader, popLoader, withLoaded } from '@lib/loaded';
 import './basic.less';
 import './fonts.less';
@@ -52,7 +53,7 @@ class Base extends React.Component {
       scrollClasses: scrollClasses.join() === classes.join() ? scrollClasses : classes
     }, () => {
       Object.keys( scrollClass ).forEach(( key ) => {
-        const func = new Function( `return ${doc.scrollTop + key}` );
+        const func = new Function( `return ${doc.scrollTop + this.toRealPixel( key )}` );
         if ( func() && !scrollCache.includes( key )) {
           scrollCache.push( key );
           this.setState(( state ) => {
@@ -83,11 +84,21 @@ class Base extends React.Component {
     });
   };
 
+  toRealPixel = ( key ) => {
+    const vh = /(\d+)vh/.exec( key );
+    const { height } = getClientSize();
+    if ( vh ) {
+      return key.replace( /(\d+)vh/, `${Math.round( height * ~~vh[1] / 100 )}` );
+    }
+    return key;
+  };
+
   render() {
     const { scrollClasses } = this.state;
-    const { children, isMobile, isLoaded, className, ...props } = omit( this.props, ['scrollClass']);
+    const { children, isMobile, isLoaded, themeConfig, className, ...props } = omit( this.props, ['scrollClass']);
+
     return (
-      <ThemeContext.Provider value={{ themeVariables, thiemeEasings, isMobile, isLoaded }}>
+      <ThemeContext.Provider value={{ themeConfig, themeVariables, themeEasings, isMobile, isLoaded }}>
         <div {...props} className={classnames( 'page-basic', scrollClasses.join( ' ' ), className )}>
           {children}
         </div>

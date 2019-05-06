@@ -46,6 +46,12 @@ class Scene extends React.Component {
         transparent: true
       },
       footer: false,
+      pageProps: {
+        scrollClass: {
+          '>=0': 'page-header-hold',
+          '>=100vh-64': 'page-header-dark banner-menu-fixed'
+        }
+      },
       title: '解决方案'
     };
     return { layoutProps };
@@ -261,9 +267,9 @@ class Scene extends React.Component {
   };
 
   getTransition = ( isIn ) => {
-    const { themeVariables, thiemeEasings } = this.context;
+    const { themeVariables, themeEasings } = this.context;
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
-    const ease = isIn ? thiemeEasings['@easeOutExpo'] : thiemeEasings['@easeOutCirc'];
+    const ease = isIn ? themeEasings['@easeOutExpo'] : themeEasings['@easeOutCirc'];
     return Object.entries({
       width: { ease, duration: animSpeed },
       height: { ease, duration: animSpeed },
@@ -275,11 +281,11 @@ class Scene extends React.Component {
   };
 
   getImageTransition = ( isIn ) => {
-    const { themeVariables, thiemeEasings } = this.context;
+    const { themeVariables, themeEasings } = this.context;
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
     return Object.entries({
       transform: {
-        ease: isIn ? thiemeEasings['@easeOutCirc'] : thiemeEasings['@easeOutExpo'],
+        ease: isIn ? themeEasings['@easeOutCirc'] : themeEasings['@easeOutExpo'],
         duration: animSpeed
       }
     }).map(([ property, { ease, duration }]) => {

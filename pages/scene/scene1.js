@@ -3,12 +3,22 @@ import React from 'react';
 import classnames from 'classnames';
 import TweenOne from 'rc-tween-one';
 import SvgIcon from '@components/SvgIcon';
+import { setTheme } from '@components/Themes';
 import quote from '@assets/images/scene/quote.svg?sprite';
 import banner from '@assets/images/scene/banner.jpg';
 import styles from './scene1.less';
 
 
 class SectionBlock extends React.Component {
+
+  componentDidMount() {
+    setTheme({ footer: true });
+  }
+
+  componentWillUnmount() {
+    setTheme({ footer: false });
+  }
+
   render() {
     const { className, bannerImage, ...props } = this.props;
     return (

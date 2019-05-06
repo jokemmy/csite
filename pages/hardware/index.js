@@ -32,12 +32,11 @@ class Hardware extends React.Component {
   static contextType = ThemeContext;
 
   static getInitialProps = async function( ctx_ ) {
-    const darkTop = `>=${300 - 64}`;
     const layoutProps = {
       pageProps: {
         scrollClass: {
           '>=0': 'page-header-hold',
-          [darkTop]: 'page-header-dark banner-menu-fixed'
+          '>=(300 - 64)': 'page-header-dark banner-menu-fixed'
         }
       },
       header: {
@@ -283,9 +282,9 @@ class Hardware extends React.Component {
   };
 
   getTransition = ( isIn ) => {
-    const { themeVariables, thiemeEasings } = this.context;
+    const { themeVariables, themeEasings } = this.context;
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
-    const ease = isIn ? thiemeEasings['@easeOutExpo'] : thiemeEasings['@easeOutCirc'];
+    const ease = isIn ? themeEasings['@easeOutExpo'] : themeEasings['@easeOutCirc'];
     return Object.entries({
       width: { ease, duration: animSpeed },
       height: { ease, duration: animSpeed },
@@ -297,12 +296,12 @@ class Hardware extends React.Component {
   };
 
   getImageTransition = ( isIn ) => {
-    const { themeVariables, thiemeEasings } = this.context;
+    const { themeVariables, themeEasings } = this.context;
     const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
     return Object.entries({
       opacity: { ease: '', duration: animSpeed },
       transform: {
-        ease: isIn ? thiemeEasings['@easeOutCirc'] : thiemeEasings['@easeOutExpo'],
+        ease: isIn ? themeEasings['@easeOutCirc'] : themeEasings['@easeOutExpo'],
         duration: animSpeed
       }
     }).map(([ property, { ease, duration }]) => {
