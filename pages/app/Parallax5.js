@@ -34,7 +34,7 @@ class WallPaper extends React.Component {
         </Paper>
         <div className={styles.leftContent}>
           <div className={classnames( styles.topic, 'AppSiYuan' )}>
-            <h1 className={classnames( styles.topicTitle, 'AppSiYuanExtraLight' )}>
+            <h1 className={classnames( styles.topicTitle, 'AppSiYuan' )}>
               欣动科技 · 智能硬件
             </h1>
             <p className={styles.topicDesc}>

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import omit from 'omit.js';
 import classnames from 'classnames';
 // import { set, getClientSize } from 'rc-util/lib/Dom/css';
 import { ThemeContext, setTheme } from '@components/Themes';
@@ -109,7 +110,7 @@ class SectionBlock extends React.Component {
     // const { animating, animOver } = this.state;
     const { className, index, bannerImage, category, ...props } = this.props;
     return (
-      <section {...props} className={classnames( styles.block, className, {
+      <section {...omit( props, ['router'])} className={classnames( styles.block, className, {
         // [styles.blockAnimating]: !animOver,
         // [styles.blockOh]: !animOver
       })}>

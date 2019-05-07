@@ -60,7 +60,7 @@ class About extends React.Component {
             ]} />
           </div>
         </div>
-        <section className={styles.aboutBlock}>
+        <section className={styles.aboutBlock} style={{ backgroundColor: themeVariables['@gray-3'] }}>
           <div className="page-content">
             <h2 className={styles.aboutBlockTitle}>
               我们做什么

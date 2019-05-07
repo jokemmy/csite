@@ -1,2 +1,0 @@
-www.buildinamsterdam.com
-https://github.com/baptistebriel/smooth-scrolling

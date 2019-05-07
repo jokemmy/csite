@@ -72,19 +72,19 @@ class Header extends Component {
     });
   };
 
-  getPCMenu = ( data ) => Object.entries( data ).map(([ key, { text, url, className, as }]) => {
+  getPCMenu = ( data ) => Object.entries( data ).map(([ key, { text, url, className, as, target }]) => {
     return (
       <Link key={key} as={as} href={url || '/'}>
-        <a className={classnames( styles.link, className )}>{text}</a>
+        <a target={target || '_self'} className={classnames( styles.link, className )}>{text}</a>
       </Link>
     );
   });
 
-  getMobileMenu = ( data ) => Object.entries( data ).map(([ key, { text, url, as, className }]) => {
+  getMobileMenu = ( data ) => Object.entries( data ).map(([ key, { text, url, as, className, target }]) => {
     return (
       <Item key={key}>
         <Link as={as} href={url || '/'}>
-          <a className={className}>{text}</a>
+          <a target={target || '_self'} className={className}>{text}</a>
         </Link>
       </Item>
     );

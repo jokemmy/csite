@@ -1,11 +1,10 @@
 
 import React from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 import { withRouter } from 'next/router';
 import SvgIcon from '@components/SvgIcon';
-import apps from './apps';
+import appData from './apps';
 import styles from './store.less';
 
 
@@ -23,24 +22,34 @@ class Store extends React.Component {
     return (
       <>
         <div className={styles.banner} />
-        <div className={classnames( 'page-content', styles.appList )}>
-          {apps.map(({ name, icon, description, href, as }) => {
-            return (
-              <Link key={name} href={href || ''} as={as}>
-                <div className={styles.app}>
-                  <div className={styles.icon}>
-                    <SvgIcon icon={icon} />
-                  </div>
-                  <div className={styles.content}>
-                    <h2 className={styles.name}>{name}</h2>
-                    <p className={styles.description}>
-                      {( description || '' ).length > 30 ? `${( description || '' ).slice( 0, 30 )}...` : ( description || '' )}
-                    </p>
-                  </div>
+        <div className={styles.appList}>
+          <div className="page-content">
+            {appData.apps.map(({ code, name, apps }) => {
+              const appBlocks = apps.map(({ name, icon, description, href, as }) => {
+                return (
+                  <Link key={name} href={href || ''} as={as}>
+                    <div className={styles.app}>
+                      <div className={styles.icon}>
+                        <SvgIcon icon={icon} />
+                      </div>
+                      <div className={styles.content}>
+                        <h2 className={styles.name}>{name}</h2>
+                        <p className={styles.description}>
+                          {( description || '' ).length > 30 ? `${( description || '' ).slice( 0, 30 )}...` : ( description || '' )}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              });
+              return (
+                <div key={code} className={styles.category}>
+                  <div className={styles.categoryTitle}>{name}</div>
+                  <div className={styles.categoryApps}>{appBlocks}</div>
                 </div>
-              </Link>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </>
     );

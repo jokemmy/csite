@@ -17,22 +17,36 @@
 
 .app-list {
   padding: 64px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  background-color: @gray-2;
+  .category {
+    margin-bottom: 32px;
+  }
+  .category-title {
+    font-weight: bold;
+    line-height: 48px;
+    padding: 0 8px;
+  }
+  .category-apps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }
 
 .app {
-  width: 440px;
+  width: 458px;
   display: flex;
   flex: 0 0 auto;
   padding: 16px;
   cursor: pointer;
-  margin-bottom: 48px;
-  border: 1px solid transparent;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  border: 1px solid @dark-1;
+  background-color: @light-10;
   touch-action: manipulation;
   &:hover {
-    border: 1px solid #ececec;
+    border: 1px solid @dark-1;
     box-shadow: 2px 2px 7px #eee;
   }
 }
@@ -53,10 +67,9 @@
 .content {
   h2 {
     font-size: 1.4em;
-    line-height: 2em;
+    line-height: 1.7em;
   }
   p {
     height: 3em;
   }
 }
-

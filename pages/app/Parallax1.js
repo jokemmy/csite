@@ -36,8 +36,8 @@ class WallPaper extends React.Component {
         </Paper>
         <div className={styles.centerContent}>
           <div className={classnames( styles.topic, 'AppSiYuan' )}>
-            <h1 className={classnames( styles.topicTitle, 'AppSiYuanExtraLight' )}>
-              智慧能源集成服务提供商
+            <h1 className={classnames( styles.topicTitle, 'AppSiYuan' )}>
+              智慧无界 赋能无限
             </h1>
             <p className={styles.topicDesc}>
               打造全新的智慧能源运管体系，为客户提供全方位、一体化的整合式服务。

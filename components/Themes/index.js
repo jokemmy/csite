@@ -34,7 +34,9 @@ export const setTheme = ( config, changeRoute ) => {
     storeTheme.set( `change-${changeRoute}`, Object.assign({}, themeConfig, config ));
   } else {
     const themeConfig = storeTheme.get( `change-${route}` );
-    storeTheme.dispense( 'change', Object.assign({}, themeConfig, config ));
+    const newConfig = Object.assign({}, themeConfig, config );
+    storeTheme.set( `change-${route}`, newConfig );
+    storeTheme.dispense( 'change', newConfig );
   }
 };
 
@@ -64,8 +66,6 @@ export function withTheme( Comp ) {
         });
       }
       this.configHandle = storeTheme.watch( 'change', ( themeConfig ) => {
-        const { route } = this.props.router;
-        storeTheme.set( `change-${route}`, themeConfig );
         this.setState({
           themeConfig: Object.assign( storeTheme.get( 'config' ), themeConfig )
         });

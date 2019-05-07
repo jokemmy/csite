@@ -4,10 +4,11 @@
 }
 
 .pro {
-  margin: 48px auto;
+  margin: 120px auto;
   max-width: @page-width-lg;
   background-color: @dark-1;
   display: flex;
+  overflow: hidden;
 }
 
 .pro-image {
@@ -27,8 +28,28 @@
   width: 600px;
   font-size: 16px;
   line-height: 1.8;
+  padding-left: 48px;
+  position: relative;
   h2 {
     font-size: 2.5em;
+  }
+}
+
+.pro-info-sold-out {
+  font-size: 14px;
+  line-height: 24px;
+  position: absolute;
+  background-color: @dark-2;
+  margin-top: 24px;
+  border-radius: 12px;
+  padding: 0 8px;
+  left: -8px;
+  top: 0;
+}
+
+.sold-out {
+  .pro-image {
+    opacity: 0.5;
   }
 }
 

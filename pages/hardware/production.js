@@ -18,11 +18,12 @@ class Production extends React.Component {
         duration={600}
         animConfig={{ opacity:[ 1, 0 ]}}
         className={classnames( styles.container, className )}>
-        {productions.map(({ name, image, html }, index ) => {
+        {productions.map(({ name, image, html, soldOut }, index ) => {
+          const soldOutTag = `<div class=${styles.proInfoSoldOut}>停产</div>`;
           return (
-            <section key={`pro-${index}`} className={styles.pro}>
+            <section key={`pro-${index}`} className={classnames( styles.pro, { [styles.soldOut]: soldOut })}>
               <div className={styles.proInfo}>
-                <div className={styles.proInfoContent} dangerouslySetInnerHTML={{ __html: html }} />
+                <div className={styles.proInfoContent} dangerouslySetInnerHTML={{ __html: ( soldOut ? soldOutTag : '' ) + html }} />
               </div>
               <figure className={styles.proImage}>
                 <img alt={name} src={image} width="100%" />

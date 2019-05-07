@@ -34,8 +34,8 @@ class WallPaper extends React.Component {
         </Paper>
         <div className={styles.leftContent}>
           <div className={classnames( styles.topic, 'AppSiYuan' )}>
-            <h1 className={classnames( styles.topicTitle, 'AppSiYuanExtraLight' )}>
-              云服务 · 智慧应用
+            <h1 className={classnames( styles.topicTitle, 'AppSiYuan' )}>
+              智慧应用
             </h1>
             <p className={styles.topicDesc}>
               围绕核心功能，分类构建功能应用体系，涉及多个业务领域，为用户带来统一高效的管理。

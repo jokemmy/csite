@@ -6,7 +6,7 @@ import Link from 'next/link';
 import classnames from 'classnames';
 import { withRouter } from 'next/router';
 import NotFound from '@components/NotFound';
-import apps from './apps';
+import appData from './apps';
 import styles from './goods.less';
 
 
@@ -15,7 +15,7 @@ class Goods extends React.Component {
 
   static getInitialProps = async function( ctx ) {
     const code = ctx.query.code;
-    const goods = apps.find(( goods ) => code === goods.code );
+    const goods = appData.allApps.find(( goods ) => code === goods.code );
     const layoutProps = {
       title: '应用商店',
       pageProps: {

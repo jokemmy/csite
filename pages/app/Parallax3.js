@@ -34,8 +34,8 @@ class WallPaper extends React.Component {
         </Paper>
         <div className={styles.leftContent}>
           <div className={classnames( styles.topic, 'AppSiYuan' )}>
-            <h1 className={classnames( styles.topicTitle, 'AppSiYuanExtraLight' )}>
-              云数据中心
+            <h1 className={classnames( styles.topicTitle, 'AppSiYuan' )}>
+              数据中心
             </h1>
             <p className={styles.topicDesc}>
               充分利用云计算和大数据技术，适配各个行业需求，为客户提供托管云、混合云等场景下的解决方案，实现业务全面云化，推进行业数字化转型。
