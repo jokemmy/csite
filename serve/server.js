@@ -4,6 +4,7 @@ const next = require( 'next' );
 const logger = require( 'koa-logger' );
 const koabody = require( 'koa-body' );
 const Router = require( 'koa-router' );
+const Static = require( 'koa-static' );
 const compress = require( 'koa-compress' );
 const routers = require( './router' );
 
@@ -26,6 +27,7 @@ app.prepare().then(() => {
 
   server.use( koabody());
   server.use( compress());
+  server.use( Static( 'public' ));
 
   router.get( '/text', async ctx => {
     await app.render( ctx.req, ctx.res, '/text', ctx.query );
