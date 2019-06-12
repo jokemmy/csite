@@ -102,7 +102,7 @@ module.exports = compose([
 
 ], {
   useFileSystemPublicRoutes: false,
-  // overwriteImageLoaderPaths: 'node_modules',
+  overwriteImageLoaderPaths: 'node_modules',
   webpack( config ) {
 
     // 添加 node_modules 内外的 less css 支持
