@@ -86,6 +86,7 @@ export function withTheme( Comp ) {
 }
 
 export const ThemeContext = React.createContext({
+  env: {},
   themeConfig: { ...defaultThemeConfig },
   themeEasings,
   themeVariables,

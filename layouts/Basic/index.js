@@ -95,10 +95,10 @@ class Base extends React.Component {
 
   render() {
     const { scrollClasses } = this.state;
-    const { children, isMobile, isLoaded, themeConfig, className, ...props } = omit( this.props, ['scrollClass']);
+    const { children, isMobile, isLoaded, themeConfig, className, env, ...props } = omit( this.props, ['scrollClass']);
 
     return (
-      <ThemeContext.Provider value={{ themeConfig, themeVariables, themeEasings, isMobile, isLoaded }}>
+      <ThemeContext.Provider value={{ env, themeConfig, themeVariables, themeEasings, isMobile, isLoaded }}>
         <div {...props} className={classnames( 'page-basic', scrollClasses.join( ' ' ), className )}>
           {children}
         </div>

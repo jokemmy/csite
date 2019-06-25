@@ -166,7 +166,7 @@ class Carousel extends React.Component {
             </Animate>
             {showPoints ? (
               <Points
-                size="80%"
+                size="100%"
                 index={index}
                 onChange={this.handleChange}
                 points={Array( count ).fill( 1 )} />

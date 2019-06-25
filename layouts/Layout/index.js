@@ -17,11 +17,11 @@ class Layout extends React.Component {
 
   render() {
 
-    const { children, title, themeConfig, pageProps } = this.props;
+    const { children, title, themeConfig, pageProps, env } = this.props;
     const { header, footer } = themeConfig;
 
     return (
-      <Page {...pageProps} themeConfig={themeConfig} className={bodyStyles.container}>
+      <Page {...pageProps} env={env} themeConfig={themeConfig} className={bodyStyles.container}>
         <Head>
           <meta charSet="utf-8" />
           <meta name="renderer" content="webkit" />
