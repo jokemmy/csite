@@ -361,7 +361,7 @@ class Hardware extends React.Component {
               [styles.unVisibility]: selected.animIn && !selected.animating,
               'no-events': selected.animating || selected.animIn
             })}>
-              {categorys.map(({ name }, index ) => {
+              {categorys.map(({ name, products }, index ) => {
                 return (
                   <div
                     key={name}
@@ -372,12 +372,9 @@ class Hardware extends React.Component {
                       image: images[index],
                       className: styles[`itemImage${index + 1}`]
                     })}
-                    className={classnames( styles.item, styles[`itemImage${index + 1}`], {
-                      // [styles.unVisibility]: selected.animIn
-                      //   ? selected.index === index + 1 && ( selected.animating || selected.animIn )
-                      //   : selected.index === index + 1 && this.state.index !== 0
-                    })}>
+                    className={classnames( styles.item, styles[`itemImage${index + 1}`])}>
                     <h2 className={styles.categoryTitle}>{name}</h2>
+                    <p className={styles.categoryProducts}>{products}</p>
                     <SvgIcon className={styles.categoryIcon} icon={icons[index]} />
                   </div>
                 );

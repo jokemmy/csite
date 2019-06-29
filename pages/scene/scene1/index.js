@@ -5,7 +5,6 @@ import TweenOne from 'rc-tween-one';
 import SvgIcon from '@components/SvgIcon';
 import { setTheme } from '@components/Themes';
 import quote from '@assets/images/scene/quote.svg?sprite';
-// import banner from '@assets/images/scene/banner.jpg';
 import Section2 from './section2';
 import Section3 from './section3';
 import Section4 from './section4';
