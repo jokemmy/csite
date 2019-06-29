@@ -158,17 +158,23 @@
     transform @anim-speed-2 @easeOutExpo;
 }
 
+@media only screen and (max-width: 768px) {
+  .item {
+    width: 100%;
+  }
+}
 
 @media only screen and (max-width: 1024px) {
   .item {
-    width: 100%;
-    min-height: 100px;
+    min-height: 80px;
+  }
+  .category-products {
+    right: 64px + 24px;
   }
   .category-icon {
     font-size: 64px;
     bottom: 18px;
   }
-
 }
 
 @media only screen and (min-width: 1200px) {
