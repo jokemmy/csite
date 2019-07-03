@@ -8,6 +8,7 @@ import quote from '@assets/images/scene/quote.svg?sprite';
 import Section2 from './section2';
 import Section3 from './section3';
 import Section4 from './section4';
+import Section5 from './section5';
 import styles from './scene1.less';
 
 
@@ -81,6 +82,7 @@ class SectionBlock extends React.Component {
         <section className={styles.blockContent}>
           <div className="page-content">
             <h2>技术架构</h2>
+            <Section5 />
           </div>
         </section>
         <section className={styles.blockContent}>

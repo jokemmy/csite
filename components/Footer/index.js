@@ -1,7 +1,6 @@
 
 import moment from 'moment';
 import classnames from 'classnames';
-import Beian from './Beian';
 import styles from './footer.less';
 
 
@@ -21,7 +20,6 @@ function Footer({ transparent, overlay, mode }) {
         <section className="footer-legal">
           <div className="footer-legal-copyright">
             Copyright © {moment().year()} 江苏欣动信息科技有限公司
-            <Beian />
           </div>
           <div className="footer-legal-links">
             <a href="#">隐私政策</a>

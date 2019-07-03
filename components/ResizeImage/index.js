@@ -1,5 +1,7 @@
 
 import React from 'react';
+import is from 'whatitis';
+import omit from 'omit.js';
 import pick from 'object.pick';
 import { set, get } from 'rc-util/lib/Dom/css';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
@@ -31,11 +33,15 @@ class ResizeImage extends React.Component {
 
   componentDidMount() {
     const { width } = this.state;
+    const { onInit } = this.props;
     const { themeVariables } = this.context;
     // eslint-disable-next-line
     this.state.width = width === null ? +themeVariables['@page-width'].replace( /px$/, '' ) - 24 * 2 : width;
     this.resizeHandler = addEventListener( window, 'resize', this.handleResize );
     this.handleResize();
+    if ( is.Function( onInit )) {
+      onInit( this.handleResize );
+    }
   }
 
   componentWillUnmount() {
@@ -75,7 +81,7 @@ class ResizeImage extends React.Component {
     style = pick( style, Object.keys( style ).filter( key => style[key]));
 
     return (
-      <div {...props} ref={this.wrapRef}>
+      <div {...omit( props, ['onInit'])} ref={this.wrapRef}>
         <div style={style} className={styles.container} ref={this.containerRef}>
           {children}
         </div>
