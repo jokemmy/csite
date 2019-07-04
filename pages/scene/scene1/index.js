@@ -4,11 +4,13 @@ import classnames from 'classnames';
 import TweenOne from 'rc-tween-one';
 import SvgIcon from '@components/SvgIcon';
 import { setTheme } from '@components/Themes';
-import quote from '@assets/images/scene/quote.svg?sprite';
+import quote from '@assets/images/scene/scene1/quote.svg?sprite';
+import blockBlueBg from '@assets/images/scene/scene1/block-blue-bg.png';
 import Section2 from './section2';
 import Section3 from './section3';
 import Section4 from './section4';
 import Section5 from './section5';
+import Section6 from './section6';
 import styles from './scene1.less';
 
 
@@ -85,11 +87,14 @@ class SectionBlock extends React.Component {
             <Section5 />
           </div>
         </section>
-        <section className={styles.blockContent}>
+        <section className={styles.blockContent} style={{
+          backgroundImage: `url(${blockBlueBg})`,
+          backgroundPosition: 'top center',
+          backgroundSize: 'cover'
+        }}>
           <div className="page-content">
             <h2>技术特点</h2>
-            <div className={styles.characteristic}>
-            </div>
+            <Section6 />
           </div>
         </section>
       </div>

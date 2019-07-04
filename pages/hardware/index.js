@@ -297,7 +297,9 @@ class Hardware extends React.Component {
 
   getImageTransition = ( isIn ) => {
     const { themeVariables, themeEasings } = this.context;
-    const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
+    const animSpeed = isIn
+      ? +themeVariables['@anim-speed-3'].replace( 'ms', '' ) + 32
+      : themeVariables['@anim-speed-3'].replace( 'ms', '' );
     return Object.entries({
       opacity: { ease: '', duration: animSpeed },
       transform: {

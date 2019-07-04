@@ -36,6 +36,7 @@
     }
     .header-logo {
       height: 0;
+      z-index: 1;
       left: 16px;
       position: absolute;
       line-height: @header-height - 16px;
@@ -94,6 +95,12 @@
   background-color: @header-background-color;
 }
 
+@media only screen and (max-width: 767px) {
+  :global(.page-header-dark .page-header) {
+    height: @header-phone-height;
+  }
+}
+
 :global(.page-header-light .page-header) {
   background-color: @light-10;
   .link {
@@ -119,6 +126,12 @@
   }
   :global(.header-light-logo-image) {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  :global(.page-header-light .page-header) {
+    height: @header-phone-height;
   }
 }
 
@@ -173,6 +186,12 @@
   }
 }
 
+@media only screen and (max-width: 767px) {
+  :global(.page-header-light) .mobile-menu em {
+    background: #333;
+  }
+}
+
 .open {
   .mobile-menu em {
     &:nth-child(1) {
@@ -187,5 +206,19 @@
   }
   .phone-menu-container {
     opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  :global(.page-header-light) .open .mobile-menu em {
+    background: #fff;
+  }
+  :global(.page-header-logo-color) {
+    .open :global(.header-color-logo-image) {
+      display: none;
+    }
+    .open :global(.header-light-logo-image) {
+      display: inline;
+    }
   }
 }

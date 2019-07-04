@@ -108,6 +108,7 @@
   z-index: 1;
   .link {
     color: @dark-7;
+    text-align: center;
     &:hover {
       color: @dark-10;
       background-color: @dark-1;
@@ -116,5 +117,18 @@
       color: @dark-8;
       background-color: @dark-2;
     }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  :global(.banner-menu-fixed) .banner-menu {
+    top: @header-phone-height;
+  }
+  .banner-menu {
+    display: flex;
+  }
+  .banner-menu .link {
+    padding: 0;
+    flex: 1 1 auto;
   }
 }

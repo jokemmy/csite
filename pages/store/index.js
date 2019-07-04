@@ -1,9 +1,11 @@
 
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import classnames from 'classnames';
 import { withRouter } from 'next/router';
+import { Anchor, Link } from '@components/Anchor';
 import SvgIcon from '@components/SvgIcon';
+import scrollTo from '@lib/scrollTo';
 import appData from './apps';
 import styles from './store.less';
 
@@ -27,21 +29,51 @@ class Store extends React.Component {
     return { layoutProps };
   };
 
+  state = {
+    anchor: null,
+    anchors: []
+  };
+
+  handleAnchorChange = ( anchor, anchors ) => {
+    this.setState({ anchor, anchors });
+  };
+
+  scrollToAnchor = ( anchor ) => () => {
+    if ( anchor ) {
+      scrollTo({ anchor: anchor.anchor.dom });
+    }
+  };
+
   render() {
+
+    const { anchor, anchors } = this.state;
+
     return (
       <>
         <div className={styles.banner}>
           <div className={styles.bannerMenu}>
-            {[{ name: '智慧能源' }, { name: '智慧餐饮' }, { name: '智慧房产' }].map(({ name }, index ) => {
+            {[
+              { code: 'Manage', name: '能源管理' },
+              { code: 'Recycle', name: '能源回收' },
+              { code: 'SaveAndControl', name: '节能控制' },
+              { code: 'SafeAndSafety', name: '安全保障' },
+              { code: 'OperationManage', name: '运行管理' },
+              { code: '6', name: '智慧餐饮' },
+              { code: '7', name: '智慧房产' }
+            ].map(({ name, code }) => {
               return (
-                <div key={name} className={classnames( styles.link, { [styles.selected]: !index })}>
+                <a key={code}
+                  onClick={this.scrollToAnchor( anchors.find(({ anchor }) => code === anchor.value.code ))}
+                  className={classnames( styles.link, {
+                  [styles.selected]: anchor && anchor.value.code === code
+                })}>
                   {name}
-                </div>
+                </a>
               );
             })}
           </div>
         </div>
-        <div className={styles.appList}>
+        <Anchor top={48 + 48} onChange={this.handleAnchorChange} className={styles.appList}>
           <div className="page-content">
             {appData.apps.map(({ code, name, desc, color, apps }) => {
               const appBlocks = apps.map(({ name, icon, description }) => {
@@ -63,7 +95,7 @@ class Store extends React.Component {
                 <div key={code} className={styles.category}>
                   <div className={styles.categoryHead}>
                     <div className={styles.categoryContent}>
-                      <h1 className={styles.categoryTitle}>{name}</h1>
+                      <Link component="h1" className={styles.categoryTitle} value={{ code }}>{name}</Link>
                       <p className={styles.categoryDesc}>{desc}</p>
                     </div>
                   </div>
@@ -72,7 +104,7 @@ class Store extends React.Component {
               );
             })}
           </div>
-        </div>
+        </Anchor>
       </>
     );
   }

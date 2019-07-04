@@ -2,18 +2,11 @@
 .banner {
   position: relative;
   height: 350px;
-  // margin-top: @header-height;
   background-color: @dark-1;
   background-image: url(../../assets/images/store/banner.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-}
-
-@media only screen and (max-width: 767px) {
-  .banner {
-    margin-top: @header-height - 16px;
-  }
 }
 
 .app-list {
@@ -65,16 +58,12 @@
   height: 48px;
   line-height: 48px;
   text-align: center;
-  // background-color: @light-2;
   position: absolute;
   width: 100vw;
   bottom: 0;
   transition: background-color @anim-speed-2;
   background-color: rgba(0,11,38,0.5);
-  // background-color: rgba(0,153,153,0.8);
   .link {
-    width: 200px;
-    // font-weight: bold;
     display: inline-block;
     padding: 0 24px;
     color: @light-10;
@@ -102,6 +91,7 @@
   z-index: 1;
   .link {
     color: @dark-7;
+    text-align: center;
     &:hover {
       color: @dark-10;
       background-color: @dark-1;
@@ -110,6 +100,19 @@
       color: @dark-8;
       background-color: @dark-2;
     }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  :global(.banner-menu-fixed) .banner-menu {
+    top: @header-phone-height;
+  }
+  .banner-menu {
+    display: flex;
+  }
+  .banner-menu .link {
+    padding: 0;
+    flex: 1 1 auto;
   }
 }
 
@@ -128,6 +131,13 @@
   touch-action: manipulation;
   &:hover {
     box-shadow: 2px 2px 7px #ccc;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .app {
+    width: 100%;
+    height: auto;
   }
 }
 

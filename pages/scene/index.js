@@ -268,7 +268,7 @@ class Scene extends React.Component {
 
   getTransition = ( isIn ) => {
     const { themeVariables, themeEasings } = this.context;
-    const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
+    const animSpeed = themeVariables['@anim-speed-2'].replace( 'ms', '' );
     const ease = isIn ? themeEasings['@easeOutExpo'] : themeEasings['@easeOutCirc'];
     return Object.entries({
       width: { ease, duration: animSpeed },
@@ -282,7 +282,9 @@ class Scene extends React.Component {
 
   getImageTransition = ( isIn ) => {
     const { themeVariables, themeEasings } = this.context;
-    const animSpeed = themeVariables['@anim-speed-3'].replace( 'ms', '' );
+    const animSpeed = isIn
+      ? +themeVariables['@anim-speed-3'].replace( 'ms', '' ) + 32
+      : themeVariables['@anim-speed-3'].replace( 'ms', '' );;
     return Object.entries({
       transform: {
         ease: isIn ? themeEasings['@easeOutCirc'] : themeEasings['@easeOutExpo'],

@@ -105,7 +105,7 @@ class Header extends Component {
         [styles.light]: mode === 'light'
       })}>
         <div className="header-container">
-          <figure className="header-logo">
+          <figure className={classnames( 'header-logo', { [styles.open]: phoneOpen })}>
             <img alt="logo" className="header-color-logo-image" src={logoColor} />
             <img alt="logo" className="header-light-logo-image" src={logo} />
           </figure>
