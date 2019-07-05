@@ -5,15 +5,19 @@ import Router, { withRouter } from 'next/router';
 import { set, get, getClientSize } from 'rc-util/lib/Dom/css';
 import { ThemeContext } from '@components/Themes';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
+import banner from '@assets/images/scene/banner.jpg';
 import banner1 from '@assets/images/scene/banner-1.jpg';
 import banner2 from '@assets/images/scene/banner-2.jpg';
 import banner3 from '@assets/images/scene/banner-3.jpg';
 import banner4 from '@assets/images/scene/banner-4.jpg';
+import banner5 from '@assets/images/scene/banner-5.jpg';
 import Scene1 from './scene1';
 import Scene2 from './scene2';
 import Scene3 from './scene3';
 import Scene4 from './scene4';
 import styles from './scene.less';
+
+
 
 
 const images = [ banner1, banner2, banner3, banner4 ];
@@ -52,7 +56,8 @@ class Scene extends React.Component {
           '>=100vh-64': 'page-header-dark banner-menu-fixed'
         }
       },
-      title: '解决方案'
+      title: '解决方案',
+      preLoad: [ banner, banner1, banner2, banner3, banner4, banner5 ]
     };
     return { layoutProps };
   };

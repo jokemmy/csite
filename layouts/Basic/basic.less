@@ -36,7 +36,8 @@
 
   // 文本内容区域
   .page-content,
-  .page-content-lg {
+  .page-content-lg,
+  .page-content-extend {
     max-width: @page-width;
     padding: 0 24px;
     margin: 0 auto;
@@ -55,6 +56,12 @@
 
   .page-content-lg {
     max-width: @page-width-lg;
+  }
+
+  @media only screen and (min-width: 1441px) {
+    .page-content-extend {
+      max-width: @page-width-md;
+    }
   }
 
   .page-poem {

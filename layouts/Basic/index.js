@@ -5,10 +5,12 @@ import Media from 'react-media';
 import classnames from 'classnames';
 import { getClientSize } from 'rc-util/lib/Dom/css';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
-import { requestAnimationFrame } from '@lib/requestAnimationFrame';
 import Mask from '@components/Mask';
+import { requestAnimationFrame } from '@lib/requestAnimationFrame';
 import { ThemeContext, themeVariables, themeEasings } from '@components/Themes';
 import { pushLoader, popLoader, withLoaded } from '@lib/loaded';
+import ImagePreLoad from '@lib/ImagePreLoad.worker';
+import * as images from '@assets/preImages';
 import './basic.less';
 import './fonts.less';
 
@@ -33,6 +35,7 @@ class Base extends React.Component {
       scroll.initEvent( 'scroll', true, true );
       window.dispatchEvent( scroll );
       this.handleScroll();
+      this.handleWorker( this.props.preLoad );
     });
   }
 
@@ -42,6 +45,22 @@ class Base extends React.Component {
       this.scrollEvent = null;
     }
   }
+
+  handleWorker = ( currentImages = []) => {
+    const worker = new ImagePreLoad();console.log(":", currentImages.concat(
+      Object.values( images ).filter(( url ) => {
+        return !currentImages.includes( url );
+      })).map(( url ) => {
+        return location.origin + url;
+      }))
+    worker.postMessage( currentImages.concat(
+      Object.values( images ).filter(( url ) => {
+        return !currentImages.includes( url );
+      })).map(( url ) => {
+        return location.origin + url;
+      })
+    );
+  };
 
   handleScroll = () => {
     const { scrollCache, scrollClasses } = this.state;
@@ -95,7 +114,7 @@ class Base extends React.Component {
 
   render() {
     const { scrollClasses } = this.state;
-    const { children, isMobile, isLoaded, themeConfig, className, env, ...props } = omit( this.props, ['scrollClass']);
+    const { children, isMobile, isLoaded, themeConfig, className, env, ...props } = omit( this.props, [ 'scrollClass', 'preLoad' ]);
 
     return (
       <ThemeContext.Provider value={{ env, themeConfig, themeVariables, themeEasings, isMobile, isLoaded }}>

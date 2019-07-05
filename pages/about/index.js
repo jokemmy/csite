@@ -11,6 +11,14 @@ import core3 from '@assets/images/about/core-3.svg?sprite';
 import platform1 from '@assets/images/about/platform-1.svg?sprite';
 import platform2 from '@assets/images/about/platform-2.svg?sprite';
 import platform3 from '@assets/images/about/platform-3.svg?sprite';
+import ad1 from '@assets/images/about/ad-1.jpg';
+import ad2 from '@assets/images/about/ad-2.jpg';
+import ad3 from '@assets/images/about/ad-3.jpg';
+import ad4 from '@assets/images/about/ad-4.jpg';
+import ad5 from '@assets/images/about/ad-5.jpg';
+import banner1 from '@assets/images/about/banner-1.jpg';
+import banner2 from '@assets/images/about/banner-2.jpg';
+import banner3 from '@assets/images/about/banner-3.jpg';
 // import Topology from './topology';
 import styles from './about.less';
 
@@ -39,7 +47,8 @@ class About extends React.Component {
           '>=0': 'page-header-hold',
           '>=600': 'page-header-light page-header-logo-color'
         }
-      }
+      },
+      preLoad: [ ad1, ad2, ad3, ad4, ad5, banner1, banner2, banner3 ]
     };
     return { layoutProps };
   };

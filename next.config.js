@@ -5,6 +5,7 @@ const withFonts = require( 'next-fonts' );
 const withMDX = require( '@next/mdx' );
 const withCSS = require( '@zeit/next-css' );
 const withLess = require( '@zeit/next-less' );
+const withWorkers = require('@zeit/next-workers')
 const compose = require( 'next-compose-plugins' );
 const { PHASE_PRODUCTION_BUILD, PHASE_EXPORT } = require( 'next/constants' );
 const optimizedImages = require( 'next-optimized-images' );
@@ -21,6 +22,13 @@ if ( typeof require !== 'undefined' ) {
 }
 
 module.exports = compose([
+
+  [ withWorkers, {
+    workerLoaderOptions: {
+      inline: true,
+      name: '[name].[hash].js'
+    }
+  }],
 
   [ withMDX, {
     extension: /\.mdx?$/
@@ -164,6 +172,9 @@ module.exports = compose([
     [ 'components', 'layouts', 'pages', 'assets', 'lib' ].forEach(( dirName ) => {
       config.resolve.alias[`@${dirName}`] = path.resolve( __dirname, `./${dirName}` );
     });
+
+    // worker loader 报错 window is not defined
+    config.output.globalObject = 'this';
 
     return config;
   }

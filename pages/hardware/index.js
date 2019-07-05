@@ -6,6 +6,7 @@ import Router, { withRouter } from 'next/router';
 import { ThemeContext } from '@components/Themes';
 import { set, getClientSize } from 'rc-util/lib/Dom/css';
 import { requestAnimationFrame } from '@lib/requestAnimationFrame';
+import banner from '@assets/images/hardware/banner.jpg';
 import category1 from '@assets/images/hardware/category-1.jpg';
 import category2 from '@assets/images/hardware/category-2.jpg';
 import category3 from '@assets/images/hardware/category-3.jpg';
@@ -43,7 +44,8 @@ class Hardware extends React.Component {
         transparent: true
       },
       footer: false,
-      title: '智能硬件'
+      title: '智能硬件',
+      preLoad: [ banner, category1, category2, category3, category4, category5, category6 ]
     };
     return { layoutProps };
   };

@@ -1,10 +1,10 @@
 
 import React from 'react';
-// import Link from 'next/link';
 import classnames from 'classnames';
 import { withRouter } from 'next/router';
 import { Anchor, Link } from '@components/Anchor';
 import SvgIcon from '@components/SvgIcon';
+import storeImage1 from '@assets/images/store/banner.jpg';
 import scrollTo from '@lib/scrollTo';
 import appData from './apps';
 import styles from './store.less';
@@ -24,7 +24,8 @@ class Store extends React.Component {
       header: {
         transparent: true
       },
-      title: '应用商店'
+      title: '应用商店',
+      preLoad: [storeImage1]
     };
     return { layoutProps };
   };
@@ -40,7 +41,7 @@ class Store extends React.Component {
 
   scrollToAnchor = ( anchor ) => () => {
     if ( anchor ) {
-      scrollTo({ anchor: anchor.anchor.dom });
+      scrollTo({ anchor: anchor.anchor.dom, top: 64 + 48 });
     }
   };
 
@@ -74,7 +75,7 @@ class Store extends React.Component {
           </div>
         </div>
         <Anchor top={48 + 48} onChange={this.handleAnchorChange} className={styles.appList}>
-          <div className="page-content">
+          <div className="page-content-extend">
             {appData.apps.map(({ code, name, desc, color, apps }) => {
               const appBlocks = apps.map(({ name, icon, description }) => {
                 return (
