@@ -11,7 +11,9 @@ import Section3 from './section3';
 import Section4 from './section4';
 import Section5 from './section5';
 import Section6 from './section6';
-import styles from './scene1.less';
+import Section7 from './section7';
+import Section8 from './section8';
+import styles from './scene.less';
 
 
 class SectionBlock extends React.Component {
@@ -95,6 +97,18 @@ class SectionBlock extends React.Component {
           <div className="page-content">
             <h2>技术特点</h2>
             <Section6 />
+          </div>
+        </section>
+        <section className={styles.blockContent}>
+          <div className="page-content">
+            <h2>平台功能</h2>
+            <Section7 />
+          </div>
+        </section>
+        <section className={styles.blockContent}>
+          <div className="page-content">
+            <h2>应用场景</h2>
+            <Section8 />
           </div>
         </section>
       </div>

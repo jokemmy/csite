@@ -2,7 +2,7 @@
 import React from 'react';
 import ResizeImage from '@components/ResizeImage';
 import techMap from '@assets/images/scene/scene1/tech-map.svg';
-import styles from './section5.less';
+import styles from './section.less';
 
 
 class Section extends React.Component {

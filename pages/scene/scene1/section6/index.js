@@ -2,7 +2,7 @@
 import React from 'react';
 import SvgIcon from '@components/SvgIcon';
 import icon from '@assets/images/scene/scene1/quote.svg';
-import styles from './section6.less';
+import styles from './section.less';
 
 
 const features = [{

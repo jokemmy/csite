@@ -2,7 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import ResizeImage from '@components/ResizeImage';
-import styles from './section4.less';
+import styles from './section.less';
 
 
 class Section extends React.Component {

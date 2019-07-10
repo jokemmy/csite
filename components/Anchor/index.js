@@ -19,6 +19,7 @@ export class Anchor extends React.Component {
   };
 
   state = {
+    clienSize: {},
     current: null,
     anchors: []
   };

@@ -289,7 +289,7 @@ class Scene extends React.Component {
     const { themeVariables, themeEasings } = this.context;
     const animSpeed = isIn
       ? +themeVariables['@anim-speed-3'].replace( 'ms', '' ) + 32
-      : themeVariables['@anim-speed-3'].replace( 'ms', '' );;
+      : themeVariables['@anim-speed-3'].replace( 'ms', '' );
     return Object.entries({
       transform: {
         ease: isIn ? themeEasings['@easeOutCirc'] : themeEasings['@easeOutExpo'],

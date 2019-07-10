@@ -1,6 +1,6 @@
 
 import React from 'react';
-import styles from './section2.less';
+import styles from './section.less';
 
 
 const tableData = [{
