@@ -32,27 +32,27 @@ const categorys = [{
   code: 'Manage',
   name: '能源管理',
   color: 'rgba(0,204,253,0.3)',
-  desc: '根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和'
+  desc: '通过先进的物联网技术对水、电、气、热等能源数据进行实时采集和全方位远程监控，实时掌握不同区域、不同类别能源的消耗情况与设备运行状态，实现节能降耗、安全运行、精细化管理。'
 }, {
   code: 'Recycle',
   name: '能源回收',
   color: 'rgba(255,153,102,0.3)',
-  desc: '根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和'
+  desc: '解决能源运营回收问题，整合多种类型、多种品牌能源计量设备，支持预付费和后付费两种收费模式，借助信息化和物联网技术堵住用能漏洞，实现用能的统一管理。'
 }, {
   code: 'SaveAndControl',
   name: '节能控制',
   color: 'rgba(102,204,255,0.3)',
-  desc: '根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和'
+  desc: '由节能控制管理软件、总线传输系统、节能控制设备三部分组成，实现各种用能能耗的自动采集、监测、统计分析展示、以及定额管理，远程通断，故障告警等功能。'
 }, {
   code: 'SafeAndSafety',
   name: '安全保障',
   color: 'rgba(153,153,255,0.3)',
-  desc: '根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和'
+  desc: '对引发安全问题的主要因素进行不间断的数据跟踪与统计分析，并将发现的各种隐患信息及时推送给企业管理人员，实现安全状态监控。达到消除潜在安全隐患，实现“防患于未然”的目的。'
 }, {
   code: 'OperationManage',
   name: '运行管理',
   color: 'rgba(153,204,102,0.3)',
-  desc: '根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和'
+  desc: '统一协调各种角色，统筹管理设施设备的运行，提供技术手段和支撑服务，实现职能与资源的整合，管理有执行，服务有指挥的良好运营模式。'
 }];
 
 const apps = [{
@@ -62,7 +62,7 @@ const apps = [{
   href: '/store/goods?code=estatis',
   as: '/store/estatis',
   icon: estatis,
-  description: `根据国家机关办公建筑和大型公共建筑能耗监测系统、高等学校校园建筑节能监管系统等相关导则和`,
+  description: '以建筑为维度，实时采集与监测能耗数据，提供具有业务价值的可视化数据，协助能源管理部门科学决策、加强管理。',
   content: require( 'text-loader!./estatis.md' )
 }, {
   code: 'edept',
@@ -71,7 +71,7 @@ const apps = [{
   href: '/store/goods?code=edept',
   as: '/store/edept',
   icon: edept,
-  description: '采取定额使用、超额自理和分级授权、逐级管理的模式，对高校各院系部门用能进行指标化管理。',
+  description: '以部门为维度，对各部门的用能情况进行指标化管理，实现部门能耗的监测以及用能的统计分析。',
   content: require( 'text-loader!./edept.md' )
 }, {
   code: 'efacility',
@@ -80,7 +80,7 @@ const apps = [{
   href: '/store/goods?code=efacility',
   as: '/store/efacility',
   icon: efacility,
-  description: '系统基于传统服务器或云服务器平台和智能传感网络技术（LORA/NB-IoT等），采用物联网智能网关、智能监控装置、智能转换器等，对各种设施',
+  description: '以设施设备为维度，实时采集、传输用能数据，随时监测、分析用能情况，直观掌握设备设施的运行状况及节能效益评价。',
   content: require( 'text-loader!./efacility.md' )
 }, {
   code: 'eaccount',
@@ -89,7 +89,7 @@ const apps = [{
   href: '/store/goods?code=eaccount',
   as: '/store/eaccount',
   icon: eaccount,
-  description: '系统能够自动对下发的用能指标、用能回收和支出进行统一结算，形成一本准确无遗漏的总账',
+  description: '自动对下发的用能指标、用能回收和支出进行统一结算，形成一本准确无遗漏的总账，促进收支平衡。',
   content: require( 'text-loader!./eaccount.md' )
 }, {
   code: 'ebalance',
@@ -98,7 +98,7 @@ const apps = [{
   href: '/store/goods?code=ebalance',
   as: '/store/ebalance',
   icon: ebalance,
-  description: '通过建立水或电的用量拓扑关系，在同一时间范畴下计量各节点用量，计算出各节点平衡度，以此分析漏失、损耗以及其他非正常的水电使用等。',
+  description: '建立水或电的用量拓扑关系，在同一时间范畴下计量各节点用量，计算出各节点平衡度，以此分析漏失、损耗以及其他非正常的水电使用等。',
   content: require( 'text-loader!./ebalance.md' )
 }, {
   code: 'eupdatas',
@@ -107,7 +107,7 @@ const apps = [{
   href: '/store/goods?code=eupdatas',
   as: '/store/eupdatas',
   icon: eupdatas,
-  description: '能源上报系统可通过智能数据网关，根据国家大型公共建筑能源数据上报导则，自动将高校能源数据上报至所属统计部门。',
+  description: '根据国家大型公共建筑能源数据上报导则，按照分项分类编码规则和数据质量要求，自动将能源数据上报至所属统计部门。',
   content: require( 'text-loader!./eupdatas.md' )
 }, {
   code: 'echargedmt',
@@ -116,7 +116,7 @@ const apps = [{
   href: '/store/goods?code=echargedmt',
   as: '/store/echargedmt',
   icon: echargedmt,
-  description: '宿舍能源收费系统可对水、电等多种能源进行回收管理，支持多种类、多品牌表具，可自动统计与核算用能数据',
+  description: '设计了通用的宿舍用能模型，计量宿舍不同分项的用能数据，支持水电联动策略、恶性负载识别，确保用电安全。',
   content: require( 'text-loader!./echargedmt.md' )
 }, {
   code: 'echargebus',
@@ -125,7 +125,7 @@ const apps = [{
   href: '/store/goods?code=echargebus',
   as: '/store/echargebus',
   icon: echargebus,
-  description: '能源收费子系统是智慧能源场景中的一个子系统，主要解决能源运营回收问题，通过成熟的技术架构，整合多种类型、多种品牌能源计量设备',
+  description: '对多种能源进行回收管理，自动统计与核算用能数据，提供准确的用能账目，降低物管人员和财务人员的工作量和错误率。',
   content: require( 'text-loader!./echargebus.md' )
 }, {
   code: 'echargechp',
@@ -143,7 +143,7 @@ const apps = [{
   href: '/store/goods?code=echargehotw',
   as: '/store/echargehotw',
   icon: echargehotw,
-  description: '充电桩设备管理，手机扫码充电、一卡通刷卡充电等多种支付手段，在线运营、结算和维保管理，实时数据监测，安全事件、故障报警。',
+  description: '热水设备管理和计量，实时监测温度、流量、水压、用水量等数据，实现在线运营、用户管理、账目结算、热水设备维保等管理工作。',
   content: require( 'text-loader!./echargehotw.md' )
 }, {
   code: 'echargepws',
@@ -215,7 +215,7 @@ const apps = [{
   href: '/store/goods?code=pumphouse',
   as: '/store/pumphouse',
   icon: pumphouse,
-  description: '建立一套远程集中监控系统，针对泵房实际情况，利用网络通讯技术，实现监控中心对各二次供水泵房的数据监控。',
+  description: '建立一套远程集中监控系统，针对泵房实际情况，利用网络通讯技术，进行数据监控，实现泵房无人值守管理需要。',
   content: require( 'text-loader!./pumphouse.md' )
 }, {
   code: 'watermonitor',
@@ -242,7 +242,7 @@ const apps = [{
   href: '/store/goods?code=firehydrant',
   as: '/store/firehydrant',
   icon: firehydrant,
-  description: '监测消防栓的撞击晃动、倾斜倒地、水阀开关、水压、流量等数据，记录相关日志，实现报警数据的实时推送',
+  description: '监测消防栓的撞击晃动、倾斜倒地、水阀开关、水压、流量等数据，记录相关日志，实现报警数据的实时推送。',
   content: require( 'text-loader!./firehydrant.md' )
 }, {
   code: 'manholecover',
@@ -251,7 +251,7 @@ const apps = [{
   href: '/store/goods?code=manholecover',
   as: '/store/manholecover',
   icon: manholecover,
-  description: '管理窨井盖的位置、编号、负责人等基础信息台账，远程监测窨井盖的打开状态、地下水位高度，实现报警数据的及时上报',
+  description: '管理窨井盖的位置、编号、负责人等基础信息台账，远程监测窨井盖的打开状态、地下水位高度，实现报警数据的及时上报。',
   content: require( 'text-loader!./manholecover.md' )
 }, {
   code: 'emonitor',
@@ -260,7 +260,7 @@ const apps = [{
   href: '/store/goods?code=emonitor',
   as: '/store/emonitor',
   icon: emonitor,
-  description: '通过图形化建模，直观立体的展现网关、表具等总管设备的地理位置分布，远程监控各计量点运行状况，并能对相关表具进行冻结等操作。',
+  description: '通过图形化建模，直观立体的展现网关、表具等设备的地理位置分布，远程监控各计量点运行状况。',
   content: require( 'text-loader!./emonitor.md' )
 }, {
   code: 'runcenter',
@@ -269,7 +269,7 @@ const apps = [{
   href: '/store/goods?code=runcenter',
   as: '/store/runcenter',
   icon: runcenter,
-  description: '通过图形化建模，直观立体的展现网关、表具等总管设备的地理位置分布，远程监控各计量点运行状况，并能对相关表具进行冻结等操作。',
+  description: '以事务调度为主线，制定标准化的运行管理工作流程，形成报警、报修、派工、维修、维护、反馈、评价和考核的完整运维业务体系。',
   content: require( 'text-loader!./runcenter.md' )
 }, {
   code: 'esmart',
@@ -278,7 +278,7 @@ const apps = [{
   href: '/store/goods?code=esmart',
   as: '/store/esmart',
   icon: esmart,
-  description: '智慧管家是能源监管平台的创新模块，旨在通过对应用层业务系统数据的深度分析，为用户提供更具价值的综合用能报告',
+  description: '通过对应用层业务系统数据的深度分析，为用户提供更具价值的综合用能报告，帮助用户有针对性地开展节能改造，实现节能案例的云端共享。',
   content: require( 'text-loader!./esmart.md' )
 }, {
   code: 'eworkspace',
@@ -287,7 +287,7 @@ const apps = [{
   href: '/store/goods?code=eworkspace',
   as: '/store/eworkspace',
   icon: eworkspace,
-  description: '能源聚合空间通过数据聚合实现功能创新，既是能源监管平台业务数据的“聚合”，又是能源管理工作资讯的“聚合”。',
+  description: '通过数据聚合实现平台业务数据的“聚合”、能源管理工作资讯的“聚合”。',
   content: require( 'text-loader!./eworkspace.md' )
 }];
 

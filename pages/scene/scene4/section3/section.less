@@ -1,0 +1,28 @@
+
+.wrap {
+  & > div {
+    width: calc(( 100% - 32px ) / 2);
+    display: inline-block;
+    background-color: @light-8;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1);
+    &:nth-child(even) {
+      margin-left: 32px;
+    }
+  }
+}
+
+.block-title {
+  padding: 24px;
+  font-size: 20px;
+  font-weight: normal;
+  text-align: center;
+  background: #f5f5ff url(../../../../assets/images/scene/scene1/mini-block-title-bg.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.block-content {
+  // padding: 50px 30px;
+}
+
+
