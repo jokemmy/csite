@@ -8,7 +8,7 @@ function Beian({ className, ...props }) {
   const { env } =  useContext( ThemeContext );
   return env.pc ? (
     <div {...props} className={classnames( 'footer-beian', className )}>
-      <a target="_blank" href="https://beian.miit.gov.cn">苏ICP备19019187号-1</a>
+      <a target="_blank" href="https://beian.miit.gov.cn">苏ICP备19019187号-2</a>
       <span style={{ width: 300, display: 'inline-block', paddingLeft: 8 }}>
         <a
           target="_blank"
