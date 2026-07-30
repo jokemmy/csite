@@ -36,10 +36,10 @@ class WallPaper extends React.Component {
         <div className={styles.leftContent}>
           <div className={classnames( styles.topic, 'AppSiYuan' )}>
             <h1 className={classnames( styles.topicTitle, 'AppSiYuan' )}>
-              万物感知 · 万物互联 · 万物智能
+              多元感知 · 设备互联 · 智能协同
             </h1>
             <p className={styles.topicDesc}>
-              DD-IoT物联感知平台，部署各类传感网智能硬件产品，及时、准确、快速的监测一切人和物。
+              Mammoth物联感知平台，部署各类传感网智能硬件产品，可高效、稳定完成人员与物件状态监测。
             </p>
             <div className={styles.topicExtend}>
               <div className={styles.topicIcon}>

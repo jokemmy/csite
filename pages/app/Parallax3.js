@@ -38,12 +38,12 @@ class WallPaper extends React.Component {
               数据中心
             </h1>
             <p className={styles.topicDesc}>
-              充分利用云计算和大数据技术，适配各个行业需求，为客户提供托管云、混合云等场景下的解决方案，实现业务全面云化，推进行业数字化转型。
+              利用云计算和大数据技术，适配各个行业需求，为客户提供托管云、混合云等场景下的解决方案，实现业务云化，推进行业数字化转型。
             </p>
             <div className={styles.topicExtend}>
               <div className={styles.topicIcon}>
                 <SvgIcon icon={svg1} />
-                <div className={styles.topicLabel}>极致性能</div>
+                <div className={styles.topicLabel}>卓越性能</div>
               </div>
               <div className={styles.topicIcon}>
                 <SvgIcon icon={svg2} />

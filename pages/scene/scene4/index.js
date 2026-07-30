@@ -59,7 +59,7 @@ class SectionBlock extends React.Component {
             </p>
             <p className="page-poem">
               我们通过<br />对园区、高等院校、商业建筑、政府机关、大型公共建筑等设施<br />
-              用户的用能习惯和用能情况进行分析<br />提供全面的能源管理<br />实现能源利用最优
+              用户的用能习惯和用能情况进行分析<br />提供多维度能源管理<br />提高能源利用率
             </p>
           </div>
         </section>

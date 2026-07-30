@@ -22,7 +22,7 @@ export const categorys = [{
   url: '/hardware?category=4',
   name: '终端设备类',
   products: 'TC100-R8/TDV100-WN',
-  description: '欣动终端设备类是将客户通用需求与客户个性化需求、行业性需求有机融合的革命性产品。其中智能控制器使用微处理器和专用控制算法，实现智能控制；信息发布终端提供综合、全面的信息发布解决方案。'
+  description: '欣动终端设备，融合客户通用需求、个性化需求与行业专属需求，打造创新型硬件产品。其中智能控制器搭载微处理器与专用控制算法，实现智能控制；信息发布终端提供多元综合的信息发布解决方案。'
 }, {
   as: '/hardware/5',
   url: '/hardware?category=5',

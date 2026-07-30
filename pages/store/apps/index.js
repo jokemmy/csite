@@ -32,7 +32,7 @@ const categorys = [{
   code: 'Manage',
   name: '能源管理',
   color: 'rgba(0,204,253,0.3)',
-  desc: '通过先进的物联网技术对水、电、气、热等能源数据进行实时采集和全方位远程监控，实时掌握不同区域、不同类别能源的消耗情况与设备运行状态，实现节能降耗、安全运行、精细化管理。'
+  desc: '依托物联网技术，对水、电、气、热等各类能源数据进行实时采集与多维度远程监控，动态掌握各区域、各类型能源消耗状况及设备运行状态，助力项目实现节能降耗、安全稳定运行与精细化运维管理。'
 }, {
   code: 'Recycle',
   name: '能源回收',
@@ -188,7 +188,7 @@ const apps = [{
   href: '/store/goods?code=heating',
   as: '/store/heating',
   icon: heating,
-  description: '对供暖管网的参数进行跟踪监测，全面掌握供热状态，快速、准确地反映故障报警信息，方便维护人员及时查修，减少管道损耗。',
+  description: '持续跟踪监测供暖管网运行参数，动态掌握供热工况，高效推送故障告警信息，便于运维人员及时排查检修，助力降低管网损耗。',
   content: require( 'text-loader!./heating.md' )
 }, {
   code: 'substation',
